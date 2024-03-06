@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SfpCustomizeQuantityService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Safepot.Contracts\Safepot.Contracts.csproj" />
+    <ProjectReference Include="..\Safepot.Entity\Safepot.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

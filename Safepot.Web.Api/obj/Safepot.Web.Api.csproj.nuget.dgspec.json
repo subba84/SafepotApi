@@ -1,0 +1,385 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Web.Api\\Safepot.Web.Api.csproj": {}
+  },
+  "projects": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj",
+        "projectName": "Safepot.Business",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj",
+        "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Texas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj"
+              },
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj",
+        "projectName": "Safepot.Contracts",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj",
+        "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Texas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj",
+        "projectName": "Safepot.DataAccess",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Texas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj"
+              },
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Portable.BouncyCastle": {
+              "target": "Package",
+              "version": "[1.9.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj",
+        "projectName": "Safepot.Entity",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj",
+        "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Texas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Web.Api\\Safepot.Web.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Web.Api\\Safepot.Web.Api.csproj",
+        "projectName": "Safepot.Web.Api",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Web.Api\\Safepot.Web.Api.csproj",
+        "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Web.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Texas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj"
+              },
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
+            "NLog.Web.AspNetCore": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.6.0, )"
+            },
+            "Quartz.AspNetCore": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

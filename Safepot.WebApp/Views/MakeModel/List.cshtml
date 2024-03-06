@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Safepot.Entity.SfpMakeModelMaster>
+@{
+    ViewData["Title"] = "Make Model Master";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Make Model Master</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="card-title">Make Model Master</h5>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="button" class="btn btn-primary" style="float:right;margin-top:5px;" value="+ Add Make Model" onclick="fnGotoMakeModelCreation();" />
+                            </div>
+                        </div>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Make</th>
+                                    <th scope="col">Model</th>
+                                    <th scope="col">UOM</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int i = 1;
+                                    foreach (var makeModel in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@i</th>
+                                            <td>@(makeModel.Make)</td>
+                                            <td>@makeModel.Model</td>
+                                            <td>@makeModel.Uom</td>
+                                            <td style="text-align:center">
+                                                <a href="@Url.Action("Edit","MakeModel")?id=@makeModel.Id">
+                                                    <i b-mk0rxp7ouj="" class="bi bi-pen"></i>
+                                                </a>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <a href="@Url.Action("Delete","MakeModel")?id=@makeModel.Id" style="color:red">
+                                                    <i b-mk0rxp7ouj="" class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6">No Data Found</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    function fnGotoMakeModelCreation() {
+        window.location.href = "@Url.Action("Edit","MakeModel")";
+    };
+</script>
+
+

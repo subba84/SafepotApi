@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BB+nri8hLxfBeVu8Inb2+RsSBhI8Vo7Q+g463KGPHN4=",
+  "Source": "Safepot.Web.Api",
+  "BasePath": "_content/Safepot.Web.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

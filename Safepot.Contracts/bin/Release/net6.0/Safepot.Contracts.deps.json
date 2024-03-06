@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Safepot.Contracts/1.0.0": {
+        "dependencies": {
+          "Safepot.Entity": "1.0.0"
+        },
+        "runtime": {
+          "Safepot.Contracts.dll": {}
+        }
+      },
+      "Safepot.Entity/1.0.0": {
+        "runtime": {
+          "Safepot.Entity.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Safepot.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Safepot.Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

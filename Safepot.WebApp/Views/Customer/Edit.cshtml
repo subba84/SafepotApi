@@ -1,0 +1,240 @@
+﻿@model Safepot.Entity.SfpUser
+@{
+    ViewData["Title"] = "Agent Registration";
+}
+
+<style>
+    .text-red {
+        color: red;
+    }
+</style>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Customer</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Customer Registration</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <form class="row g-3 needs-validation" method="post" asp-action="SaveCustomer" asp-controller="Customer" novalidate>
+                            <input type="hidden" value="@Model.Id" name="Id" />
+                            <div class="col-12">
+                                <label for="firstName" class="form-label">First Name<span class="text-red">*</span></label>
+                                <input type="text" name="FirstName" value="@Model.FirstName" class="form-control" id="firstName" maxlength="256" required>
+                                <div class="invalid-feedback">Please, enter first name!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="lastName" class="form-label">Last Name<span class="text-red">*</span></label>
+                                <input type="text" name="LastName" value="@Model.LastName" class="form-control" id="lastName" maxlength="256" required>
+                                <div class="invalid-feedback">Please, enter last name!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="userName" class="form-label">Username<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="UserName" value="@Model.UserName" class="form-control" id="userName" maxlength="128" required>
+                                    <div class="invalid-feedback">Please choose a username.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="password" class="form-label">Password<span class="text-red">*</span></label>
+                                <input type="password" name="Password" value="@Model.Password" class="form-control" id="password" maxlength="128" required>
+                                <div class="invalid-feedback">Please enter password!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="confirmPassword" class="form-label">Confirm Password<span class="text-red">*</span></label>
+                                <input type="password" name="" value="@Model.Password" class="form-control" id="confirmPassword" maxlength="128" required>
+                                <div class="invalid-feedback">Please enter confirm password!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="emailId" class="form-label">Email<span class="text-red">*</span></label>
+                                <input type="email" name="EmailId" value="@Model.EmailId" class="form-control" id="emailId" maxlength="256" required>
+                                <div class="invalid-feedback">Please enter a valid Email Adddress!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="mobile" class="form-label">Mobile Number<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="number" name="Mobile" value="@Model.Mobile" class="form-control" id="mobile" maxlength="10" required>
+                                    <div class="invalid-feedback">Please enter mobile number.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="altMobile" class="form-label">Alt. Mobile Number</label>
+                                <div class="input-group has-validation">
+                                    <input type="number" name="AltMobile" value="@Model.AltMobile" class="form-control" id="altMobile" maxlength="10">
+                                    <div class="invalid-feedback">Please enter alternate mobile number.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="state" class="form-label">State<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <select class="form-control" id="state" name="StateId" required>
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select state.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="city" class="form-label">City<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <select class="form-control" id="city" name="CityId" required>
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select city.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Address<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <textarea rows="3" class="form-control" name="Address" maxlength="512" id="address">@Model.Address</textarea>
+                                    <div class="invalid-feedback">Please enter address.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="landMark" class="form-label">Landmark</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="LandMark" value="@Model.LandMark" class="form-control" id="landMark" maxlength="256">
+                                    <div class="invalid-feedback">Please enter landmark.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="pincode" class="form-label">Pincode<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="PinCode" value="@Model.PinCode" class="form-control" id="pincode" maxlength="10" required>
+                                    <div class="invalid-feedback">Please enter pincode.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="company" class="form-label">Company<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="CompanyName" value="@Model.CompanyName" class="form-control" id="company" maxlength="256" required>
+                                    <div class="invalid-feedback">Please enter company.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="gstNumber" class="form-label">GST Number</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="GSTNumber" value="@Model.GSTNumber" class="form-control" id="gstNumber" maxlength="10">
+                                    <div class="invalid-feedback">Please enter gst number.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="panNumber" class="form-label">PAN Number</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="PANNumber" value="@Model.PANNumber" class="form-control" id="panNumber" maxlength="10">
+                                    <div class="invalid-feedback">Please enter pan number.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="geoLocation" class="form-label">Geo Location</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="GeoSelection" value="@Model.GeoSelection" class="form-control" id="geoLocation" maxlength="256">
+                                    <div class="invalid-feedback">Please enter geo location.</div>
+                                </div>
+                            </div>
+                            @*<div class="col-12">
+                                <label for="joinDate" class="form-label">Joining Date<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="date" name="JoinDate" value="@(Model.JoinDate != null ? Model.JoinDate.Value.ToString("yyyy-MM-dd") : "")" class="form-control" id="joinDate" required>
+                                    <div class="invalid-feedback">Please enter joining date.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="subscriptionPrice" class="form-label">Subscription Price<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="number" name="SubscriptionPrice" value="@Model.SubscriptionPrice" class="form-control" id="subscriptionPrice" maxlength="6" required>
+                                    <div class="invalid-feedback">Please enter Subscription Price.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="renewalDate" class="form-label">Renewal Date<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="date" name="RenewalDate" value="@(Model.RenewalDate != null ? Model.RenewalDate.Value.ToString("yyyy-MM-dd") : "")" class="form-control" id="renewalDate" required>
+                                    <div class="invalid-feedback">Please enter renewal date.</div>
+                                </div>
+                            </div>*@
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" id="btnSave" type="submit">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    fnGetStates("@Model.StateId");
+
+    fnGetCities("@Model.StateId", "@Model.CityId");
+
+
+    function fnGetStates(id) {
+        $.getJSON("@Url.Action("GetStates","Customer")", function (result) {
+            $("#state").html('');
+            $("#state").append("<option value='0'>--Select--</option>");
+            $.each(result, function (i, field) {
+                if (field.id == id) {
+                    $("#state").append("<option value='" + field.id + "' selected>" + field.stateName + "</option>");
+                }
+                else {
+                    $("#state").append("<option value='" + field.id + "'>" + field.stateName + "</option>");
+                }
+            });
+        });
+    };
+
+    function fnGetCities(stateid, cityid) {
+        $.getJSON("@Url.Action("GetCitiesbyState","Customer")?stateid=" + stateid, function (result) {
+            $("#city").html('');
+            $("#city").append("<option value='0'>--Select--</option>");
+            $.each(result, function (i, field) {
+                if (field.id == cityid) {
+                    $("#city").append("<option value='" + field.id + "' selected>" + field.cityName + "</option>");
+                }
+                else {
+                    $("#city").append("<option value='" + field.id + "'>" + field.cityName + "</option>");
+                }
+            });
+        });
+    };
+
+    $("#state").change(function () {
+        fnGetCities($(this).val(), 0);
+    });
+
+    $("#btnSave").click(function () {
+        if ($("#password").val() != $("#confirmPassword").val()) {
+            alert("Password & Confirm Password is not matching");
+            return false;
+        }
+    });
+</script>
+
+

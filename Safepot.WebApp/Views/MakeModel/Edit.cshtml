@@ -1,0 +1,73 @@
+﻿@model Safepot.Entity.SfpMakeModelMaster
+@{
+    ViewData["Title"] = "Make Model Master";
+}
+
+<style>
+    .text-red {
+        color: red;
+    }
+</style>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Make Model Master</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <form class="row g-3 needs-validation" method="post" asp-action="SaveMakeModel" asp-controller="MakeModel" novalidate>
+                            <input type="hidden" value="@Model.Id" name="Id" />
+                            <div class="col-12">
+                                <label for="make" class="form-label">Make<span class="text-red">*</span></label>
+                                <input type="text" name="Make" value="@Model.Make" class="form-control" id="make" maxlength="256" required>
+                                <div class="invalid-feedback">Please, enter make!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="model" class="form-label">Model<span class="text-red">*</span></label>
+                                <input type="text" name="Model" value="@Model.Model" class="form-control" id="model" maxlength="256" required>
+                                <div class="invalid-feedback">Please, enter model!</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="uom" class="form-label">Unit of Measure<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="Uom" value="@Model.Uom" class="form-control" id="uom" maxlength="128" required>
+                                    <div class="invalid-feedback">Please enter unit of measure.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" id="btnSave" type="submit">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    
+</script>
+
+

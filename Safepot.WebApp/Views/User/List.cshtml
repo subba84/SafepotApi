@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Safepot.Entity.SfpUser>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Users</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="card-title">Users</h5>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="button" class="btn btn-primary" style="float:right;margin-top:5px;" value="+ Add User" onclick="fnGotoUserRegistration();" />
+                            </div>
+                        </div>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Pwd Reset</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int i = 1;
+                                    foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@i</th>
+                                            <td>@(user.FirstName + " " + user.LastName)</td>
+                                            <td>@user.Mobile</td>
+                                            <td>@user.EmailId</td>
+                                            <td>@user.RoleName</td>
+                                            <td style="text-align:center">
+                                                <a href="@Url.Action("Edit","User")?userid=@user.Id">
+                                                    <i b-mk0rxp7ouj="" class="bi bi-pen"></i>
+                                                </a>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <a href="@Url.Action("Delete","User")?userid=@user.Id" style="color:red">
+                                                    <i b-mk0rxp7ouj="" class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("PasswordReset","User")?userid=@user.Id" style="color:orange">
+                                                    <i b-mk0rxp7ouj="" class="bi bi-lock"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">No Data Found</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    function fnGotoUserRegistration() {
+        window.location.href = "@Url.Action("Edit","User")?userid=0";
+    };
+</script>
+
+

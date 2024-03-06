@@ -1,0 +1,1291 @@
+2024-03-04 11:47:27.1231 - Registered model binder providers, in the following order: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider -            
+
+2024-03-04 11:47:27.3260 - Hosting starting -            
+
+2024-03-04 11:47:27.5343 - TaskSchedulingThreadPool configured with max concurrency of 10 and TaskScheduler ThreadPoolTaskScheduler. -            
+
+2024-03-04 11:47:27.6520 - Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl -            
+
+2024-03-04 11:47:27.6520 - Quartz Scheduler created -            
+
+2024-03-04 11:47:27.6520 - JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory -            
+
+2024-03-04 11:47:27.6520 - RAMJobStore initialized. -            
+
+2024-03-04 11:47:27.6520 - Quartz Scheduler 3.8.0.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized -            
+
+2024-03-04 11:47:27.6520 - Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10 -            
+
+2024-03-04 11:47:27.6520 - Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False -            
+
+2024-03-04 11:47:27.7079 - Adding 2 jobs, 2 triggers. -            
+
+2024-03-04 11:47:27.7079 - Adding job: DEFAULT.OrderCreationJob -            
+
+2024-03-04 11:47:27.7079 - Scheduling job: DEFAULT.OrderCreationJob with trigger: DEFAULT.OrderCreationJob-trigger -            
+
+2024-03-04 11:47:27.7615 - Adding job: DEFAULT.PendingOrderRejectionJob -            
+
+2024-03-04 11:47:27.7615 - Scheduling job: DEFAULT.PendingOrderRejectionJob with trigger: DEFAULT.PendingOrderRejectionJob-trigger -            
+
+2024-03-04 11:47:27.7615 - Rescheduling job: DEFAULT.OrderCreationJob with updated trigger: DEFAULT.OrderCreationJob-trigger -            
+
+2024-03-04 11:47:27.7746 - Rescheduling job: DEFAULT.PendingOrderRejectionJob with updated trigger: DEFAULT.PendingOrderRejectionJob-trigger -            
+
+2024-03-04 11:47:28.1953 - Using development certificate: CN=localhost (Thumbprint: F77D03129487211503E12DF266D8AF1AAFC62F88) -            
+
+2024-03-04 11:47:28.3070 - Now listening on: https://localhost:7159 -            
+
+2024-03-04 11:47:28.3070 - Now listening on: http://localhost:5159 -            
+
+2024-03-04 11:47:28.3070 - Loaded hosting startup assembly Safepot.Web.Api -            
+
+2024-03-04 11:47:28.3070 - Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh -            
+
+2024-03-04 11:47:28.3070 - Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net -            
+
+2024-03-04 11:47:28.3070 - Application started. Press Ctrl+C to shut down. -            
+
+2024-03-04 11:47:28.3070 - Hosting environment: Development -            
+
+2024-03-04 11:47:28.3070 - Content root path: C:\Working Projects\Safepot\Safepot.Web.Api\ -            
+
+2024-03-04 11:47:28.3070 - Hosting started -            
+
+2024-03-04 11:47:28.3221 - Scheduler QuartzScheduler_$_NON_CLUSTERED started. -            
+
+2024-03-04 11:47:28.3301 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:47:28.4702 - Connection id "0HN1S2B28TUS4" accepted. -            
+
+2024-03-04 11:47:28.4702 - Connection id "0HN1S2B28TUS5" accepted. -            
+
+2024-03-04 11:47:28.4702 - Connection id "0HN1S2B28TUS4" started. -            
+
+2024-03-04 11:47:28.4702 - Connection id "0HN1S2B28TUS5" started. -            
+
+2024-03-04 11:47:28.4955 - Connection id "0HN1S2B28TUS4" received FIN. -            
+
+2024-03-04 11:47:28.4955 - Connection id "0HN1S2B28TUS5" received FIN. -            
+
+2024-03-04 11:47:28.5299 - Failed to authenticate HTTPS connection. -               at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+
+2024-03-04 11:47:28.7358 - Connection id "0HN1S2B28TUS6" accepted. -            
+
+2024-03-04 11:47:28.5299 - Failed to authenticate HTTPS connection. -               at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+
+2024-03-04 11:47:28.7746 - Connection id "0HN1S2B28TUS6" started. -            
+
+2024-03-04 11:47:28.7872 - Connection id "0HN1S2B28TUS4" stopped. -            
+
+2024-03-04 11:47:28.7872 - Connection id "0HN1S2B28TUS5" stopped. -            
+
+2024-03-04 11:47:28.7872 - Connection id "0HN1S2B28TUS4" sending FIN because: "The Socket transport's send loop completed gracefully." -            
+
+2024-03-04 11:47:28.7872 - Connection id "0HN1S2B28TUS5" sending FIN because: "The Socket transport's send loop completed gracefully." -            
+
+2024-03-04 11:47:28.8518 - Connection id "0HN1S2B28TUS6" received FIN. -            
+
+2024-03-04 11:47:28.8518 - Connection id "0HN1S2B28TUS7" accepted. -            
+
+2024-03-04 11:47:28.8518 - Connection id "0HN1S2B28TUS7" started. -            
+
+2024-03-04 11:47:28.8655 - Connection id "0HN1S2B28TUS8" accepted. -            
+
+2024-03-04 11:47:28.8655 - Connection id "0HN1S2B28TUS7" received FIN. -            
+
+2024-03-04 11:47:28.8655 - Connection id "0HN1S2B28TUS8" started. -            
+
+2024-03-04 11:47:28.8795 - Failed to authenticate HTTPS connection. -               at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+
+2024-03-04 11:47:28.8795 - Connection id "0HN1S2B28TUS6" stopped. -            
+
+2024-03-04 11:47:28.8795 - Connection id "0HN1S2B28TUS6" sending FIN because: "The Socket transport's send loop completed gracefully." -            
+
+2024-03-04 11:47:28.8976 - Failed to authenticate HTTPS connection. -               at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+
+2024-03-04 11:47:28.8976 - Connection id "0HN1S2B28TUS7" stopped. -            
+
+2024-03-04 11:47:28.8976 - Connection id "0HN1S2B28TUS7" sending FIN because: "The Socket transport's send loop completed gracefully." -            
+
+2024-03-04 11:47:28.9538 - Connection 0HN1S2B28TUS8 established using the following protocol: Tls12 -            
+
+2024-03-04 11:47:29.0278 - Connection id "0HN1S2B28TUS8" sending SETTINGS frame for stream ID 0 with length 18 and flags NONE. -            
+
+2024-03-04 11:47:29.0343 - Connection id "0HN1S2B28TUS8" sending WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0. -            
+
+2024-03-04 11:47:29.0343 - Connection id "0HN1S2B28TUS8" received SETTINGS frame for stream ID 0 with length 24 and flags NONE. -            
+
+2024-03-04 11:47:29.0343 - Connection id "0HN1S2B28TUS8" sending SETTINGS frame for stream ID 0 with length 0 and flags ACK. -            
+
+2024-03-04 11:47:29.0343 - Connection id "0HN1S2B28TUS8" received WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0. -            
+
+2024-03-04 11:47:29.0343 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 1 with length 522 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.0991 - Connection id "0HN1S2B28TUS8" received SETTINGS frame for stream ID 0 with length 0 and flags ACK. -            
+
+2024-03-04 11:47:29.1194 - Request starting HTTP/2 GET https://localhost:7159/swagger - - -            
+
+2024-03-04 11:47:29.1896 - Wildcard detected, all requests with hosts will be allowed. -            
+
+2024-03-04 11:47:29.1896 - All hosts are allowed. -            
+
+2024-03-04 11:47:29.2405 - No candidates found for the request path '/swagger' -            
+
+2024-03-04 11:47:29.2405 - Request did not match any endpoints -            
+
+2024-03-04 11:47:29.3821 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 1 with length 69 and flags END_STREAM, END_HEADERS. -            
+
+2024-03-04 11:47:29.3821 - Request finished HTTP/2 GET https://localhost:7159/swagger - - - 301 0 - 276.3239ms -            
+
+2024-03-04 11:47:29.3926 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 3 with length 39 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.3926 - Request starting HTTP/2 GET https://localhost:7159/swagger/index.html - - -            
+
+2024-03-04 11:47:29.3926 - All hosts are allowed. -            
+
+2024-03-04 11:47:29.3926 - No candidates found for the request path '/swagger/index.html' -            
+
+2024-03-04 11:47:29.3926 - Request did not match any endpoints -            
+
+2024-03-04 11:47:29.7249 - Response markup is scheduled to include browser refresh script injection. -            
+
+2024-03-04 11:47:29.7249 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 3 with length 28 and flags END_HEADERS. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 1024 and flags NONE. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 1024 and flags NONE. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 1024 and flags NONE. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 1024 and flags NONE. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 996 and flags NONE. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 65 and flags NONE. -            
+
+2024-03-04 11:47:29.9168 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 16 and flags NONE. -            
+
+2024-03-04 11:47:29.9300 - Response markup was updated to include browser refresh script injection. -            
+
+2024-03-04 11:47:29.9300 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 3 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:29.9300 - Request finished HTTP/2 GET https://localhost:7159/swagger/index.html - - - 200 - text/html;charset=utf-8 534.3074ms -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 5 with length 110 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 7 with length 55 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.9400 - Request starting HTTP/2 GET https://localhost:7159/swagger/swagger-ui.css - - -            
+
+2024-03-04 11:47:29.9400 - All hosts are allowed. -            
+
+2024-03-04 11:47:29.9400 - No candidates found for the request path '/swagger/swagger-ui.css' -            
+
+2024-03-04 11:47:29.9400 - Request did not match any endpoints -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 9 with length 53 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.9400 - Request starting HTTP/2 GET https://localhost:7159/swagger/swagger-ui-bundle.js - - -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 11 with length 54 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.9400 - All hosts are allowed. -            
+
+2024-03-04 11:47:29.9400 - Request starting HTTP/2 GET https://localhost:7159/swagger/swagger-ui-standalone-preset.js - - -            
+
+2024-03-04 11:47:29.9400 - All hosts are allowed. -            
+
+2024-03-04 11:47:29.9400 - No candidates found for the request path '/swagger/swagger-ui-bundle.js' -            
+
+2024-03-04 11:47:29.9400 - Request starting HTTP/2 GET https://localhost:7159/_framework/aspnetcore-browser-refresh.js - - -            
+
+2024-03-04 11:47:29.9400 - No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js' -            
+
+2024-03-04 11:47:29.9400 - Request did not match any endpoints -            
+
+2024-03-04 11:47:29.9400 - Request did not match any endpoints -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 11 with length 60 and flags END_HEADERS. -            
+
+2024-03-04 11:47:29.9400 - Range header's value is empty. -            
+
+2024-03-04 11:47:29.9400 - Range header's value is empty. -            
+
+2024-03-04 11:47:29.9400 - Range header's value is empty. -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 11 with length 12000 and flags NONE. -            
+
+2024-03-04 11:47:29.9400 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 11 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:29.9400 - Request finished HTTP/2 GET https://localhost:7159/_framework/aspnetcore-browser-refresh.js - - - 200 12000 application/javascript;+charset=utf-8 9.6617ms -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 7 with length 94 and flags END_HEADERS. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 9 with length 34 and flags END_HEADERS. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 5 with length 43 and flags END_HEADERS. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 13 with length 36 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:29.9588 - Request starting HTTP/2 GET https://localhost:7159/_vs/browserLink - - -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 12560 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A' -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 5 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Request finished HTTP/2 GET https://localhost:7159/swagger/swagger-ui.css - - - 200 143632 text/css 27.1024ms -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9588 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:29.9939 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 13 with length 119 and flags END_HEADERS. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 9482 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 9986 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0038 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A' -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 9 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:30.0181 - Request finished HTTP/2 GET https://localhost:7159/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 80.5007ms -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0181 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 10240 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 6318 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 13 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:30.0327 - Request finished HTTP/2 GET https://localhost:7159/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 87.8883ms -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0327 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 11545 and flags NONE. -            
+
+2024-03-04 11:47:30.0509 - Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A' -            
+
+2024-03-04 11:47:30.0509 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 7 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:30.0509 - Request finished HTTP/2 GET https://localhost:7159/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 115.2613ms -            
+
+2024-03-04 11:47:30.2671 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 15 with length 69 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:47:30.2671 - Request starting HTTP/2 GET https://localhost:7159/swagger/v1/swagger.json - - -            
+
+2024-03-04 11:47:30.2671 - All hosts are allowed. -            
+
+2024-03-04 11:47:30.2671 - No candidates found for the request path '/swagger/v1/swagger.json' -            
+
+2024-03-04 11:47:30.2671 - Request did not match any endpoints -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 15 with length 65 and flags END_HEADERS. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 16384 and flags NONE. -            
+
+2024-03-04 11:47:30.6388 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 6533 and flags NONE. -            
+
+2024-03-04 11:47:30.6440 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 15 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:47:30.6440 - Request finished HTTP/2 GET https://localhost:7159/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 376.2268ms -            
+
+2024-03-04 11:47:58.2980 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:48:21.3272 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:48:44.8727 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:49:10.2581 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:49:33.4494 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:50:02.0889 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:50:30.8853 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:50:59.8966 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:51:25.1144 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:51:31.0502 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 17 with length 131 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:51:31.0845 - Connection id "0HN1S2B28TUS8" received PING frame for stream ID 0 with length 8 and flags NONE. -            
+
+2024-03-04 11:51:31.0845 - Connection id "0HN1S2B28TUS8" sending PING frame for stream ID 0 with length 8 and flags ACK. -            
+
+2024-03-04 11:51:31.0845 - Request starting HTTP/2 PUT https://localhost:7159/api/OrderDetails/updateorderdetails?customerid=10&agentId=1&deliveryBoyId=19&status=Completed - 0 -            
+
+2024-03-04 11:51:31.0845 - All hosts are allowed. -            
+
+2024-03-04 11:51:31.0995 - 1 candidate(s) found for the request path '/api/OrderDetails/updateorderdetails' -            
+
+2024-03-04 11:51:31.1119 - Endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' with route pattern 'api/OrderDetails/updateorderdetails' is valid for the request path '/api/OrderDetails/updateorderdetails' -            
+
+2024-03-04 11:51:31.1119 - Request matched endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' -            
+
+2024-03-04 11:51:31.1119 - Static files was skipped as the request already matched an endpoint. -            
+
+2024-03-04 11:51:31.1119 - Executing endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' -            
+
+2024-03-04 11:51:31.2030 - Route matched with {action = "UpdateOrderDetails", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Safepot.Web.Api.Helpers.ResponseModel`1[Safepot.Entity.SfpCustomizeQuantity]] UpdateOrderDetails(Int32, Int32, Int32, System.String) on controller Safepot.Web.Api.Controllers.OrderDetailsController (Safepot.Web.Api). -            
+
+2024-03-04 11:51:31.2044 - Execution plan of authorization filters (in the following order): None -            
+
+2024-03-04 11:51:31.2044 - Execution plan of resource filters (in the following order): None -            
+
+2024-03-04 11:51:31.2044 - Execution plan of action filters (in the following order): Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000), Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000) -            
+
+2024-03-04 11:51:31.2044 - Execution plan of exception filters (in the following order): None -            
+
+2024-03-04 11:51:31.2044 - Execution plan of result filters (in the following order): Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000) -            
+
+2024-03-04 11:51:31.2044 - Executing controller factory for controller Safepot.Web.Api.Controllers.OrderDetailsController (Safepot.Web.Api) -            
+
+2024-03-04 11:51:31.7673 - An 'IServiceProvider' was created for internal use by Entity Framework. -            
+
+2024-03-04 11:51:33.5190 - No store type was specified for the decimal property 'Quantity' on entity type 'SfpMakeModelMaster'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'. -            
+
+2024-03-04 11:51:33.5190 - No store type was specified for the decimal property 'Price' on entity type 'SfpPriceMaster'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'. -            
+
+2024-03-04 11:51:33.9519 - Entity Framework Core 7.0.7 initialized 'SafepotDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:7.0.7' with options: NoTracking  -            
+
+2024-03-04 11:51:33.9658 - Executed controller factory for controller Safepot.Web.Api.Controllers.OrderDetailsController (Safepot.Web.Api) -            
+
+2024-03-04 11:51:33.9890 - Attempting to bind parameter 'customerid' of type 'System.Int32' ... -            
+
+2024-03-04 11:51:33.9890 - Attempting to bind parameter 'customerid' of type 'System.Int32' using the name 'customerid' in request data ... -            
+
+2024-03-04 11:51:33.9890 - Done attempting to bind parameter 'customerid' of type 'System.Int32'. -            
+
+2024-03-04 11:51:33.9890 - Done attempting to bind parameter 'customerid' of type 'System.Int32'. -            
+
+2024-03-04 11:51:33.9890 - Attempting to validate the bound parameter 'customerid' of type 'System.Int32' ... -            
+
+2024-03-04 11:51:33.9890 - Done attempting to validate the bound parameter 'customerid' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Attempting to bind parameter 'agentId' of type 'System.Int32' ... -            
+
+2024-03-04 11:51:34.0034 - Attempting to bind parameter 'agentId' of type 'System.Int32' using the name 'agentId' in request data ... -            
+
+2024-03-04 11:51:34.0034 - Done attempting to bind parameter 'agentId' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Done attempting to bind parameter 'agentId' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Attempting to validate the bound parameter 'agentId' of type 'System.Int32' ... -            
+
+2024-03-04 11:51:34.0034 - Done attempting to validate the bound parameter 'agentId' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Attempting to bind parameter 'deliveryBoyId' of type 'System.Int32' ... -            
+
+2024-03-04 11:51:34.0034 - Attempting to bind parameter 'deliveryBoyId' of type 'System.Int32' using the name 'deliveryBoyId' in request data ... -            
+
+2024-03-04 11:51:34.0034 - Done attempting to bind parameter 'deliveryBoyId' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Done attempting to bind parameter 'deliveryBoyId' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Attempting to validate the bound parameter 'deliveryBoyId' of type 'System.Int32' ... -            
+
+2024-03-04 11:51:34.0034 - Done attempting to validate the bound parameter 'deliveryBoyId' of type 'System.Int32'. -            
+
+2024-03-04 11:51:34.0034 - Attempting to bind parameter 'status' of type 'System.String' ... -            
+
+2024-03-04 11:51:34.0034 - Attempting to bind parameter 'status' of type 'System.String' using the name 'status' in request data ... -            
+
+2024-03-04 11:51:34.0034 - Done attempting to bind parameter 'status' of type 'System.String'. -            
+
+2024-03-04 11:51:34.0034 - Done attempting to bind parameter 'status' of type 'System.String'. -            
+
+2024-03-04 11:51:34.0034 - Attempting to validate the bound parameter 'status' of type 'System.String' ... -            
+
+2024-03-04 11:51:34.0034 - Done attempting to validate the bound parameter 'status' of type 'System.String'. -            
+
+2024-03-04 11:51:34.0173 - Action Filter: Before executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:51:34.0173 - Action Filter: After executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:51:34.0173 - Action Filter: Before executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:51:34.0173 - Action Filter: After executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:51:34.0173 - Executing action method Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api) - Validation state: Valid -            
+
+2024-03-04 11:51:34.0173 - Executing action method Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api) with arguments (10, 1, 19, Completed) -            
+
+2024-03-04 11:51:41.5615 - Compiling query expression: 
+'DbSet<SfpOrder>()
+    .Where(x => x.CustomerId == __customerid_0 && x.AgentId == __agentId_1 && x.TransactionDate == null ? x.TransactionDate : (DateTime?)x.TransactionDate.Value.Date == __transactionDate_Date_2)
+    .AsNoTracking()' -            
+
+2024-03-04 11:51:42.5361 - Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<SfpOrder>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: SfpOrder.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: SfpOrder.AgentId (int?), 1], [Property: SfpOrder.AgentName (string), 2], [Property: SfpOrder.CustomerId (int?), 3], [Property: SfpOrder.CustomerName (string), 4], [Property: SfpOrder.DeliveryBoyId (int?), 5], [Property: SfpOrder.DeliveryBoyName (string), 6], [Property: SfpOrder.MakeModelMasterId (int?), 7], [Property: SfpOrder.OrderAcceptedBy (int?), 8], [Property: SfpOrder.OrderAcceptedOn (DateTime?), 9], [Property: SfpOrder.OrderCompletedBy (int?), 10], [Property: SfpOrder.OrderCompletedOn (DateTime?), 11], [Property: SfpOrder.OrderRejectedBy (int?), 12], [Property: SfpOrder.OrderRejectedComments (string), 13], [Property: SfpOrder.OrderRejectedOn (DateTime?), 14], [Property: SfpOrder.Quantity (string), 15], [Property: SfpOrder.Status (string), 16], [Property: SfpOrder.TotalPrice (string), 17], [Property: SfpOrder.TransactionDate (DateTime?), 18], [Property: SfpOrder.UnitPrice (string), 19] }
+        SELECT s.Id, s.AgentId, s.AgentName, s.CustomerId, s.CustomerName, s.DeliveryBoyId, s.DeliveryBoyName, s.MakeModelMasterId, s.OrderAcceptedBy, s.OrderAcceptedOn, s.OrderCompletedBy, s.OrderCompletedOn, s.OrderRejectedBy, s.OrderRejectedComments, s.OrderRejectedOn, s.Quantity, s.Status, s.TotalPrice, s.TransactionDate, s.UnitPrice
+        FROM SfpOrder AS s
+        WHERE ((s.CustomerId == @__customerid_0) && (s.AgentId == @__agentId_1)) && (CASE
+            WHEN s.TransactionDate == NULL THEN s.TransactionDate
+            ELSE CONVERT(date, s.TransactionDate)
+        END == @__transactionDate_Date_2)), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, SfpOrder>, 
+    Safepot.DataAccess.SafepotDbContext, 
+    False, 
+    False, 
+    True
+)' -            
+
+2024-03-04 11:51:42.7445 - Creating DbCommand for 'ExecuteReader'. -            
+
+2024-03-04 11:51:42.7537 - Creating DbConnection. -            
+
+2024-03-04 11:51:42.9159 - Created DbConnection. (154ms). -            
+
+2024-03-04 11:51:42.9470 - Created DbCommand for 'ExecuteReader' (196ms). -            
+
+2024-03-04 11:51:42.9795 - Initialized DbCommand for 'ExecuteReader' (238ms). -            
+
+2024-03-04 11:51:43.0095 - Opening connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:51:44.1629 - Opened connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:51:44.2179 - Executing DbCommand [Parameters=[@__customerid_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__transactionDate_Date_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[MakeModelMasterId], [s].[OrderAcceptedBy], [s].[OrderAcceptedOn], [s].[OrderCompletedBy], [s].[OrderCompletedOn], [s].[OrderRejectedBy], [s].[OrderRejectedComments], [s].[OrderRejectedOn], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice]
+FROM [SfpOrder] AS [s]
+WHERE [s].[CustomerId] = @__customerid_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__transactionDate_Date_2 -            
+
+2024-03-04 11:51:44.4316 - Executed DbCommand (241ms) [Parameters=[@__customerid_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__transactionDate_Date_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[MakeModelMasterId], [s].[OrderAcceptedBy], [s].[OrderAcceptedOn], [s].[OrderCompletedBy], [s].[OrderCompletedOn], [s].[OrderRejectedBy], [s].[OrderRejectedComments], [s].[OrderRejectedOn], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice]
+FROM [SfpOrder] AS [s]
+WHERE [s].[CustomerId] = @__customerid_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__transactionDate_Date_2 -            
+
+2024-03-04 11:51:44.5402 - Closing data reader to 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:51:44.5690 - A data reader for 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' is being disposed after spending 120ms reading results. -            
+
+2024-03-04 11:51:44.5903 - Closing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:51:44.6204 - Closed connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' (30ms). -            
+
+2024-03-04 11:52:04.6540 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:52:19.2322 - Creating DbCommand for 'ExecuteReader'. -            
+
+2024-03-04 11:52:19.2322 - Created DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:52:19.2322 - Initialized DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:52:19.2322 - Opening connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:52:19.2322 - Opened connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:52:19.2322 - Executing DbCommand [Parameters=[@__customerid_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__transactionDate_Date_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[MakeModelMasterId], [s].[OrderAcceptedBy], [s].[OrderAcceptedOn], [s].[OrderCompletedBy], [s].[OrderCompletedOn], [s].[OrderRejectedBy], [s].[OrderRejectedComments], [s].[OrderRejectedOn], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice]
+FROM [SfpOrder] AS [s]
+WHERE [s].[CustomerId] = @__customerid_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__transactionDate_Date_2 -            
+
+2024-03-04 11:52:19.2660 - Executed DbCommand (31ms) [Parameters=[@__customerid_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__transactionDate_Date_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[MakeModelMasterId], [s].[OrderAcceptedBy], [s].[OrderAcceptedOn], [s].[OrderCompletedBy], [s].[OrderCompletedOn], [s].[OrderRejectedBy], [s].[OrderRejectedComments], [s].[OrderRejectedOn], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice]
+FROM [SfpOrder] AS [s]
+WHERE [s].[CustomerId] = @__customerid_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__transactionDate_Date_2 -            
+
+2024-03-04 11:52:19.2660 - Closing data reader to 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:52:19.2660 - A data reader for 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' is being disposed after spending 0ms reading results. -            
+
+2024-03-04 11:52:19.2660 - Closing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:52:19.2660 - Closed connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' (0ms). -            
+
+2024-03-04 11:53:21.6953 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:53:28.9852 - Executed action method Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 114944.8982ms. -            
+
+2024-03-04 11:53:28.9876 - Action Filter: Before executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:53:28.9876 - Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:53:28.9876 - Action Filter: Before executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:53:28.9876 - Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:53:28.9876 - Result Filter: Before executing OnResultExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:53:28.9876 - Result Filter: After executing OnResultExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:53:28.9876 - Before executing action result Microsoft.AspNetCore.Mvc.ObjectResult. -            
+
+2024-03-04 11:53:28.9876 - List of registered output formatters, in the following order: Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter -            
+
+2024-03-04 11:53:29.0012 - Attempting to select an output formatter based on Accept header 'text/plain'. -            
+
+2024-03-04 11:53:29.0012 - Could not find an output formatter based on content negotiation. Accepted types were (text/plain) -            
+
+2024-03-04 11:53:29.0012 - Attempting to select an output formatter without using a content type as no explicit content types were specified for the response. -            
+
+2024-03-04 11:53:29.0012 - Attempting to select the first formatter in the output formatters list which can write the result. -            
+
+2024-03-04 11:53:29.0012 - Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response. -            
+
+2024-03-04 11:53:29.0012 - Executing ObjectResult, writing value of type 'Safepot.Web.Api.Helpers.ResponseModel`1[[Safepot.Entity.SfpCustomizeQuantity, Safepot.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. -            
+
+2024-03-04 11:53:29.0206 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 17 with length 66 and flags END_HEADERS. -            
+
+2024-03-04 11:53:29.0206 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 17 with length 80 and flags NONE. -            
+
+2024-03-04 11:53:29.0206 - After executing action result Microsoft.AspNetCore.Mvc.ObjectResult. -            
+
+2024-03-04 11:53:29.0206 - Result Filter: Before executing OnResultExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:53:29.0206 - Result Filter: After executing OnResultExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:53:29.0206 - Connection id "0HN1S2B28TUS8" received WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0. -            
+
+2024-03-04 11:53:29.0206 - Connection id "0HN1S2B28TUS8" received WINDOW_UPDATE frame for stream ID 17 with length 4 and flags 0x0. -            
+
+2024-03-04 11:53:29.0364 - Executed action Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api) in 117824.3599ms -            
+
+2024-03-04 11:53:29.0364 - Executed endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' -            
+
+2024-03-04 11:53:29.0364 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 17 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:53:29.0364 - 'SafepotDbContext' disposed. -            
+
+2024-03-04 11:53:29.0639 - Disposing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:53:29.0639 - Disposed connection to database '' on server '' (4ms). -            
+
+2024-03-04 11:53:29.0639 - Request finished HTTP/2 PUT https://localhost:7159/api/OrderDetails/updateorderdetails?customerid=10&agentId=1&deliveryBoyId=19&status=Completed - 0 - 200 - application/json;+charset=utf-8 117983.5986ms -            
+
+2024-03-04 11:53:35.4532 - Connection id "0HN1S2B28TUS8" received HEADERS frame for stream ID 19 with length 98 and flags END_STREAM, END_HEADERS, PRIORITY. -            
+
+2024-03-04 11:53:35.4532 - Request starting HTTP/2 PUT https://localhost:7159/api/OrderDetails/updateorderdetails?customerid=10&agentId=1&deliveryBoyId=19&status=Completed - 0 -            
+
+2024-03-04 11:53:35.4532 - All hosts are allowed. -            
+
+2024-03-04 11:53:35.4550 - 1 candidate(s) found for the request path '/api/OrderDetails/updateorderdetails' -            
+
+2024-03-04 11:53:35.4550 - Endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' with route pattern 'api/OrderDetails/updateorderdetails' is valid for the request path '/api/OrderDetails/updateorderdetails' -            
+
+2024-03-04 11:53:35.4550 - Request matched endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' -            
+
+2024-03-04 11:53:35.4550 - Static files was skipped as the request already matched an endpoint. -            
+
+2024-03-04 11:53:35.4550 - Executing endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' -            
+
+2024-03-04 11:53:35.4550 - Route matched with {action = "UpdateOrderDetails", controller = "OrderDetails"}. Executing controller action with signature System.Threading.Tasks.Task`1[Safepot.Web.Api.Helpers.ResponseModel`1[Safepot.Entity.SfpCustomizeQuantity]] UpdateOrderDetails(Int32, Int32, Int32, System.String) on controller Safepot.Web.Api.Controllers.OrderDetailsController (Safepot.Web.Api). -            
+
+2024-03-04 11:53:35.4550 - Execution plan of authorization filters (in the following order): None -            
+
+2024-03-04 11:53:35.4550 - Execution plan of resource filters (in the following order): None -            
+
+2024-03-04 11:53:35.4550 - Execution plan of action filters (in the following order): Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000), Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000) -            
+
+2024-03-04 11:53:35.4550 - Execution plan of exception filters (in the following order): None -            
+
+2024-03-04 11:53:35.4550 - Execution plan of result filters (in the following order): Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000) -            
+
+2024-03-04 11:53:35.4550 - Executing controller factory for controller Safepot.Web.Api.Controllers.OrderDetailsController (Safepot.Web.Api) -            
+
+2024-03-04 11:53:35.5914 - Entity Framework Core 7.0.7 initialized 'SafepotDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:7.0.7' with options: NoTracking  -            
+
+2024-03-04 11:53:35.5914 - Executed controller factory for controller Safepot.Web.Api.Controllers.OrderDetailsController (Safepot.Web.Api) -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'customerid' of type 'System.Int32' ... -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'customerid' of type 'System.Int32' using the name 'customerid' in request data ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'customerid' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'customerid' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to validate the bound parameter 'customerid' of type 'System.Int32' ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to validate the bound parameter 'customerid' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'agentId' of type 'System.Int32' ... -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'agentId' of type 'System.Int32' using the name 'agentId' in request data ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'agentId' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'agentId' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to validate the bound parameter 'agentId' of type 'System.Int32' ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to validate the bound parameter 'agentId' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'deliveryBoyId' of type 'System.Int32' ... -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'deliveryBoyId' of type 'System.Int32' using the name 'deliveryBoyId' in request data ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'deliveryBoyId' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'deliveryBoyId' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to validate the bound parameter 'deliveryBoyId' of type 'System.Int32' ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to validate the bound parameter 'deliveryBoyId' of type 'System.Int32'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'status' of type 'System.String' ... -            
+
+2024-03-04 11:53:35.6052 - Attempting to bind parameter 'status' of type 'System.String' using the name 'status' in request data ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'status' of type 'System.String'. -            
+
+2024-03-04 11:53:35.6052 - Done attempting to bind parameter 'status' of type 'System.String'. -            
+
+2024-03-04 11:53:35.6052 - Attempting to validate the bound parameter 'status' of type 'System.String' ... -            
+
+2024-03-04 11:53:35.6052 - Done attempting to validate the bound parameter 'status' of type 'System.String'. -            
+
+2024-03-04 11:53:35.6052 - Action Filter: Before executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:53:35.6052 - Action Filter: After executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:53:35.6052 - Action Filter: Before executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:53:35.6052 - Action Filter: After executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:53:35.6052 - Executing action method Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api) - Validation state: Valid -            
+
+2024-03-04 11:53:35.6052 - Executing action method Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api) with arguments (10, 1, 19, Completed) -            
+
+2024-03-04 11:54:50.7494 - Batch acquisition of 0 triggers -            
+
+2024-03-04 11:54:51.7377 - Compiling query expression: 
+'DbSet<SfpOrder>()
+    .Where(x => x.CustomerId == __customerid_0 && x.AgentId == __agentId_1 && x.TransactionDate == null ? x.TransactionDate : (DateTime?)x.TransactionDate.Value.Date == __transactionDate_Date_2)
+    .AsNoTracking()' -            
+
+2024-03-04 11:54:51.7377 - Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<SfpOrder>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: SfpOrder.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: SfpOrder.AgentId (int?), 1], [Property: SfpOrder.AgentName (string), 2], [Property: SfpOrder.CustomerId (int?), 3], [Property: SfpOrder.CustomerName (string), 4], [Property: SfpOrder.DeliveryBoyId (int?), 5], [Property: SfpOrder.DeliveryBoyName (string), 6], [Property: SfpOrder.MakeModelMasterId (int?), 7], [Property: SfpOrder.OrderAcceptedBy (int?), 8], [Property: SfpOrder.OrderAcceptedOn (DateTime?), 9], [Property: SfpOrder.OrderCompletedBy (int?), 10], [Property: SfpOrder.OrderCompletedOn (DateTime?), 11], [Property: SfpOrder.OrderRejectedBy (int?), 12], [Property: SfpOrder.OrderRejectedComments (string), 13], [Property: SfpOrder.OrderRejectedOn (DateTime?), 14], [Property: SfpOrder.Quantity (string), 15], [Property: SfpOrder.Status (string), 16], [Property: SfpOrder.TotalPrice (string), 17], [Property: SfpOrder.TransactionDate (DateTime?), 18], [Property: SfpOrder.UnitPrice (string), 19] }
+        SELECT s.Id, s.AgentId, s.AgentName, s.CustomerId, s.CustomerName, s.DeliveryBoyId, s.DeliveryBoyName, s.MakeModelMasterId, s.OrderAcceptedBy, s.OrderAcceptedOn, s.OrderCompletedBy, s.OrderCompletedOn, s.OrderRejectedBy, s.OrderRejectedComments, s.OrderRejectedOn, s.Quantity, s.Status, s.TotalPrice, s.TransactionDate, s.UnitPrice
+        FROM SfpOrder AS s
+        WHERE ((s.CustomerId == @__customerid_0) && (s.AgentId == @__agentId_1)) && (CASE
+            WHEN s.TransactionDate == NULL THEN s.TransactionDate
+            ELSE CONVERT(date, s.TransactionDate)
+        END == @__transactionDate_Date_2)), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, SfpOrder>, 
+    Safepot.DataAccess.SafepotDbContext, 
+    False, 
+    False, 
+    True
+)' -            
+
+2024-03-04 11:54:51.7377 - Creating DbCommand for 'ExecuteReader'. -            
+
+2024-03-04 11:54:51.7377 - Creating DbConnection. -            
+
+2024-03-04 11:54:51.7377 - Created DbConnection. (0ms). -            
+
+2024-03-04 11:54:51.7377 - Created DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:54:51.7377 - Initialized DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:54:51.7377 - Opening connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:54:51.7377 - Opened connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:54:51.7377 - Executing DbCommand [Parameters=[@__customerid_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__transactionDate_Date_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[MakeModelMasterId], [s].[OrderAcceptedBy], [s].[OrderAcceptedOn], [s].[OrderCompletedBy], [s].[OrderCompletedOn], [s].[OrderRejectedBy], [s].[OrderRejectedComments], [s].[OrderRejectedOn], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice]
+FROM [SfpOrder] AS [s]
+WHERE [s].[CustomerId] = @__customerid_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__transactionDate_Date_2 -            
+
+2024-03-04 11:54:51.7972 - Executed DbCommand (53ms) [Parameters=[@__customerid_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__transactionDate_Date_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[MakeModelMasterId], [s].[OrderAcceptedBy], [s].[OrderAcceptedOn], [s].[OrderCompletedBy], [s].[OrderCompletedOn], [s].[OrderRejectedBy], [s].[OrderRejectedComments], [s].[OrderRejectedOn], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice]
+FROM [SfpOrder] AS [s]
+WHERE [s].[CustomerId] = @__customerid_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__transactionDate_Date_2 -            
+
+2024-03-04 11:54:51.8022 - Closing data reader to 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:54:51.8022 - A data reader for 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' is being disposed after spending 1ms reading results. -            
+
+2024-03-04 11:54:51.8022 - Closing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:54:51.8022 - Closed connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' (0ms). -            
+
+2024-03-04 11:55:01.7711 - Context 'SafepotDbContext' started tracking 'SfpOrder' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:01.8543 - An entity of type 'SfpOrder' tracked by 'SafepotDbContext' changed state from 'Unchanged' to 'Modified'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:01.8724 - SaveChanges starting for 'SafepotDbContext'. -            
+
+2024-03-04 11:55:01.8794 - DetectChanges starting for 'SafepotDbContext'. -            
+
+2024-03-04 11:55:01.8794 - DetectChanges completed for 'SafepotDbContext'. -            
+
+2024-03-04 11:55:02.0828 - Opening connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.0828 - Opened connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.0991 - Creating DbCommand for 'ExecuteReader'. -            
+
+2024-03-04 11:55:02.0991 - Created DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:55:02.0991 - Initialized DbCommand for 'ExecuteReader' (2ms). -            
+
+2024-03-04 11:55:02.0991 - Executing DbCommand [Parameters=[@p19='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime2), @p11='?' (DbType = Int32), @p12='?' (Size = 4000), @p13='?' (DbType = DateTime2), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (DbType = DateTime2), @p18='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [SfpOrder] SET [AgentId] = @p0, [AgentName] = @p1, [CustomerId] = @p2, [CustomerName] = @p3, [DeliveryBoyId] = @p4, [DeliveryBoyName] = @p5, [MakeModelMasterId] = @p6, [OrderAcceptedBy] = @p7, [OrderAcceptedOn] = @p8, [OrderCompletedBy] = @p9, [OrderCompletedOn] = @p10, [OrderRejectedBy] = @p11, [OrderRejectedComments] = @p12, [OrderRejectedOn] = @p13, [Quantity] = @p14, [Status] = @p15, [TotalPrice] = @p16, [TransactionDate] = @p17, [UnitPrice] = @p18
+OUTPUT 1
+WHERE [Id] = @p19; -            
+
+2024-03-04 11:55:02.1141 - Executed DbCommand (12ms) [Parameters=[@p19='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (DbType = Int32), @p5='?' (Size = 4000), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime2), @p11='?' (DbType = Int32), @p12='?' (Size = 4000), @p13='?' (DbType = DateTime2), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (DbType = DateTime2), @p18='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [SfpOrder] SET [AgentId] = @p0, [AgentName] = @p1, [CustomerId] = @p2, [CustomerName] = @p3, [DeliveryBoyId] = @p4, [DeliveryBoyName] = @p5, [MakeModelMasterId] = @p6, [OrderAcceptedBy] = @p7, [OrderAcceptedOn] = @p8, [OrderCompletedBy] = @p9, [OrderCompletedOn] = @p10, [OrderRejectedBy] = @p11, [OrderRejectedComments] = @p12, [OrderRejectedOn] = @p13, [Quantity] = @p14, [Status] = @p15, [TotalPrice] = @p16, [TransactionDate] = @p17, [UnitPrice] = @p18
+OUTPUT 1
+WHERE [Id] = @p19; -            
+
+2024-03-04 11:55:02.2058 - Closing data reader to 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.2058 - A data reader for 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' is being disposed after spending 91ms reading results. -            
+
+2024-03-04 11:55:02.2058 - Closing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.2058 - Closed connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' (0ms). -            
+
+2024-03-04 11:55:02.2312 - An entity of type 'SfpOrder' tracked by 'SafepotDbContext' changed state from 'Modified' to 'Unchanged'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:02.2407 - SaveChanges completed for 'SafepotDbContext' with 1 entities written to the database. -            
+
+2024-03-04 11:55:02.2407 - An entity of type 'SfpOrder' tracked by 'SafepotDbContext' changed state from 'Unchanged' to 'Detached'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:02.2643 - Compiling query expression: 
+'DbSet<SfpCustomizeQuantity>()
+    .Where(x => x.CustomerId == __customerId_0 && x.AgentId == __agentId_1 && x.TransactionDate == null ? x.TransactionDate : (DateTime?)x.TransactionDate.Value.Date == __p_2)
+    .AsNoTracking()' -            
+
+2024-03-04 11:55:02.2759 - Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<SfpCustomizeQuantity>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: SfpCustomizeQuantity.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: SfpCustomizeQuantity.AgentId (int?), 1], [Property: SfpCustomizeQuantity.AgentName (string), 2], [Property: SfpCustomizeQuantity.CreatedBy (int?), 3], [Property: SfpCustomizeQuantity.CreatedOn (DateTime?), 4], [Property: SfpCustomizeQuantity.CreatorName (string), 5], [Property: SfpCustomizeQuantity.CustomerId (int?), 6], [Property: SfpCustomizeQuantity.CustomerName (string), 7], [Property: SfpCustomizeQuantity.DeliveryBoyId (int?), 8], [Property: SfpCustomizeQuantity.DeliveryBoyName (string), 9], [Property: SfpCustomizeQuantity.IsAbsent (bool?), 10], [Property: SfpCustomizeQuantity.MakeModelMasterId (int?), 11], [Property: SfpCustomizeQuantity.MakeName (string), 12], [Property: SfpCustomizeQuantity.ModelName (string), 13], [Property: SfpCustomizeQuantity.ModifiedBy (int?), 14], [Property: SfpCustomizeQuantity.ModifiedOn (DateTime?), 15], [Property: SfpCustomizeQuantity.ModifierName (string), 16], [Property: SfpCustomizeQuantity.OrderCreatedBy (string), 17], [Property: SfpCustomizeQuantity.Price (string), 18], [Property: SfpCustomizeQuantity.Quantity (string), 19], [Property: SfpCustomizeQuantity.Status (string), 20], [Property: SfpCustomizeQuantity.TotalPrice (string), 21], [Property: SfpCustomizeQuantity.TransactionDate (DateTime?), 22], [Property: SfpCustomizeQuantity.UnitPrice (string), 23], [Property: SfpCustomizeQuantity.UnitQuantity (string), 24], [Property: SfpCustomizeQuantity.UomName (string), 25] }
+        SELECT s.Id, s.AgentId, s.AgentName, s.CreatedBy, s.CreatedOn, s.CreatorName, s.CustomerId, s.CustomerName, s.DeliveryBoyId, s.DeliveryBoyName, s.IsAbsent, s.MakeModelMasterId, s.MakeName, s.ModelName, s.ModifiedBy, s.ModifiedOn, s.ModifierName, s.OrderCreatedBy, s.Price, s.Quantity, s.Status, s.TotalPrice, s.TransactionDate, s.UnitPrice, s.UnitQuantity, s.UomName
+        FROM SfpCustomizeQuantity AS s
+        WHERE ((s.CustomerId == @__customerId_0) && (s.AgentId == @__agentId_1)) && (CASE
+            WHEN s.TransactionDate == NULL THEN s.TransactionDate
+            ELSE CONVERT(date, s.TransactionDate)
+        END == @__p_2)), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, SfpCustomizeQuantity>, 
+    Safepot.DataAccess.SafepotDbContext, 
+    False, 
+    False, 
+    True
+)' -            
+
+2024-03-04 11:55:02.2759 - Creating DbCommand for 'ExecuteReader'. -            
+
+2024-03-04 11:55:02.2759 - Created DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:55:02.2759 - Initialized DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:55:02.2759 - Opening connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.2759 - Opened connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.2759 - Executing DbCommand [Parameters=[@__customerId_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__p_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CreatedBy], [s].[CreatedOn], [s].[CreatorName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[IsAbsent], [s].[MakeModelMasterId], [s].[MakeName], [s].[ModelName], [s].[ModifiedBy], [s].[ModifiedOn], [s].[ModifierName], [s].[OrderCreatedBy], [s].[Price], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice], [s].[UnitQuantity], [s].[UomName]
+FROM [SfpCustomizeQuantity] AS [s]
+WHERE [s].[CustomerId] = @__customerId_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__p_2 -            
+
+2024-03-04 11:55:02.2901 - Executed DbCommand (12ms) [Parameters=[@__customerId_0='?' (DbType = Int32), @__agentId_1='?' (DbType = Int32), @__p_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AgentId], [s].[AgentName], [s].[CreatedBy], [s].[CreatedOn], [s].[CreatorName], [s].[CustomerId], [s].[CustomerName], [s].[DeliveryBoyId], [s].[DeliveryBoyName], [s].[IsAbsent], [s].[MakeModelMasterId], [s].[MakeName], [s].[ModelName], [s].[ModifiedBy], [s].[ModifiedOn], [s].[ModifierName], [s].[OrderCreatedBy], [s].[Price], [s].[Quantity], [s].[Status], [s].[TotalPrice], [s].[TransactionDate], [s].[UnitPrice], [s].[UnitQuantity], [s].[UomName]
+FROM [SfpCustomizeQuantity] AS [s]
+WHERE [s].[CustomerId] = @__customerId_0 AND [s].[AgentId] = @__agentId_1 AND CASE
+    WHEN [s].[TransactionDate] IS NULL THEN [s].[TransactionDate]
+    ELSE CONVERT(date, [s].[TransactionDate])
+END = @__p_2 -            
+
+2024-03-04 11:55:02.2901 - Closing data reader to 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.2901 - A data reader for 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' is being disposed after spending 0ms reading results. -            
+
+2024-03-04 11:55:02.2901 - Closing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.2901 - Closed connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' (0ms). -            
+
+2024-03-04 11:55:02.4974 - Context 'SafepotDbContext' started tracking 'SfpCustomizeQuantity' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:02.5173 - An entity of type 'SfpCustomizeQuantity' tracked by 'SafepotDbContext' changed state from 'Unchanged' to 'Modified'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:02.5174 - SaveChanges starting for 'SafepotDbContext'. -            
+
+2024-03-04 11:55:02.5174 - DetectChanges starting for 'SafepotDbContext'. -            
+
+2024-03-04 11:55:02.5174 - DetectChanges completed for 'SafepotDbContext'. -            
+
+2024-03-04 11:55:02.5174 - Opening connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.5174 - Opened connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.5174 - Creating DbCommand for 'ExecuteReader'. -            
+
+2024-03-04 11:55:02.5174 - Created DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:55:02.5174 - Initialized DbCommand for 'ExecuteReader' (0ms). -            
+
+2024-03-04 11:55:02.5174 - Executing DbCommand [Parameters=[@p25='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (DbType = Int32), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = Int32), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Int32), @p14='?' (DbType = DateTime2), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (Size = 4000), @p20='?' (Size = 4000), @p21='?' (DbType = DateTime2), @p22='?' (Size = 4000), @p23='?' (Size = 4000), @p24='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [SfpCustomizeQuantity] SET [AgentId] = @p0, [AgentName] = @p1, [CreatedBy] = @p2, [CreatedOn] = @p3, [CreatorName] = @p4, [CustomerId] = @p5, [CustomerName] = @p6, [DeliveryBoyId] = @p7, [DeliveryBoyName] = @p8, [IsAbsent] = @p9, [MakeModelMasterId] = @p10, [MakeName] = @p11, [ModelName] = @p12, [ModifiedBy] = @p13, [ModifiedOn] = @p14, [ModifierName] = @p15, [OrderCreatedBy] = @p16, [Price] = @p17, [Quantity] = @p18, [Status] = @p19, [TotalPrice] = @p20, [TransactionDate] = @p21, [UnitPrice] = @p22, [UnitQuantity] = @p23, [UomName] = @p24
+OUTPUT 1
+WHERE [Id] = @p25; -            
+
+2024-03-04 11:55:02.5174 - Executed DbCommand (6ms) [Parameters=[@p25='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (DbType = Int32), @p6='?' (Size = 4000), @p7='?' (DbType = Int32), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = Int32), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Int32), @p14='?' (DbType = DateTime2), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (Size = 4000), @p20='?' (Size = 4000), @p21='?' (DbType = DateTime2), @p22='?' (Size = 4000), @p23='?' (Size = 4000), @p24='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [SfpCustomizeQuantity] SET [AgentId] = @p0, [AgentName] = @p1, [CreatedBy] = @p2, [CreatedOn] = @p3, [CreatorName] = @p4, [CustomerId] = @p5, [CustomerName] = @p6, [DeliveryBoyId] = @p7, [DeliveryBoyName] = @p8, [IsAbsent] = @p9, [MakeModelMasterId] = @p10, [MakeName] = @p11, [ModelName] = @p12, [ModifiedBy] = @p13, [ModifiedOn] = @p14, [ModifierName] = @p15, [OrderCreatedBy] = @p16, [Price] = @p17, [Quantity] = @p18, [Status] = @p19, [TotalPrice] = @p20, [TransactionDate] = @p21, [UnitPrice] = @p22, [UnitQuantity] = @p23, [UomName] = @p24
+OUTPUT 1
+WHERE [Id] = @p25; -            
+
+2024-03-04 11:55:02.5174 - Closing data reader to 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.5174 - A data reader for 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' is being disposed after spending 0ms reading results. -            
+
+2024-03-04 11:55:02.5174 - Closing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:02.5174 - Closed connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS' (0ms). -            
+
+2024-03-04 11:55:02.5174 - An entity of type 'SfpCustomizeQuantity' tracked by 'SafepotDbContext' changed state from 'Modified' to 'Unchanged'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:02.5174 - SaveChanges completed for 'SafepotDbContext' with 1 entities written to the database. -            
+
+2024-03-04 11:55:02.5174 - An entity of type 'SfpCustomizeQuantity' tracked by 'SafepotDbContext' changed state from 'Unchanged' to 'Detached'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values. -            
+
+2024-03-04 11:55:05.1188 - Executed action method Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 89511.9121ms. -            
+
+2024-03-04 11:55:05.1188 - Action Filter: Before executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:55:05.1188 - Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter. -            
+
+2024-03-04 11:55:05.1188 - Action Filter: Before executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:55:05.1188 - Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter. -            
+
+2024-03-04 11:55:05.1188 - Result Filter: Before executing OnResultExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:55:05.1188 - Result Filter: After executing OnResultExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:55:05.1188 - Before executing action result Microsoft.AspNetCore.Mvc.ObjectResult. -            
+
+2024-03-04 11:55:05.1188 - List of registered output formatters, in the following order: Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter -            
+
+2024-03-04 11:55:05.1188 - Attempting to select an output formatter based on Accept header 'text/plain'. -            
+
+2024-03-04 11:55:05.1188 - Could not find an output formatter based on content negotiation. Accepted types were (text/plain) -            
+
+2024-03-04 11:55:05.1188 - Attempting to select an output formatter without using a content type as no explicit content types were specified for the response. -            
+
+2024-03-04 11:55:05.1188 - Attempting to select the first formatter in the output formatters list which can write the result. -            
+
+2024-03-04 11:55:05.1188 - Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response. -            
+
+2024-03-04 11:55:05.1188 - Executing ObjectResult, writing value of type 'Safepot.Web.Api.Helpers.ResponseModel`1[[Safepot.Entity.SfpCustomizeQuantity, Safepot.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. -            
+
+2024-03-04 11:55:05.1188 - Connection id "0HN1S2B28TUS8" sending HEADERS frame for stream ID 19 with length 34 and flags END_HEADERS. -            
+
+2024-03-04 11:55:05.1188 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 19 with length 80 and flags NONE. -            
+
+2024-03-04 11:55:05.1188 - After executing action result Microsoft.AspNetCore.Mvc.ObjectResult. -            
+
+2024-03-04 11:55:05.1188 - Result Filter: Before executing OnResultExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:55:05.1188 - Result Filter: After executing OnResultExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter. -            
+
+2024-03-04 11:55:05.1188 - Executed action Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api) in 89657.9834ms -            
+
+2024-03-04 11:55:05.1188 - Executed endpoint 'Safepot.Web.Api.Controllers.OrderDetailsController.UpdateOrderDetails (Safepot.Web.Api)' -            
+
+2024-03-04 11:55:05.1188 - Connection id "0HN1S2B28TUS8" sending DATA frame for stream ID 19 with length 0 and flags END_STREAM. -            
+
+2024-03-04 11:55:05.1188 - 'SafepotDbContext' disposed. -            
+
+2024-03-04 11:55:05.1188 - Disposing connection to database 'Safepot' on server 'DESKTOP-9AGC4LE\SQLEXPRESS'. -            
+
+2024-03-04 11:55:05.1188 - Disposed connection to database '' on server '' (0ms). -            
+
+2024-03-04 11:55:05.1188 - Request finished HTTP/2 PUT https://localhost:7159/api/OrderDetails/updateorderdetails?customerid=10&agentId=1&deliveryBoyId=19&status=Completed - 0 - 200 - application/json;+charset=utf-8 89668.2811ms -            
+
+2024-03-04 11:55:05.1188 - Connection id "0HN1S2B28TUS8" received WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0. -            
+
+2024-03-04 11:55:19.0318 - Batch acquisition of 0 triggers -            
+

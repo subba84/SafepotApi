@@ -1,0 +1,17 @@
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Business.deps.json
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Business.dll
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Business.pdb
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Contracts.dll
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Entity.dll
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Contracts.pdb
+C:\Working Projects\Safepot\Safepot.Business\bin\Debug\net6.0\Safepot.Entity.pdb
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.csproj.AssemblyReference.cache
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.AssemblyInfoInputs.cache
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.AssemblyInfo.cs
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.csproj.CoreCompileInputs.cache
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.csproj.CopyComplete
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.dll
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\refint\Safepot.Business.dll
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\Safepot.Business.pdb
+C:\Working Projects\Safepot\Safepot.Business\obj\Debug\net6.0\ref\Safepot.Business.dll

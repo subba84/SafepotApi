@@ -1,0 +1,173 @@
+﻿@model Safepot.Entity.SfpUser
+@{
+    ViewData["Title"] = "Agent Registration";
+}
+
+<style>
+    .text-red {
+        color: red;
+    }
+</style>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Agent Approval</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <form class="row g-3 needs-validation" method="post" asp-action="ApproveAgent" asp-controller="AgentApproval" novalidate>
+                            <input type="hidden" value="@Model.Id" name="agentid" />
+                            <div class="row" style="padding-top:20px;">
+                                <div class="col-lg-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <br/><span style="font-weight:bold">@Model.FirstName</span>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <br /><span style="font-weight:bold">@Model.LastName</span>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="userName" class="form-label">Username</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.UserName</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="emailId" class="form-label">Email</label>
+                                    <br /><span style="font-weight:bold">@Model.EmailId</span>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="mobile" class="form-label">Mobile Number</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.Mobile</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="state" class="form-label">State</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.StateName</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="city" class="form-label">City</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.CityName</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="address" class="form-label">Address</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.Address</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="landMark" class="form-label">Landmark</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.LandMark</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="pincode" class="form-label">Pincode</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.PinCode</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="company" class="form-label">Company</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.CompanyName</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="gstNumber" class="form-label">GST Number</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.GSTNumber</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="panNumber" class="form-label">PAN Number</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.PANNumber</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="geoLocation" class="form-label">Geo Location</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span style="font-weight:bold">@Model.GeoSelection</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label for="remarks" class="form-label">Remarks</label>
+                                <div class="input-group has-validation">
+                                    <textarea class="form-control" rows="3" name="remarks" id="remarks"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <button class="btn btn-primary w-100" id="btnApprove" value="Approved" type="submit" name="status">Approve</button>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-danger w-100" id="btnReject" value="Rejected" type="submit" name="status">Reject</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    
+
+    $("#btnReject").click(function () {
+        if ($("#remarks").val() == "" || $("#remarks").val() == null) {
+            alert("Please enter remarks");
+            return false;
+        }
+    });
+</script>
+
+
