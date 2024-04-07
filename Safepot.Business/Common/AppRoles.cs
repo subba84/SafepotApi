@@ -13,5 +13,7 @@ namespace Safepot.Business.Common
         public static int Agent = 3;
         public static int Customer = 4;
         public static int Delivery = 5;
+        public static int Operator = 6;
+        public static int Approver = 7;
     }
 }

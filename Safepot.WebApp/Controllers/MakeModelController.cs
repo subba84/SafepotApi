@@ -69,7 +69,7 @@ namespace Safepot.WebApp.Controllers
                     sfpMakeModelMaster.CreatorName = _loggedInUserName;
                     sfpMakeModelMaster.CreatedOn = DateTime.Now;
                     await _sfpMakeModelMasterService.SaveMakeModel(sfpMakeModelMaster);
-                    await _activityLogService.SaveActivityLog("Save Make Model", _loggedInUserName + " has created make - " + sfpMakeModelMaster.Make + " - " + sfpMakeModelMaster.Model + " - " + sfpMakeModelMaster.Uom, null, _loggedInUserId, _loggedInUserName ?? "");
+                    await _activityLogService.SaveActivityLog("Save Make Model", _loggedInUserName + " has created make - " + sfpMakeModelMaster.MakeName + " - " + sfpMakeModelMaster.ModelName + " - " + sfpMakeModelMaster.UomName, null, _loggedInUserId, _loggedInUserName ?? "");
                 }
                 TempData["Notification"] = "Make Model Details Saved Successfully";
                 return RedirectToAction("List");
@@ -89,7 +89,7 @@ namespace Safepot.WebApp.Controllers
                 _loggedInUserName = HttpContext.Session.GetString("_Name");
                 var data = await _sfpMakeModelMasterService.GetMakeModel(id);
                 await _sfpMakeModelMasterService.DeleteMakeModel(id);
-                await _activityLogService.SaveActivityLog("Delete Make Model", _loggedInUserName + " has deleted make - " + data.Make + " - " + data.Model + " - " + data.Uom, null, _loggedInUserId, _loggedInUserName ?? "");
+                await _activityLogService.SaveActivityLog("Delete Make Model", _loggedInUserName + " has deleted make - " + data.MakeName + " - " + data.ModelName + " - " + data.UomName, null, _loggedInUserId, _loggedInUserName ?? "");
                 TempData["Notification"] = "Make Model Deleted";
             }
             catch (Exception ex)

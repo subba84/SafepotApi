@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Working Projects\\Safepot\\Safepot.WebApp\\Safepot.WebApp.csproj": {}
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\Safepot.WebApp.csproj": {}
   },
   "projects": {
-    "C:\\Working Projects\\Safepot\\Safepot.Business\\Safepot.Business.csproj": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Working Projects\\Safepot\\Safepot.Business\\Safepot.Business.csproj",
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj",
         "projectName": "Safepot.Business",
-        "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Business\\Safepot.Business.csproj",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj",
         "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
-        "outputPath": "C:\\Working Projects\\Safepot\\Safepot.Business\\obj\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj"
               },
-              "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj"
               }
             }
           }
@@ -70,14 +70,14 @@
         }
       }
     },
-    "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj",
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj",
         "projectName": "Safepot.Contracts",
-        "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj",
         "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
-        "outputPath": "C:\\Working Projects\\Safepot\\Safepot.Contracts\\obj\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -98,8 +98,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj"
               }
             }
           }
@@ -133,14 +133,14 @@
         }
       }
     },
-    "C:\\Working Projects\\Safepot\\Safepot.DataAccess\\Safepot.DataAccess.csproj": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Working Projects\\Safepot\\Safepot.DataAccess\\Safepot.DataAccess.csproj",
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj",
         "projectName": "Safepot.DataAccess",
-        "projectPath": "C:\\Working Projects\\Safepot\\Safepot.DataAccess\\Safepot.DataAccess.csproj",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
-        "outputPath": "C:\\Working Projects\\Safepot\\Safepot.DataAccess\\obj\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -161,11 +161,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj"
               },
-              "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj"
               }
             }
           }
@@ -217,14 +217,14 @@
         }
       }
     },
-    "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj",
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj",
         "projectName": "Safepot.Entity",
-        "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Entity\\Safepot.Entity.csproj",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\Safepot.Entity.csproj",
         "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
-        "outputPath": "C:\\Working Projects\\Safepot\\Safepot.Entity\\obj\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -276,14 +276,14 @@
         }
       }
     },
-    "C:\\Working Projects\\Safepot\\Safepot.WebApp\\Safepot.WebApp.csproj": {
+    "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\Safepot.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Working Projects\\Safepot\\Safepot.WebApp\\Safepot.WebApp.csproj",
+        "projectUniqueName": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\Safepot.WebApp.csproj",
         "projectName": "Safepot.WebApp",
-        "projectPath": "C:\\Working Projects\\Safepot\\Safepot.WebApp\\Safepot.WebApp.csproj",
+        "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\Safepot.WebApp.csproj",
         "packagesPath": "C:\\Users\\Texas\\.nuget\\packages\\",
-        "outputPath": "C:\\Working Projects\\Safepot\\Safepot.WebApp\\obj\\",
+        "outputPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -304,14 +304,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Working Projects\\Safepot\\Safepot.Business\\Safepot.Business.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Business\\Safepot.Business.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Business\\Safepot.Business.csproj"
               },
-              "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.Contracts\\Safepot.Contracts.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.Contracts\\Safepot.Contracts.csproj"
               },
-              "C:\\Working Projects\\Safepot\\Safepot.DataAccess\\Safepot.DataAccess.csproj": {
-                "projectPath": "C:\\Working Projects\\Safepot\\Safepot.DataAccess\\Safepot.DataAccess.csproj"
+              "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj": {
+                "projectPath": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.DataAccess\\Safepot.DataAccess.csproj"
               }
             }
           }
@@ -326,9 +326,21 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.8, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.3, )"
+            },
+            "itextsharp.xmlworker": {
+              "target": "Package",
+              "version": "[5.5.13.3, )"
             }
           },
           "imports": [

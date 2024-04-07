@@ -28,5 +28,9 @@ namespace Safepot.Web.Api.Helpers
         public string? AgentAddress { get; set; }
         public string? AgentLandMark { get; set; }
         public string? AgentPinCode { get; set; }
+
+        public DateTime? SyncDateTime { get; set; }
+        public int? DeliveryBoyId { get; set; }
+        public string? OrderCode { get; set; }
     }
 }

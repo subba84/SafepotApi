@@ -30,6 +30,9 @@ builder.Services.AddTransient<ISfpActivityLogService, SfpActivityLogService>();
 builder.Services.AddTransient<ISfpSubscriptionHistoryService, SfpSubscriptionHistoryService>();
 builder.Services.AddTransient<ISfpRoleMasterService, SfpRoleMasterService>();
 builder.Services.AddTransient<ISfpMakeModelMasterService, SfpMakeModelMasterService>();
+builder.Services.AddTransient<ISfpCompanyService, SfpCompanyService>();
+builder.Services.AddTransient<IUserRoleMapService, UserRoleMapService>();
+builder.Services.AddTransient<ISfpInvoiceService, SfpInvoiceService>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

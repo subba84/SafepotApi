@@ -11,7 +11,7 @@ namespace Safepot.Contracts
     {
         Task<IEnumerable<SfpMakeModelMaster>> GetMakeModels();
         Task<IEnumerable<SfpMakeModelMaster>> GetMakeModelsbasedonAgent(int agentId);
-        Task<IEnumerable<SfpMakeModelMaster>> GetExistedMakeModels(int? makeId, int? modelId, int? uomId, decimal qty);
+        Task<IEnumerable<SfpMakeModelMaster>> GetExistedMakeModels(int? agentId,int? makeId, int? modelId, int? uomId, decimal qty);
         Task<SfpMakeModelMaster> GetMakeModel(int id);
         Task SaveMakeModel(SfpMakeModelMaster sfpMakeModelMaster);
         Task UpdateMakeModel(SfpMakeModelMaster sfpMakeModelMaster);

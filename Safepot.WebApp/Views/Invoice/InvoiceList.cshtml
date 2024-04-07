@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Safepot.Entity.SfpInvoice>
+@{
+    ViewData["Title"] = "Invoices List";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Invoices</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="card-title">Invoices</h5>
+                            </div>
+                            @*<div class="col-lg-6">
+                                <input type="button" class="btn btn-primary" style="float:right;margin-top:5px;" value="+ Add Agent" onclick="fnGotoAgentRegistration();" />
+                            </div>*@
+                        </div>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Company Name</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">GST</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int i = 1;
+                                    foreach (var invoice in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row" style="text-align:center">@invoice.Id</th>
+                                            <td>@(invoice.CompanyName)</td>
+                                            <td>@invoice.CompanyState</td>
+                                            <td>@invoice.CompanyCity</td>
+                                            <td style="text-align:right">@invoice.Amount</td>
+                                            <td style="text-align:right">@invoice.GST</td>
+                                            <td style="text-align:right">@invoice.TotalAmount</td>
+                                            <td style="text-align:center">
+                                                <a href="@Url.Action("DownloadInvoice","Invoice")?invoiceId=@invoice.Id">
+                                                    <i b-mk0rxp7ouj="" class="bi bi-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">No Data Found</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+

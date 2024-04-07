@@ -10,12 +10,14 @@ namespace Safepot.WebApp.Controllers
         private readonly ILogger<AgentController> _logger;
         private readonly ISfpActivityLogService _activityLogService;
         private readonly ISfpUserService _userService;
+        private readonly ISfpCompanyService _companyService;
         private readonly ISfpStateMasterService _stateService;
         private readonly ISfpCityMasterService _cityService;
         private readonly ISfpSubscriptionHistoryService _sfpSubscriptionHistoryService;
         private int? _loggedInUserId;
         private string? _loggedInUserName;
         public AgentController(ISfpUserService userService,
+            ISfpCompanyService companyService,
             ISfpStateMasterService stateService,
             ISfpCityMasterService cityService,
             ILogger<AgentController> logger,
@@ -23,6 +25,7 @@ namespace Safepot.WebApp.Controllers
             ISfpSubscriptionHistoryService sfpSubscriptionHistoryService)
         {
             _userService = userService;
+            _companyService = companyService;
             _stateService = stateService;
             _cityService = cityService;
             _logger = logger;
@@ -33,8 +36,7 @@ namespace Safepot.WebApp.Controllers
         {
             try
             {
-                var agents = await _userService.GetRolebasedUsers(AppRoles.Agent);
-                //var agents = await _userService.GetAllUsers();
+                var agents = await _companyService.GetAllCompanies();
                 return View(agents);
             }
             catch(Exception ex)
@@ -48,12 +50,12 @@ namespace Safepot.WebApp.Controllers
         {
             try
             {
-                SfpUser user = new SfpUser();
+                SfpCompany company = new SfpCompany();
                 if(agentid > 0)
                 {
-                    user = await _userService.GetUser(agentid);
+                    company = await _companyService.GetCompany(agentid);
                 }
-                return View(user);
+                return View(company);
             }
             catch(Exception ex)
             {
@@ -63,72 +65,73 @@ namespace Safepot.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveAgent(SfpUser user)
+        public async Task<IActionResult> SaveAgent(SfpCompany company)
         {
             try
             {
+                var companies = await _companyService.GetAllCompanies();
+                if(companies!=null && companies.Count() > 0)
+                {
+                    var existedCompany = companies.Where(x => x.Mobile == company.Mobile);
+                    if(existedCompany!=null && existedCompany.Count() > 0)
+                    {
+                        TempData["Notification"] = "Company Already Exists";
+                        return RedirectToAction("List");
+                    }
+                }
                 _loggedInUserId = HttpContext.Session.GetInt32("_Id");
                 _loggedInUserName = HttpContext.Session.GetString("_Name");
-                if (user.Id > 0)
+                if (company.Id > 0)
                 {
-                    var existingdate = await _userService.GetUser(user.Id);
-                    if (user.CityId > 0 && user.StateId > 0)
+                    var existingdata = await _companyService.GetCompany(company.Id);
+                    if (company.CityId > 0 && company.StateId > 0)
                     {
-                        IEnumerable<SfpCityMaster> cities = await _cityService.GetCities(user.StateId ?? 0);
+                        IEnumerable<SfpCityMaster> cities = await _cityService.GetCities(company.StateId ?? 0);
                         if (cities != null && cities.Count() > 0)
-                            user.CityName = cities.First(x => x.Id == user.CityId).CityName;
+                            company.CityName = cities.First(x => x.Id == company.CityId).CityName;
                         IEnumerable<SfpStateMaster> states = await _stateService.GetStates();
                         if (states != null && states.Count() > 0)
-                            user.StateName = states.First(x => x.Id == user.StateId).StateName;
+                            company.StateName = states.First(x => x.Id == company.StateId).StateName;
                     }
-                    user.RoleId = AppRoles.Agent;
-                    user.RoleName = "Agent";
-                    user.ApprovalStatus = "Approved";
-                    user.ActionRemarks = "Approved by System";
-                    user.ActionPerformedBy = _loggedInUserId ?? 0;
-                    user.ActionPerformedOn = DateTime.Now;
-                    await _userService.UpdateUser(user);
+                    company.ApprovalStatus = "Submitted";
+                    company.ActionPerformedBy = _loggedInUserName;
+                    company.ActionPerformedOn = DateTime.Now;
+                    await _companyService.UpdateCompany(company);
 
                     // Save Subscription History
-                    if (existingdate.SubscriptionPrice!=user.SubscriptionPrice || existingdate.RenewalDate != user.RenewalDate)
+                    if (existingdata.TotalAmount!= company.TotalAmount || existingdata.RenewalDate != existingdata.RenewalDate)
                     {
                         SfpSubscriptionHistory history = new SfpSubscriptionHistory();
-                        history.AgentId = user.Id;
-                        history.AgentName = user.FirstName + " " + user.LastName;
-                        history.SubscriptionPrice = user.SubscriptionPrice;
-                        history.RenewalDate = user.RenewalDate;
+                        history.AgentId = company.Id;
+                        history.AgentName = company.CompanyName;
+                        history.SubscriptionPrice = company.TotalAmount;
+                        history.RenewalDate = company.RenewalDate;
                         history.CreatedBy = _loggedInUserId;
                         history.CreatorName = _loggedInUserName;
                         history.CreatedOn = DateTime.Now;
                         await _sfpSubscriptionHistoryService.SaveSubscriptionHistory(history);
-                    }
-                    
+                    }                    
                 }
                 else
                 {                    
-                    if(user.CityId > 0 && user.StateId > 0)
+                    if(company.CityId > 0 && company.StateId > 0)
                     {
-                        IEnumerable<SfpCityMaster> cities = await _cityService.GetCities(user.StateId ?? 0);
+                        IEnumerable<SfpCityMaster> cities = await _cityService.GetCities(company.StateId ?? 0);
                         if (cities != null && cities.Count() > 0)
-                            user.CityName = cities.First(x => x.Id == user.CityId).CityName;
+                            company.CityName = cities.First(x => x.Id == company.CityId).CityName;
                         IEnumerable<SfpStateMaster> states = await _stateService.GetStates();
                         if (states != null && states.Count() > 0)
-                            user.StateName = states.First(x => x.Id == user.StateId).StateName;
+                            company.StateName = states.First(x => x.Id == company.StateId).StateName;
                     }
-                    user.RoleId = AppRoles.Agent;
-                    user.RoleName = "Agent";
-                    user.ApprovalStatus = "Approved";
-                    user.ActionPerformedBy = _loggedInUserId ?? 0;
-                    user.ActionPerformedOn = DateTime.Now;
-                    user.ActionRemarks = "Approved by System";
-                    user.CreatedBy = _loggedInUserId ?? 0;
-                    user.CreatorName = _loggedInUserName;
-                    user.CreatedOn = DateTime.Now;
-                    await _userService.CreateUser(user);
-                    await _activityLogService.SaveActivityLog("Save Agent", _loggedInUserName + " has created an agent - " + user.FirstName + " " + user.LastName , null, _loggedInUserId, _loggedInUserName ?? "");
+                    company.ApprovalStatus = "Submitted";
+                    company.ActionPerformedBy = _loggedInUserName;
+                    company.ActionPerformedOn = DateTime.Now;
+                    company.ActionRemarks = "Approved by System";
+                    await _companyService.SaveCompany(company);
+                    await _activityLogService.SaveActivityLog("Save Agent", _loggedInUserName + " has created an agent - " + company.CompanyName , null, _loggedInUserId, _loggedInUserName ?? "");
                     
                 }
-                TempData["Notification"] = "Agent Saved Successfully";
+                TempData["Notification"] = "Company Saved Successfully";
                 return RedirectToAction("List");
             }
             catch(Exception ex)
@@ -138,16 +141,16 @@ namespace Safepot.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> Delete(int agentid)
+        public async Task<IActionResult> Delete(int companyId)
         {
             try
             {
                 _loggedInUserId = HttpContext.Session.GetInt32("_Id");
                 _loggedInUserName = HttpContext.Session.GetString("_Name");
-                var user = await _userService.GetUser(agentid);
-                await _userService.DeleteUser(agentid);
-                await _activityLogService.SaveActivityLog("Delete Agent", _loggedInUserName + " has deleted an agent - " + user.FirstName + " " + user.LastName, null, _loggedInUserId, _loggedInUserName ?? "");
-                TempData["Notification"] = "Agent Deleted";
+                var user = await _companyService.GetCompany(companyId);
+                await _companyService.DeleteCompany(companyId);
+                await _activityLogService.SaveActivityLog("Delete Company", _loggedInUserName + " has deleted an company - " + user.CompanyName, null, _loggedInUserId, _loggedInUserName ?? "");
+                TempData["Notification"] = "Company Deleted";
             }
             catch(Exception ex)
             {

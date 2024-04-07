@@ -1,0 +1,227 @@
+﻿@model Safepot.Entity.SfpInvoice
+
+@{
+    int i = 1;
+    double lineItemstotal = 0;
+    double CGSTtotal = 0;
+    double SGSTtotal = 0;
+    double IGSTtotal = 0;
+}
+
+<div class="row">
+    @if (Model != null)
+    {
+        <table class="table" border="1" style="border-collapse:collapse;width:100%">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="11" style="text-align:center">DataBricks Technologies</th>
+                    <th scope="col" colspan="4" style="text-align:center">
+                        @*<img style="height:50px;width:100px" src="@imagePath" />*@
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="col" colspan="15" style="text-align:center">Invoice : @Model.Id</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="3" style="text-align:center">Company Address</td>
+                    <td scope="col" colspan="6" style="text-align:center">Hyderabad</td>
+                    <td scope="col" colspan="2" style="text-align:center">GSTIN:</td>
+                    <td scope="col" colspan="4" style="text-align:center">36AAIFD1660R1ZZ</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="15" style="text-align:center">Customer Details</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="2" style="text-align:center">Name</td>
+                    <td scope="col" colspan="7" style="text-align:center">@Model.CompanyName</td>
+                    <td scope="col" colspan="3" style="text-align:center">POS</td>
+                    <td scope="col" colspan="3" style="text-align:center">Invoice#</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="2" rowspan="3" style="text-align:center">Address</td>
+                    <td scope="col" colspan="7" style="text-align:center">@Model.CompanyCity, @Model.CompanyState ,@Model.CompanyAddress</td>
+                    <td scope="col" colspan="3" style="text-align:center">@Model.CompanyCity</td>
+                    <td scope="col" colspan="3" style="text-align:center">@Model.Id</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="7" style="text-align:center"></td>
+                    <td scope="col" colspan="3" style="text-align:center">GSTN</td>
+                    <td scope="col" colspan="3" style="text-align:center">Date</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="7" style="text-align:center"></td>
+                    <td scope="col" colspan="3" style="text-align:center">@(Model.GSTNumber != null ? Model.GSTNumber : " --")</td>
+                    <td scope="col" colspan="3" style="text-align:center">@(Model.CreatedOn != null ? Convert.ToDateTime(Model.CreatedOn).ToShortDateString() : null)</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="3" style="text-align:center">Customer GSTN</td>
+                    <td scope="col" colspan="4" style="text-align:center"> -- </td>
+                    <td scope="col" colspan="4" style="text-align:center">Customer PAN</td>
+                    <td scope="col" colspan="4" style="text-align:center">@(Model.CustomerPAN != null ? Model.CustomerPAN : " -- ")</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="15" style="text-align:center">Product-wise Details:</td>
+                </tr>
+                <tr>
+                    <td scope="col" rowspan="2" style="text-align:center">SNo</td>
+                    <td scope="col" rowspan="2" colspan="2" style="text-align:center">Product Description</td>
+                    <td scope="col" rowspan="2" colspan="2" style="text-align:center">HSC/SAC Code</td>
+                    <td scope="col" rowspan="2" style="text-align:center">Unit</td>
+                    <td scope="col" rowspan="2" style="text-align:center">Rate</td>
+                    <td scope="col" rowspan="2" colspan="2" style="text-align:center">Taxable Value</td>
+                    <td scope="col" colspan="2" rowspan="1" style="text-align:center">CGST</td>
+                    <td scope="col" colspan="2" rowspan="1" style="text-align:center">SGST</td>
+                    <td scope="col" colspan="2" rowspan="1" style="text-align:center">IGST</td>
+                </tr>
+                <tr>
+
+                    <td scope="col" colspan="1" rowspan="1" style="text-align:center">Rate%</td>
+                    <td scope="col" colspan="1" rowspan="1" style="text-align:center">Amount</td>
+                    <td scope="col" colspan="1" rowspan="1" style="text-align:center">Rate%</td>
+                    <td scope="col" colspan="1" rowspan="1" style="text-align:center">Amount</td>
+                    <td scope="col" colspan="1" rowspan="1" style="text-align:center">Rate%</td>
+                    <td scope="col" colspan="1" rowspan="1" style="text-align:center">Amount</td>
+
+                </tr>
+
+                <tr>
+                    <td scope="col" style="text-align:center">@i</td>
+                    <td scope="col" colspan="2" style="text-align:center">Safepot <br />(Duration: @(Model.FromDate != null ? Convert.ToDateTime(Model.FromDate).ToShortDateString() : null) to @(Convert.ToDateTime(Model.ToDate).ToShortDateString()))</td>
+                    <td scope="col" colspan="2" style="text-align:center">998434</td>
+                    <td scope="col" style="text-align:center">1</td>
+                    <td scope="col" style="text-align:center">@(Model.Amount)</td>
+                    <td scope="col" colspan="2" style="text-align:center">@(Model.Amount)</td>
+                    @if (Model.CompanyState == "Telangana")
+                    {
+                        <td scope="col" style="text-align:center">9%</td>
+                        <td scope="col" style="text-align:center">@(Convert.ToDouble(Model.GST) / 2)</td>
+                        <td scope="col" style="text-align:center">9%</td>
+                        <td scope="col" style="text-align:center">@(Convert.ToDouble(Model.GST) / 2)</td>
+                        <td scope="col" style="text-align:center">18%</td>
+                        <td scope="col" style="text-align:center">0</td>
+                        CGSTtotal += (Convert.ToDouble(Model.GST) / 2);
+                        SGSTtotal += (Convert.ToDouble(Model.GST) / 2);
+                    }
+                    else
+                    {
+                        <td scope="col" style="text-align:center">9%</td>
+                        <td scope="col" style="text-align:center">0</td>
+                        <td scope="col" style="text-align:center">9%</td>
+                        <td scope="col" style="text-align:center">0</td>
+                        <td scope="col" style="text-align:center">18%</td>
+                        <td scope="col" style="text-align:center">@(Convert.ToInt32(Model.GST))</td>
+                        IGSTtotal += (Convert.ToDouble(Model.GST));
+                    }
+                    @{
+                        i++;
+                        lineItemstotal += Convert.ToDouble(Model.Amount);
+                    }
+                </tr>
+                <tr>
+                    <td scope="col" colspan="6" style="text-align:right"> Total</td>
+                    <td scope="col" style="text-align:center">@lineItemstotal</td>
+                    <td scope="col" colspan="2" style="text-align:center">@lineItemstotal</td>
+                    <td scope="col" style="text-align:center"></td>
+                    @if (Model.CompanyState == "Telangana")
+                    {
+                        <td scope="col" style="text-align:center">@(CGSTtotal)</td>
+                        <td scope="col" style="text-align:center"></td>
+                        <td scope="col" style="text-align:center">@(SGSTtotal)</td>
+                        <td scope="col" style="text-align:center"></td>
+                        <td scope="col" style="text-align:center">0</td>
+                    }
+                    else
+                    {
+                        <td scope="col" style="text-align:center">0</td>
+                        <td scope="col" style="text-align:center"></td>
+                        <td scope="col" style="text-align:center">0</td>
+                        <td scope="col" style="text-align:center"></td>
+                        <td scope="col" style="text-align:center">@(IGSTtotal)</td>
+                    }
+                </tr>
+
+                <tr>
+                    <td scope="col" colspan="8" style="text-align:center"> Remarks:</td>
+                    <td scope="col" colspan="5" style="text-align:center"> Summary:</td>
+                    <td scope="col" colspan="2" style="text-align:center"> Amount</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="8" rowspan="2"></td>
+                    <td scope="col" colspan="5" style="text-align:center"> Total Invoice Value</td>
+                    <td scope="col" colspan="2" style="text-align:center"> @(lineItemstotal + IGSTtotal + SGSTtotal + CGSTtotal)</td>
+
+                </tr>
+                <tr>
+                    <td scope="col" colspan="5" style="text-align:center">Total Discount</td>
+                    <td scope="col" colspan="2" style="text-align:center"> 0</td>
+                </tr>
+                <tr>
+                    <td colspan="8" rowspan="3"> </td>
+                    <td scope="col" colspan="5" style="text-align:center">Total Taxable Value</td>
+                    <td scope="col" colspan="2" style="text-align:center">  @(lineItemstotal)</td>
+                </tr>
+                <tr>
+                    <td scope="col" colspan="5" style="text-align:center">CGST</td>
+                    @if (Model.CompanyState == "Telangana")
+                    {
+                        <td scope="col" colspan="2" style="text-align:center"> @(CGSTtotal)</td>
+                    }
+                    else
+                    {
+                        <td scope="col" colspan="2" style="text-align:center"> 0</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td scope="col" colspan="5" style="text-align:center">SGST</td>
+                    @if (Model.CompanyState == "Telangana")
+                    {
+                        <td scope="col" colspan="2" style="text-align:center"> @(SGSTtotal)</td>
+                    }
+                    else
+                    {
+                        <td scope="col" colspan="2" style="text-align:center"> 0</td>
+                    }
+                </tr>
+                <tr>
+                    <td colspan="8" rowspan="2" style="text-align:center"> Signature</td>
+                    <td scope="col" colspan="5" style="text-align:center">IGST</td>
+                    @if (Model.CompanyState == "Telangana")
+                    {
+                        <td scope="col" colspan="2" style="text-align:center"> 0</td>
+                    }
+                    else
+                    {
+                        <td scope="col" colspan="2" style="text-align:center"> @(IGSTtotal)</td>
+                    }
+                </tr>
+                <tr>
+                    <td scope="col" colspan="5" style="text-align:center">Grand Total</td>
+                    <td scope="col" colspan="2" style="text-align:center"> @(lineItemstotal + IGSTtotal + SGSTtotal + CGSTtotal)</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <p> <b>* This is electronically genarated Copy</b></p>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

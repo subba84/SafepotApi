@@ -1,4 +1,4 @@
-﻿@model Safepot.Entity.SfpUser
+﻿@model Safepot.Entity.SfpCompany
 @{
     ViewData["Title"] = "Agent Registration";
 }
@@ -29,37 +29,11 @@
                 <div class="card">
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="post" asp-action="SaveAgent" asp-controller="Agent" novalidate>
-                            <input type="hidden" value="@Model.Id" name="Id"/>
+                            <input type="hidden" value="@Model.Id" name="Id" />
                             <div class="col-12">
-                                <label for="firstName" class="form-label">First Name<span class="text-red">*</span></label>
-                                <input type="text" name="FirstName" value="@Model.FirstName" class="form-control" id="firstName" maxlength="256" required>
-                                <div class="invalid-feedback">Please, enter first name!</div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="lastName" class="form-label">Last Name<span class="text-red">*</span></label>
-                                <input type="text" name="LastName" value="@Model.LastName" class="form-control" id="lastName" maxlength="256" required>
-                                <div class="invalid-feedback">Please, enter last name!</div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="userName" class="form-label">Username<span class="text-red">*</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="text" name="UserName" value="@Model.UserName" class="form-control" id="userName" maxlength="128" required>
-                                    <div class="invalid-feedback">Please choose a username.</div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="password" class="form-label">Password<span class="text-red">*</span></label>
-                                <input type="password" name="Password" value="@Model.Password" class="form-control" id="password" maxlength="128" required>
-                                <div class="invalid-feedback">Please enter password!</div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="confirmPassword" class="form-label">Confirm Password<span class="text-red">*</span></label>
-                                <input type="password" name="" value="@Model.Password" class="form-control" id="confirmPassword" maxlength="128" required>
-                                <div class="invalid-feedback">Please enter confirm password!</div>
+                                <label for="firstName" class="form-label">Company Name<span class="text-red">*</span></label>
+                                <input type="text" name="CompanyName" value="@Model.CompanyName" class="form-control" id="companyName" maxlength="256" required>
+                                <div class="invalid-feedback">Please, enter company name!</div>
                             </div>
 
                             <div class="col-12">
@@ -73,14 +47,6 @@
                                 <div class="input-group has-validation">
                                     <input type="number" name="Mobile" value="@Model.Mobile" class="form-control" id="mobile" maxlength="10" required>
                                     <div class="invalid-feedback">Please enter mobile number.</div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="altMobile" class="form-label">Alt. Mobile Number</label>
-                                <div class="input-group has-validation">
-                                    <input type="number" name="AltMobile" value="@Model.AltMobile" class="form-control" id="altMobile" maxlength="10">
-                                    <div class="invalid-feedback">Please enter alternate mobile number.</div>
                                 </div>
                             </div>
 
@@ -118,27 +84,6 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="pincode" class="form-label">Pincode<span class="text-red">*</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="text" name="PinCode" value="@Model.PinCode" class="form-control" id="pincode" maxlength="10" required>
-                                    <div class="invalid-feedback">Please enter pincode.</div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label for="company" class="form-label">Company<span class="text-red">*</span></label>
-                                <div class="input-group has-validation">
-                                    <input type="text" name="CompanyName" value="@Model.CompanyName" class="form-control" id="company" maxlength="256" required>
-                                    <div class="invalid-feedback">Please enter company.</div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label for="gstNumber" class="form-label">GST Number</label>
-                                <div class="input-group has-validation">
-                                    <input type="text" name="GSTNumber" value="@Model.GSTNumber" class="form-control" id="gstNumber" maxlength="10">
-                                    <div class="invalid-feedback">Please enter gst number.</div>
-                                </div>
-                            </div>
-                            <div class="col-12">
                                 <label for="panNumber" class="form-label">PAN Number</label>
                                 <div class="input-group has-validation">
                                     <input type="text" name="PANNumber" value="@Model.PANNumber" class="form-control" id="panNumber" maxlength="10">
@@ -146,31 +91,76 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="geoLocation" class="form-label">Geo Location</label>
+                                <label for="geoLocation" class="form-label">Amount<span class="text-red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" name="GeoSelection" value="@Model.GeoSelection" class="form-control" id="geoLocation" maxlength="256">
-                                    <div class="invalid-feedback">Please enter geo location.</div>
+                                    <input type="number" name="Amount" value="@Model.Amount" class="form-control" id="amount" maxlength="8">
+                                    <div class="invalid-feedback">Please enter Amount.</div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="joinDate" class="form-label">Joining Date<span class="text-red">*</span></label>
+                                <label for="joinDate" class="form-label">GST<span class="text-red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="date" name="JoinDate" value="@(Model.JoinDate != null ? Model.JoinDate.Value.ToString("yyyy-MM-dd") : "")" class="form-control" id="joinDate" required>
-                                    <div class="invalid-feedback">Please enter joining date.</div>
+                                    <input type="number" name="GST" value="@Model.GST" readonly class="form-control" id="gst" required>
+                                    <div class="invalid-feedback">Please enter GST.</div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="subscriptionPrice" class="form-label">Subscription Price<span class="text-red">*</span></label>
+                                <label for="totalAmount" class="form-label">Total Amount<span class="text-red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="number" name="SubscriptionPrice" value="@Model.SubscriptionPrice" class="form-control" id="subscriptionPrice" maxlength="6" required>
-                                    <div class="invalid-feedback">Please enter Subscription Price.</div>
+                                    <input type="number" name="TotalAmount" readonly value="@Model.TotalAmount" class="form-control" id="totalAmount" maxlength="6" required>
+                                    <div class="invalid-feedback">Please enter Total Amount.</div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="renewalDate" class="form-label">Renewal Date<span class="text-red">*</span></label>
+                                <label for="renewalDate" class="form-label">Invoice Type<span class="text-red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="date" name="RenewalDate" value="@(Model.RenewalDate != null ? Model.RenewalDate.Value.ToString("yyyy-MM-dd") : "")" class="form-control" id="renewalDate" required>
-                                    <div class="invalid-feedback">Please enter renewal date.</div>
+                                    <select class="form-control" name="InvoiceType">
+                                        @if (Model.InvoiceType == "B2C")
+                                        {
+                                            <option value="B2C" selected>B2C</option>
+                                            <option value="B2B">B2B</option>
+                                        }
+                                        else if (Model.InvoiceType == "B2B")
+                                        {
+                                            <option value="B2C">B2C</option>
+                                            <option value="B2B" selected>B2B</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="B2C">B2C</option>
+                                            <option value="B2B">B2B</option>
+                                        }
+                                    </select>
+                                    <div class="invalid-feedback">Please select invoice type.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="transactionid" class="form-label">Transaction Id<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    <input type="text" name="TransactionId" value="@Model.TransactionId" class="form-control" id="transactionid" maxlength="256" required>
+                                    <div class="invalid-feedback">Please enter transaction id.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="paidVia" class="form-label">Paid Via<span class="text-red">*</span></label>
+                                <div class="input-group has-validation">
+                                    @{
+                                        string[] paymenttypes = { "Google Pay", "Phone Pay", "Paytm", "Others" };
+                                    }
+                                    <select class="form-control" name="PaidVia">
+                                        @for (int i = 0; i < paymenttypes.Length; i++)
+                                        {
+                                            if (Model.PaidVia == paymenttypes[i])
+                                            {
+                                                <option value="@paymenttypes[i]" selected>@paymenttypes[i]</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@paymenttypes[i]">@paymenttypes[i]</option>
+                                            }
+                                        }
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -192,33 +182,33 @@
 
     fnGetStates("@Model.StateId");
 
-    fnGetCities("@Model.StateId","@Model.CityId");
+    fnGetCities("@Model.StateId", "@Model.CityId");
 
 
-    function fnGetStates(id){
+    function fnGetStates(id) {
         $.getJSON("@Url.Action("GetStates","Agent")", function (result) {
             $("#state").html('');
             $("#state").append("<option value='0'>--Select--</option>");
-            $.each(result, function (i,field) {
-                if (field.id == id){
+            $.each(result, function (i, field) {
+                if (field.id == id) {
                     $("#state").append("<option value='" + field.id + "' selected>" + field.stateName + "</option>");
                 }
-                else{
+                else {
                     $("#state").append("<option value='" + field.id + "'>" + field.stateName + "</option>");
-                }                
+                }
             });
         });
     };
 
-    function fnGetCities(stateid,cityid){
+    function fnGetCities(stateid, cityid) {
         $.getJSON("@Url.Action("GetCitiesbyState","Agent")?stateid=" + stateid, function (result) {
             $("#city").html('');
             $("#city").append("<option value='0'>--Select--</option>");
             $.each(result, function (i, field) {
-                if(field.id == cityid){
+                if (field.id == cityid) {
                     $("#city").append("<option value='" + field.id + "' selected>" + field.cityName + "</option>");
                 }
-                else{
+                else {
                     $("#city").append("<option value='" + field.id + "'>" + field.cityName + "</option>");
                 }
             });
@@ -229,10 +219,20 @@
         fnGetCities($(this).val(), 0);
     });
 
-    $("#btnSave").click(function(){
-        if ($("#password").val() != $("#confirmPassword").val()){
+    $("#btnSave").click(function () {
+        if ($("#password").val() != $("#confirmPassword").val()) {
             alert("Password & Confirm Password is not matching");
             return false;
+        }
+    });
+
+    $(document).on("keyup", "#amount", function () {
+        var thisVal = $(this).val();
+        if (thisVal != null && thisVal != undefined && thisVal != NaN) {
+            var gst = parseFloat(thisVal) * 18 / 100;
+            var total = parseFloat(thisVal) + parseFloat(gst);
+            $("#gst").val(gst);
+            $("#totalAmount").val(parseFloat(total));
         }
     });
 </script>

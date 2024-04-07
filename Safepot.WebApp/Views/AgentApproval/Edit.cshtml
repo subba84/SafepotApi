@@ -1,4 +1,4 @@
-﻿@model Safepot.Entity.SfpUser
+﻿@model Safepot.Entity.SfpCompany
 @{
     ViewData["Title"] = "Agent Registration";
 }
@@ -29,115 +29,112 @@
                 <div class="card">
                     <div class="card-body">
                         <form class="row g-3 needs-validation" method="post" asp-action="ApproveAgent" asp-controller="AgentApproval" novalidate>
-                            <input type="hidden" value="@Model.Id" name="agentid" />
+                            <input type="hidden" value="@Model.Id" name="companyId" />
                             <div class="row" style="padding-top:20px;">
                                 <div class="col-lg-6">
-                                    <label for="firstName" class="form-label">First Name</label>
-                                    <br/><span style="font-weight:bold">@Model.FirstName</span>
+                                    <label for="firstName" class="form-label" style="font-weight:bold">Company Name</label>
+                                    <br/><span>@Model.CompanyName</span>
+                                </div>
+                            </div>
+                            <hr/>
+                           
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="mobile" class="form-label" style="font-weight:bold">Mobile Number</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.Mobile</span>
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <label for="lastName" class="form-label">Last Name</label>
-                                    <br /><span style="font-weight:bold">@Model.LastName</span>
+                                    <label for="emailId" class="form-label" style="font-weight:bold">Email</label>
+                                    <br /><span>@Model.EmailId</span>
                                 </div>
                             </div>
                            
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <label for="userName" class="form-label">Username</label>
+                                    <label for="state" class="form-label" style="font-weight:bold">State</label>
                                     <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.UserName</span>
+                                        <br /><span>@Model.StateName</span>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
-                                    <label for="emailId" class="form-label">Email</label>
-                                    <br /><span style="font-weight:bold">@Model.EmailId</span>
+                                    <label for="city" class="form-label" style="font-weight:bold">City</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.CityName</span>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="landMark" class="form-label" style="font-weight:bold">Landmark</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.LandMark</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="address" class="form-label" style="font-weight:bold">Address</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.Address</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
                            
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <label for="mobile" class="form-label">Mobile Number</label>
+                                    <label for="panNumber" class="form-label" style="font-weight:bold">PAN Number</label>
                                     <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.Mobile</span>
+                                        <br /><span>@Model.PANNumber</span>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <label for="geoLocation" class="form-label" style="font-weight:bold">Invoice Type</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.InvoiceType</span>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="row">
                                 <div class="col-lg-6">
-                                    <label for="state" class="form-label">State</label>
+                                    <label for="panNumber" class="form-label" style="font-weight:bold">Amount</label>
                                     <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.StateName</span>
+                                        <br /><span>@Model.Amount</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="geoLocation" class="form-label" style="font-weight:bold">GST</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.GST</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="panNumber" class="form-label" style="font-weight:bold">Paid Via</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.PaidVia</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="geoLocation" class="form-label" style="font-weight:bold">Transaction Id</label>
+                                    <div class="input-group has-validation">
+                                        <br /><span>@Model.TransactionId</span>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="city" class="form-label">City</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.CityName</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="address" class="form-label">Address</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.Address</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="landMark" class="form-label">Landmark</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.LandMark</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="pincode" class="form-label">Pincode</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.PinCode</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="company" class="form-label">Company</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.CompanyName</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="gstNumber" class="form-label">GST Number</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.GSTNumber</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="panNumber" class="form-label">PAN Number</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.PANNumber</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="geoLocation" class="form-label">Geo Location</label>
-                                    <div class="input-group has-validation">
-                                        <br /><span style="font-weight:bold">@Model.GeoSelection</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <label for="remarks" class="form-label">Remarks</label>
+                                <label for="remarks" class="form-label" style="font-weight:bold">Remarks</label>
                                 <div class="input-group has-validation">
                                     <textarea class="form-control" rows="3" name="remarks" id="remarks"></textarea>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-top:20px;">
                                 <div class="col-lg-6">
                                     <button class="btn btn-primary w-100" id="btnApprove" value="Approved" type="submit" name="status">Approve</button>
                                 </div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Safepot.Entity.SfpUser>
+﻿@model IEnumerable<Safepot.Entity.SfpCompany>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -26,9 +26,9 @@
                             <div class="col-lg-6">
                                 <h5 class="card-title">Agents</h5>
                             </div>
-                            <div class="col-lg-6">
+                 @*           <div class="col-lg-6">
                                 <input type="button" class="btn btn-primary" style="float:right;margin-top:5px;" value="+ Add Agent" onclick="fnGotoAgentRegistration();" />
-                            </div>
+                            </div>*@
                         </div>
 
                         <!-- Table with stripped rows -->
@@ -52,13 +52,13 @@
                                     {
                                         <tr>
                                             <th scope="row">@i</th>
-                                            <td>@(agent.FirstName + " " + agent.LastName)</td>
+                                            <td>@(agent.CompanyName)</td>
                                             <td>@agent.Mobile</td>
                                             <td>@agent.EmailId</td>
                                             <td>@agent.StateName</td>
                                             <td>@agent.CityName</td>
                                             <td style="text-align:center">
-                                                <a href="@Url.Action("Edit","AgentApproval")?agentid=@agent.Id">
+                                                <a href="@Url.Action("Edit","AgentApproval")?companyId=@agent.Id">
                                                     <i b-mk0rxp7ouj="" class="bi bi-pen"></i>
                                                 </a>
                                             </td>

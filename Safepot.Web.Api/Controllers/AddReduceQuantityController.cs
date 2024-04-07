@@ -96,6 +96,7 @@ namespace Safepot.Web.Api.Controllers
                                 item.Quantity = sfpCustomizeQuantity.Quantity;
                                 item.Status = "Pending";
                                 item.TotalPrice = Convert.ToString(Convert.ToDouble(sfpCustomizeQuantity.UnitPrice ?? "0") * Convert.ToDouble(sfpCustomizeQuantity.Quantity ?? "0"));
+                                item.OrderModifiedOn = DateTime.Now;
                                 await _sfpOrderService.UpdateOrder(item);
                             }
                             else
@@ -111,6 +112,7 @@ namespace Safepot.Web.Api.Controllers
                                 sfpOrder.MakeModelMasterId = sfpCustomizeQuantity.MakeModelMasterId;
                                 sfpOrder.Quantity = sfpCustomizeQuantity.Quantity;
                                 sfpOrder.UnitPrice = sfpCustomizeQuantity.UnitPrice;
+                                item.OrderCreatedOn = DateTime.Now;
                                 await _sfpOrderService.CreateOrder(sfpOrder);
                             }
                         }

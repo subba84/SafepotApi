@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
 using Quartz;
 using Safepot.Business;
 using Safepot.Contracts;
 using Safepot.DataAccess;
 using Safepot.Web.Api.Helpers.Schedulers;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,10 +54,31 @@ builder.Services.AddTransient<ISfpPaymentReminderService, SfpPaymentReminderServ
 builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddTransient<ISfpOrderService, SfpOrderService>();
 builder.Services.AddTransient<ISfpSettingService, SfpSettingService>();
+builder.Services.AddTransient<ISfpCompanyService, SfpCompanyService>();
+builder.Services.AddTransient<ISfpInvoiceService, SfpInvoiceService>();
 
 
 
-
+// Adding Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})// Adding Jwt Bearer
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = builder.Configuration["JWT:ValidAudience"],
+                    ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+                };
+            });
 
 builder.Services.AddQuartz(q =>
 {
@@ -66,7 +90,7 @@ builder.Services.AddQuartz(q =>
         .ForJob(jobKey)
         .WithIdentity("OrderCreationJob-trigger")
         //This Cron interval can be described as "run every minute" (when second is zero)
-        .WithCronSchedule("0 0 4 ? * *")
+        .WithCronSchedule("0 0 1 ? * *")
     );
 });
 
@@ -80,7 +104,7 @@ builder.Services.AddQuartz(q =>
         .ForJob(jobKey)
         .WithIdentity("PendingOrderRejectionJob-trigger")
         //This Cron interval can be described as "run every minute" (when second is zero)
-        .WithCronSchedule("0 0 5 ? * *")
+        .WithCronSchedule("0 0 2 ? * *")
     );
 });
 
@@ -102,6 +126,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 //app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

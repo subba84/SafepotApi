@@ -54,7 +54,7 @@ namespace Safepot.Web.Api.Controllers
         {
             try
             {
-                var existedMakeModelData = await _sfpMakeModelMasterService.GetExistedMakeModels(sfpMakeModelMaster.MakeId, sfpMakeModelMaster.ModelId, sfpMakeModelMaster.UomId, sfpMakeModelMaster.Quantity ?? 0);
+                var existedMakeModelData = await _sfpMakeModelMasterService.GetExistedMakeModels(sfpMakeModelMaster.AgentId,sfpMakeModelMaster.MakeId, sfpMakeModelMaster.ModelId, sfpMakeModelMaster.UomId, sfpMakeModelMaster.Quantity ?? 0);
                 if(existedMakeModelData.Count() > 0)
                 {
                     return ResponseModel<SfpMakeModelMaster>.ToApiResponse("Duplicate", "Make Model Master Data Already Exists", new List<SfpMakeModelMaster>() { new SfpMakeModelMaster { Id = sfpMakeModelMaster.Id } });

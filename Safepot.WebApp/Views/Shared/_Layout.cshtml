@@ -300,26 +300,44 @@
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
+            @{
+                var userRole = Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetInt32("_RoleId"));
+            }
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-person"></i><span>Agents</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/Agent/List">
-                            <i class="bi bi-circle"></i><span>Search Agents</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("List","AgentApproval")">
-                            <i class="bi bi-circle"></i><span>Approvals</span>
-                        </a>
-                    </li>
+                    @if (userRole == Safepot.Business.Common.AppRoles.Operator)
+                    {
+                        <li>
+                            <a href="/Agent/List">
+                                <i class="bi bi-circle"></i><span>Search Agents</span>
+                            </a>
+                        </li>
+                    }
+                    @if (userRole == Safepot.Business.Common.AppRoles.Approver)
+                    {
+                        <li>
+                            <a href="@Url.Action("List","AgentApproval")">
+                                <i class="bi bi-circle"></i><span>Approvals</span>
+                            </a>
+                        </li>
+                    }
+
+                    @if (userRole == Safepot.Business.Common.AppRoles.Accounts)
+                    {
+                        <li>
+                            <a href="@Url.Action("InvoiceList","Invoice")">
+                                <i class="bi bi-circle"></i><span>Invoices</span>
+                            </a>
+                        </li>
+                    }
+
                 </ul>
             </li><!-- End Components Nav -->
 
-            <li class="nav-item">
+           @* <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-cust" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-person"></i><span>Customers</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
@@ -330,9 +348,10 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Components Nav -->
+            </li>*@
+            <!-- End Components Nav -->
 
-            <li class="nav-item">
+            @*<li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-user" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
@@ -343,20 +362,26 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Components Nav -->
+            </li>*@
+            <!-- End Components Nav -->
+            @if (userRole == Safepot.Business.Common.AppRoles.Operator)
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#components-masters" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-database"></i><span>Masters</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="components-masters" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/MakeModel/List">
+                                <i class="bi bi-circle"></i><span>Make Model</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-masters" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-database"></i><span>Masters</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-masters" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/MakeModel/List">
-                            <i class="bi bi-circle"></i><span>Make Model</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Components Nav -->
+                <!-- End Components Nav -->
+            }
+            
 
         </ul>
 
@@ -414,7 +439,7 @@
     <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
     <script>
-        if ("@TempData["Notification"]" != null && "@Convert.ToString(TempData["Notification"])" != ""){
+        if ("@TempData["Notification"]" != null && "@Convert.ToString(TempData["Notification"])" != "") {
             $("#pNotification").text("@Convert.ToString(TempData["Notification"])");
             $("#btnAlertModalLauncher").trigger("click");
             //$("#alertModel").modal("show");

@@ -30,6 +30,10 @@ namespace Safepot.Entity
         public int? OrderRejectedBy { get; set; }
         public DateTime? OrderRejectedOn { get; set; }
         public string? OrderRejectedComments { get; set; }
-
+        public DateTime? OrderCreatedOn { get; set; }
+        public DateTime? OrderModifiedOn { get; set; }
+        public bool? IsOrderSync { get; set; }
+        public DateTime? OrderSyncDate { get; set; }
+        public string? OrderCode { get; set; }
     }
 }

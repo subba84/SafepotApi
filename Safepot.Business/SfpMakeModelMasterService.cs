@@ -61,11 +61,11 @@ namespace Safepot.Business
             return new List<SfpMakeModelMaster>();
         }
 
-        public async Task<IEnumerable<SfpMakeModelMaster>> GetExistedMakeModels(int? makeId,int? modelId,int? uomId,decimal qty)
+        public async Task<IEnumerable<SfpMakeModelMaster>> GetExistedMakeModels(int? agentId,int? makeId,int? modelId,int? uomId,decimal qty)
         {
             try
             {
-                var masterdata = await _makeMasterRepository.GetAsync(x=>x.MakeId == makeId && x.ModelId == modelId && x.UomId == uomId && x.Quantity == qty);
+                var masterdata = await _makeMasterRepository.GetAsync(x=>x.AgentId == agentId && x.MakeId == makeId && x.ModelId == modelId && x.UomId == uomId && x.Quantity == qty);
                 if (masterdata != null && masterdata.Count() > 0)
                 {
                     return masterdata;

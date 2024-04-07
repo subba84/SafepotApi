@@ -10,3 +10,15 @@ C:\Working Projects\Safepot\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.dll
 C:\Working Projects\Safepot\Safepot.Entity\obj\Release\net6.0\refint\Safepot.Entity.dll
 C:\Working Projects\Safepot\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.pdb
 C:\Working Projects\Safepot\Safepot.Entity\obj\Release\net6.0\ref\Safepot.Entity.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\bin\Release\net6.0\Safepot.Entity.deps.json
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\bin\Release\net6.0\Safepot.Entity.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\bin\Release\net6.0\Safepot.Entity.pdb
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.csproj.AssemblyReference.cache
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.AssemblyInfoInputs.cache
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.AssemblyInfo.cs
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.csproj.CoreCompileInputs.cache
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\refint\Safepot.Entity.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\Safepot.Entity.pdb
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Release\net6.0\ref\Safepot.Entity.dll

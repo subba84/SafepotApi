@@ -45,7 +45,9 @@ namespace Safepot.Business
         {
             try
             {
-                return await _customisedQuantityRepository.GetAsync(x=> (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) == (date == null ? date : date.Value.Date));
+                var today = (date == null ? DateTime.Now.Date : date.Value.Date);
+                var tomorrow = today.AddDays(1);
+                return await _customisedQuantityRepository.GetAsync(x=> (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) >= today &&  (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) <= tomorrow);
             }
             catch (Exception ex)
             {

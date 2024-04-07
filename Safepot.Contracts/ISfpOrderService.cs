@@ -23,5 +23,6 @@ namespace Safepot.Contracts
                                                int? makeModelMasterId,
                                                DateTime transactionDate,
                                                int? damagedQuantity);
+        Task<IEnumerable<SfpOrder>> GetOrdersforSync(DateTime? lastSyncDate,int deliveryBoyId);
     }
 }

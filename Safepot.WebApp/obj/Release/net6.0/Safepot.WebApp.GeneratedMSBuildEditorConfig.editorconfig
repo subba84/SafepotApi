@@ -8,85 +8,93 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Safepot.WebApp
 build_property.RootNamespace = Safepot.WebApp
-build_property.ProjectDir = C:\Working Projects\Safepot\Safepot.WebApp\
+build_property.ProjectDir = C:\GIT Projects\Safepot\SafepotApi\Safepot.WebApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Working Projects\Safepot\Safepot.WebApp
+build_property.MSBuildProjectDirectory = C:\GIT Projects\Safepot\SafepotApi\Safepot.WebApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/AgentApproval/Edit.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/AgentApproval/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRBcHByb3ZhbFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/AgentApproval/List.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/AgentApproval/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRBcHByb3ZhbFxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Agent/Edit.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Agent/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Agent/List.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Agent/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Customer/Edit.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Customer/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Customer/List.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Customer/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Dashboard/Index.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Home/Index.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Home/Privacy.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Login/LoginPage.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Invoice/InvoiceList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52b2ljZVxJbnZvaWNlTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Invoice/_GenarateInvoice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52b2ljZVxfR2VuYXJhdGVJbnZvaWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Login/LoginPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW5QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/MakeModel/Edit.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/MakeModel/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFrZU1vZGVsXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/MakeModel/List.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/MakeModel/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFrZU1vZGVsXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Shared/Error.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/User/Edit.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/User/List.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/User/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/_ViewImports.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/_ViewStart.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Working Projects/Safepot/Safepot.WebApp/Views/Shared/_Layout.cshtml]
+[C:/GIT Projects/Safepot/SafepotApi/Safepot.WebApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-mk0rxp7ouj

@@ -32,20 +32,20 @@
                             <input type="hidden" value="@Model.Id" name="Id" />
                             <div class="col-12">
                                 <label for="make" class="form-label">Make<span class="text-red">*</span></label>
-                                <input type="text" name="Make" value="@Model.Make" class="form-control" id="make" maxlength="256" required>
+                                <input type="text" name="Make" value="@Model.MakeName" class="form-control" id="make" maxlength="256" required>
                                 <div class="invalid-feedback">Please, enter make!</div>
                             </div>
 
                             <div class="col-12">
                                 <label for="model" class="form-label">Model<span class="text-red">*</span></label>
-                                <input type="text" name="Model" value="@Model.Model" class="form-control" id="model" maxlength="256" required>
+                                <input type="text" name="Model" value="@Model.ModelName" class="form-control" id="model" maxlength="256" required>
                                 <div class="invalid-feedback">Please, enter model!</div>
                             </div>
 
                             <div class="col-12">
                                 <label for="uom" class="form-label">Unit of Measure<span class="text-red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" name="Uom" value="@Model.Uom" class="form-control" id="uom" maxlength="128" required>
+                                    <input type="text" name="Uom" value="@Model.UomName" class="form-control" id="uom" maxlength="128" required>
                                     <div class="invalid-feedback">Please enter unit of measure.</div>
                                 </div>
                             </div>

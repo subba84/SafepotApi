@@ -46,6 +46,20 @@ namespace Safepot.Business
                 && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) == DateTime.Now.Date);
                 if(existingData == null || existingData.Count() == 0)
                 {
+                    Guid guid = Guid.NewGuid();
+                    sfpOrder.OrderCode = guid.ToString();
+
+                    var existingOrderCodeDetails = await _sfpOrderRepository.GetAsync(x => x.AgentId == sfpOrder.AgentId
+                && x.CustomerId == sfpOrder.CustomerId
+                && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) == DateTime.Now.Date);
+                    if( existingOrderCodeDetails != null && existingOrderCodeDetails.Count() > 0)
+                    {
+                        if(sfpOrder.Status == existingOrderCodeDetails.First().Status)
+                        {
+                            sfpOrder.OrderCode = existingOrderCodeDetails.First().OrderCode;
+                        }
+                    }
+
                     await _sfpOrderRepository.CreateAsync(sfpOrder);
                 }
             }
@@ -60,6 +74,16 @@ namespace Safepot.Business
             try
             {
                 string? orderStatus = sfpOrder.Status;
+                var existingOrderCodeDetails = await _sfpOrderRepository.GetAsync(x => x.AgentId == sfpOrder.AgentId
+                && x.CustomerId == sfpOrder.CustomerId
+                && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) == DateTime.Now.Date);
+                if (existingOrderCodeDetails != null && existingOrderCodeDetails.Count() > 0)
+                {
+                    if(sfpOrder.Status == existingOrderCodeDetails.First().Status)
+                    {
+                        sfpOrder.OrderCode = existingOrderCodeDetails.First().OrderCode;
+                    }
+                }
                 await _sfpOrderRepository.UpdateAsync(sfpOrder);
                 var schedule = await _sfpCustomizeQuantityService.GetOrderSchedule(sfpOrder.CustomerId, sfpOrder.AgentId, sfpOrder.TransactionDate);
                 if(schedule != null && schedule.Count() > 0)
@@ -108,6 +132,7 @@ namespace Safepot.Business
                 throw ex;
             }
         }
+
 
         public async Task<IEnumerable<SfpOrder>> GetIndividualOrder(int customerid,int agentId, DateTime transactionDate,string status)
         {
@@ -292,6 +317,7 @@ namespace Safepot.Business
                             order.UnitPrice = item.UnitPrice;
                             order.TotalPrice = item.TotalPrice;
                             order.Status = "Pending";
+                            order.OrderCreatedOn = DateTime.Now;
                             await CreateOrder(order);
                             string description = "New Order have been created by " + item.CustomerName + " on " + item.TransactionDate;
                             await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date),"Order Creation",true,true,true);
@@ -324,6 +350,7 @@ namespace Safepot.Business
                             order.UnitPrice = item.UnitPrice;
                             order.TotalPrice = item.TotalPrice;
                             order.Status = "Pending";
+                            order.OrderCreatedOn = DateTime.Now;
                             await CreateOrder(order);
                             string description = "New Order have been created by " + item.CustomerName + " on " + order.TransactionDate;
                             await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (order.TransactionDate == null ? order.TransactionDate : order.TransactionDate.Value.Date),"Order Creation",true,true,true);
@@ -387,5 +414,44 @@ namespace Safepot.Business
             }
         }
 
+        public async Task<IEnumerable<SfpOrder>> GetOrdersforSync(DateTime? syncDate,int deliveryBoyId)
+        {
+            try
+            {
+                List<int> agentIds = new List<int>();
+                var associatedAgents = await _agentCustDeliveryMapService.GetDeliveryAssociatedAgents(deliveryBoyId);
+                if(associatedAgents!=null && associatedAgents.Count() > 0)
+                {
+                    agentIds = associatedAgents.Select(x => x.Id).Distinct().ToList();
+                }
+                if(agentIds.Count() > 0)
+                {
+                    if (syncDate == null)
+                    {
+                        var today = DateTime.Now.Date;
+                        var tomorrow = today.AddDays(1);
+                        var transactions = await _sfpOrderRepository.GetAsync(x => agentIds.Contains(x.AgentId ?? 0) && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) >= today.Date && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) <= tomorrow.Date);
+                        if (transactions != null && transactions.Count() > 0)
+                        {
+                            return transactions.ToList();
+                        }
+                    }
+                    else
+                    {
+                        var today = (syncDate == null ? DateTime.Now : syncDate.Value);
+                        var transactions = await _sfpOrderRepository.GetAsync(x => agentIds.Contains(x.AgentId ?? 0) && (x.OrderModifiedOn == null ? x.OrderModifiedOn : x.OrderModifiedOn.Value) >= today);
+                        if (transactions != null && transactions.Count() > 0)
+                        {
+                            return transactions.ToList();
+                        }
+                    }
+                }
+                return new List<SfpOrder>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

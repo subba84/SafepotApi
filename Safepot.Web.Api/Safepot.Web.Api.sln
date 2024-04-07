@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safepot.Contracts", "..\Saf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safepot.Business", "..\Safepot.Business\Safepot.Business.csproj", "{5D682FB1-4935-4598-80B6-A19C2ECB18D6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safepot.WebApp", "..\Safepot.WebApp\Safepot.WebApp.csproj", "{3BA2D909-B313-4FAC-ABB7-EE8F9AE3361A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5D682FB1-4935-4598-80B6-A19C2ECB18D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D682FB1-4935-4598-80B6-A19C2ECB18D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D682FB1-4935-4598-80B6-A19C2ECB18D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA2D909-B313-4FAC-ABB7-EE8F9AE3361A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA2D909-B313-4FAC-ABB7-EE8F9AE3361A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA2D909-B313-4FAC-ABB7-EE8F9AE3361A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA2D909-B313-4FAC-ABB7-EE8F9AE3361A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

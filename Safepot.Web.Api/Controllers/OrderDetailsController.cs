@@ -162,7 +162,7 @@ namespace Safepot.Web.Api.Controllers
                                         c.CustomerId,
                                         c.CustomerName,
                                         c.AgentId,
-                                        c.AgentName,
+                                        //c.AgentName,
                                         c.Status
                                     } into gcs
                                     select new OrderDetailsModel()
@@ -171,7 +171,7 @@ namespace Safepot.Web.Api.Controllers
                                         CustomerId = gcs.Key.CustomerId,
                                         CustomerName = gcs.Key.CustomerName,
                                         AgentId = gcs.Key.AgentId,
-                                        AgentName = gcs.Key.AgentName,
+                                        //AgentName = gcs.Key.AgentName,
                                         Status = gcs.Key.Status
                                     };
 
@@ -291,6 +291,7 @@ namespace Safepot.Web.Api.Controllers
                             item.OrderRejectedBy = deliveryBoyId;
                             item.OrderRejectedOn = DateTime.Now;
                         }
+                        item.OrderModifiedOn = DateTime.Now;
                         await _sfpOrderService.UpdateOrder(item);
                     }
                 }
@@ -325,6 +326,167 @@ namespace Safepot.Web.Api.Controllers
             {
                 await _sfpOrderService.RejectPastDatedPendingOrders();
                 return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Success", "Past Dated Orders Rejection Successful", null);
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("getordersforsync")]
+        public async Task<ResponseModel<OrderDetailsModel>> GetOrdersforSync(DateTime? lastSyncDate,int deliveryBoyId)
+        {
+            try
+            {
+                List<OrderDetailsModel> orders = new List<OrderDetailsModel>();
+                var data = await _sfpOrderService.GetOrdersforSync(lastSyncDate, deliveryBoyId);
+                if (data != null && data.Count() > 0)
+                {
+                    var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
+                    var agentsData = await _userService.GetUsers(data.Select(x => x.AgentId).ToList());
+                    data.ToList().ForEach(x => x.TransactionDate = (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date));
+                    var customers = from c in data
+                                    group c by new
+                                    {
+                                        c.TransactionDate,
+                                        c.CustomerId,
+                                        c.CustomerName,
+                                        c.AgentId,
+                                        c.OrderCode,
+                                        c.Status
+                                    } into gcs
+                                    select new OrderDetailsModel()
+                                    {
+                                        TransactionDate = gcs.Key.TransactionDate,
+                                        CustomerId = gcs.Key.CustomerId,
+                                        CustomerName = gcs.Key.CustomerName,
+                                        AgentId = gcs.Key.AgentId,
+                                        OrderCode = gcs.Key.OrderCode,
+                                        Status = gcs.Key.Status
+                                    };
+
+                    if (customers != null && customers.Count() > 0)
+                    {
+                        foreach (var customer in customers)
+                        {
+                            OrderDetailsModel order = new OrderDetailsModel();
+                            var user = await _userService.GetUser(customer.CustomerId ?? 0);
+                            order.CustomerId = customer.CustomerId;
+                            order.CustomerName = customer.CustomerName;
+                            order.AgentId = customer.AgentId;
+                            order.AgentName = customer.AgentName;
+                            order.TransactionDate = customer.TransactionDate;
+                            order.Address = user.Address;
+                            order.PinCode = user.PinCode;
+                            order.Mobile = user.Mobile;
+                            order.EmailId = user.EmailId;
+                            order.LandMark = user.LandMark;
+                            order.StateName = user.StateName;
+                            order.CityName = user.CityName;
+                            order.Status = customer.Status;
+                            order.OrderCode = customer.OrderCode;
+                            if (customer.AgentId != null && customer.AgentId > 0)
+                            {
+                                var agentData = agentsData.First(x => x.Id == customer.AgentId);
+                                order.AgentId = customer.AgentId;
+                                order.AgentName = agentData.FirstName + " " + agentData.LastName;
+                                order.AgentAddress = agentData.Address;
+                                order.AgentMobile = agentData.Mobile;
+                                order.AgentAltMobile = agentData.AltMobile;
+                                order.AgentEmailId = agentData.EmailId;
+                                order.AgentStateName = agentData.StateName;
+                                order.AgentCityName = agentData.CityName;
+                                order.AgentLandMark = agentData.LandMark;
+                                order.AgentPinCode = agentData.PinCode;
+                            }
+                            var consolidatedData = from c in data
+                                                   where c.CustomerId == customer.CustomerId
+                                                   where c.TransactionDate == customer.TransactionDate
+                                                   group c by new
+                                                   {
+                                                       c.MakeModelMasterId
+                                                   } into gcs
+                                                   select new SfpCustomizeQuantity()
+                                                   {
+                                                       MakeModelMasterId = gcs.Key.MakeModelMasterId,
+                                                       Quantity = Convert.ToString(gcs.Sum(x => Convert.ToInt32(x.Quantity))),
+                                                       TotalPrice = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.TotalPrice)))
+                                                   };
+                            if (consolidatedData != null && consolidatedData.Count() > 0)
+                            {
+                                var productMasterData = consolidatedData.ToList();
+                                productMasterData.ForEach(x => {
+                                    var makeModelData = makeModelMasterData.First(y => y.Id == x.MakeModelMasterId);
+                                    x.MakeName = makeModelData.MakeName;
+                                    x.ModelName = makeModelData.ModelName;
+                                    x.UomName = makeModelData.UomName;
+                                    x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
+                                    x.UnitPrice = makeModelData.Price;
+                                });
+                                order.Products = productMasterData;
+                            }
+                            order.SyncDateTime = DateTime.Now;
+                            orders.Add(order);
+                        }
+                    }
+                    return ResponseModel<OrderDetailsModel>.ToApiResponse("Success", "List Available", orders);
+                }
+                return ResponseModel<OrderDetailsModel>.ToApiResponse("Success", "List Available", new List<OrderDetailsModel>());
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<OrderDetailsModel>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+        }
+
+        [HttpPut]
+        [Route("syncorders")]
+        public async Task<ResponseModel<SfpCustomizeQuantity>> SyncOrders(List<SyncModel> orders)
+        {
+            try
+            {
+                if(orders!=null && orders.Count() > 0)
+                {
+                    foreach(var order in orders)
+                    {
+                        var serverOrderDetails = await _sfpOrderService.GetOrders(0,
+                            0,
+                            order.DeliveryBoyId ?? 0,
+                            String.Empty,
+                            null,
+                            null
+                            );
+                        if(serverOrderDetails != null && serverOrderDetails.Count() > 0)
+                        {
+                            serverOrderDetails = serverOrderDetails.Where(x => x.OrderCode == order.OrderCode);
+                            if (serverOrderDetails != null && serverOrderDetails.Count() > 0)
+                            {
+                                foreach (var ord in serverOrderDetails.ToList())
+                                {
+                                    ord.Status = order.Status;
+                                    if (order.Status == "Accepted")
+                                    {
+                                        ord.OrderAcceptedBy = order.DeliveryBoyId;
+                                        ord.OrderAcceptedOn = DateTime.Now;
+                                    }
+                                    else if (order.Status == "Completed")
+                                    {
+                                        ord.OrderCompletedBy = order.DeliveryBoyId;
+                                        ord.OrderCompletedOn = DateTime.Now;
+                                    }
+                                    else if (order.Status == "Rejected")
+                                    {
+                                        ord.OrderRejectedBy = order.DeliveryBoyId;
+                                        ord.OrderRejectedOn = DateTime.Now;
+                                    }
+                                    await _sfpOrderService.UpdateOrder(ord);
+                                }
+                            }
+                        }
+                    }
+                }
+                return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Success", "Order Sync Successfully", null);
             }
             catch (Exception ex)
             {
