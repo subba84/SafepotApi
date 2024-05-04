@@ -24,6 +24,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<SafepotDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("SqlDataConnection"))
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
+
+
+//var connectionString = builder.Configuration.GetConnectionString("SqlDataConnection");
+//var serverVersion = ServerVersion.AutoDetect(connectionString);
+//builder.Services.AddDbContext<SafepotDbContext>(options =>
+//            options.UseMySql(connectionString,serverVersion: serverVersion)
+//            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
+
+
 builder.Services.AddTransient(typeof(ISfpDataRepository<>), typeof(SfpDataRepository<>));
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<ISfpActivityLogService, SfpActivityLogService>();

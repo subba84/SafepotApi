@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Safepot.Web.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+537382f5d48273f417b565bc6b91cb69b11f99d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Safepot.Web.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Safepot.Web.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

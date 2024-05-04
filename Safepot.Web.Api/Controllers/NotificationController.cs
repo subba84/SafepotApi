@@ -23,11 +23,15 @@ namespace Safepot.Web.Api.Controllers
 
         [HttpGet]
         [Route("getnotifications")]
-        public async Task<ResponseModel<Notification>> GetNotifications(int agentId,int customerId, int deliveryId)
+        public async Task<ResponseModel<Notification>> GetNotifications(int userid,int roleid,int limit)
         {
             try
             {
-                var data = await _notificationService.GetNotifications(agentId, customerId, deliveryId);
+                var data = await _notificationService.GetNotifications(userid, roleid);
+                if(limit == 1 && data.Count() > 0)
+                {
+                    data = data.Take(10);
+                }
                 return ResponseModel<Notification>.ToApiResponse("Success", "List Available", data);
             }
             catch (Exception ex)

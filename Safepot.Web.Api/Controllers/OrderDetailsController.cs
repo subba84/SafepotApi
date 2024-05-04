@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NPOI.SS.Formula.Functions;
 using Safepot.Business;
 using Safepot.Contracts;
 using Safepot.Entity;
 using Safepot.Web.Api.Helpers;
+using System.Globalization;
 
 namespace Safepot.Web.Api.Controllers
 {
@@ -15,16 +17,22 @@ namespace Safepot.Web.Api.Controllers
         //private readonly ISfpCustomizedQuantityService _sfpCustomizedQuantityService;
         private readonly ISfpOrderService _sfpOrderService;
         private readonly ISfpMakeModelMasterService _sfpMakeModelMasterService;
+        private readonly ISfpAgentCustDlivryChargeService _sfpDeliveryChargeService;
+        private readonly ISfpAgentCustDeliveryMapService _sfpMappingService;
         private readonly ISfpUserService _userService;
         private readonly ILogger<OrderDetailsController> _logger;
         public OrderDetailsController(ISfpOrderService sfpOrderService,
             ISfpUserService userService,
             ISfpMakeModelMasterService sfpMakeModelMasterService,
+            ISfpAgentCustDlivryChargeService sfpDeliveryChargeService,
+            ISfpAgentCustDeliveryMapService sfpMappingService,
             ILogger<OrderDetailsController> logger)
         {
             _sfpOrderService = sfpOrderService;
             _userService=userService;
             _sfpMakeModelMasterService = sfpMakeModelMasterService;
+            _sfpDeliveryChargeService = sfpDeliveryChargeService;
+            _sfpMappingService = sfpMappingService;
             _logger = logger;
         }
 
@@ -35,7 +43,12 @@ namespace Safepot.Web.Api.Controllers
             try
             {
                 List<OrderDetailsModel> orders = new List<OrderDetailsModel>();
-                if(status == "Pending" && (customerid > 0 || deliveryId > 0))
+                if((status == "Pending" && (customerid > 0 || deliveryId > 0)))
+                {
+                    fromDate = DateTime.Now.Date;
+                    toDate = DateTime.Now.Date;
+                }
+                else if(status == "Completed")
                 {
                     fromDate = DateTime.Now.Date;
                     toDate = DateTime.Now.Date;
@@ -426,11 +439,11 @@ namespace Safepot.Web.Api.Controllers
                                 });
                                 order.Products = productMasterData;
                             }
-                            order.SyncDateTime = DateTime.Now;
+                            //order.SyncDateTime = DateTime.Now;
                             orders.Add(order);
                         }
                     }
-                    return ResponseModel<OrderDetailsModel>.ToApiResponse("Success", "List Available", orders);
+                    return ResponseModel<OrderDetailsModel>.ToApiResponse("Success", DateTime.Now.ToString(), orders);
                 }
                 return ResponseModel<OrderDetailsModel>.ToApiResponse("Success", "List Available", new List<OrderDetailsModel>());
             }
@@ -491,6 +504,402 @@ namespace Safepot.Web.Api.Controllers
             catch (Exception ex)
             {
                 return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("itemwisebillingreport")]
+        public async Task<ResponseModel<SfpCustomizeQuantity>> ItemwiseBillingReport(
+           int agentId,
+           int customerId,
+           DateTime fromDate,
+           DateTime toDate,
+           int makeModelMasterId)
+        {
+            double deliveryCharge = 0;
+            var ordersList = new List<SfpCustomizeQuantity>();
+            try
+            {
+                var orders = await _sfpOrderService.GetOrders(customerId, agentId, 0, "Completed", fromDate, toDate);
+                if (orders != null && orders.Count() > 0)
+                {
+                    var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
+                    if (customerId > 0)
+                    {
+                        orders = orders.Where(x => x.CustomerId == customerId);
+                    }
+                    if (makeModelMasterId > 0)
+                    {
+                        orders = orders.Where(x => x.MakeModelMasterId == makeModelMasterId);
+                    }
+                    if (orders != null && orders.Count() > 0)
+                    {
+                        var groupedOrders = from c in orders
+                                            group c by new
+                                            {
+                                                c.TransactionDate,
+                                                c.MakeModelMasterId
+                                            } into gcs
+                                            select new SfpCustomizeQuantity()
+                                            {
+                                                TransactionDate = gcs.Key.TransactionDate,
+                                                MakeModelMasterId = gcs.Key.MakeModelMasterId,
+                                                Quantity = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.Quantity))),
+                                                TotalPrice = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.TotalPrice))),
+                                            };
+                        ordersList = groupedOrders.ToList();
+                        ordersList.ForEach(x => {
+                            var makeModelData = makeModelMasterData.First(y => y.Id == x.MakeModelMasterId);
+                            x.MakeName = makeModelData.MakeName;
+                            x.ModelName = makeModelData.ModelName;
+                            x.UomName = makeModelData.UomName;
+                            x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
+                            x.UnitPrice = makeModelData.Price;
+                        });
+                    }
+
+                    
+                    if(agentId > 0)
+                    {
+                        if(customerId > 0)
+                        {
+                            deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customerId, fromDate, toDate);
+                        }
+                        else
+                        {
+                            var customers = await _sfpMappingService.GetAgentAssociatedCustomers(agentId);
+                            if(customers!=null && customers.Count() > 0)
+                            {
+                                foreach(var customer in customers)
+                                {
+                                    deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, fromDate, toDate);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Success", Convert.ToString(deliveryCharge), ordersList);
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+            
+        }
+
+        [HttpGet]
+        [Route("invoicereport")]
+        public async Task<ResponseModel<SfpCustomizeQuantity>> InvoiceReport(
+           int agentId,
+           int customerId,
+           DateTime fromDate,
+           DateTime toDate,
+           int makeModelMasterId)
+        {
+            double deliveryCharge = 0;
+            var ordersList = new List<SfpCustomizeQuantity>();
+            try
+            {
+                var orders = await _sfpOrderService.GetOrders(customerId, agentId, 0, "Completed", fromDate, toDate);
+                if (orders != null && orders.Count() > 0)
+                {
+                    var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
+                    if (customerId > 0)
+                    {
+                        orders = orders.Where(x => x.CustomerId == customerId);
+                    }
+                    if (makeModelMasterId > 0)
+                    {
+                        orders = orders.Where(x => x.MakeModelMasterId == makeModelMasterId);
+                    }
+                    if (orders != null && orders.Count() > 0)
+                    {
+                        var groupedOrders = from c in orders
+                                            group c by new
+                                            {
+                                                c.MakeModelMasterId
+                                            } into gcs
+                                            select new SfpCustomizeQuantity()
+                                            {
+                                                MakeModelMasterId = gcs.Key.MakeModelMasterId,
+                                                Quantity = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.Quantity))),
+                                                TotalPrice = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.TotalPrice))),
+                                            };
+                        ordersList = groupedOrders.ToList();
+                        ordersList.ForEach(x => {
+                            var makeModelData = makeModelMasterData.First(y => y.Id == x.MakeModelMasterId);
+                            x.MakeName = makeModelData.MakeName;
+                            x.ModelName = makeModelData.ModelName;
+                            x.UomName = makeModelData.UomName;
+                            x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
+                            x.UnitPrice = makeModelData.Price;
+                        });
+                    }
+
+                    if (agentId > 0)
+                    {
+                        if (customerId > 0)
+                        {
+                            deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customerId, fromDate, toDate);
+                        }
+                        else
+                        {
+                            var customers = await _sfpMappingService.GetAgentAssociatedCustomers(agentId);
+                            if (customers != null && customers.Count() > 0)
+                            {
+                                foreach (var customer in customers)
+                                {
+                                    deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, fromDate, toDate);
+                                }
+                            }
+                        }
+                    }
+                }
+                return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Success", Convert.ToString(deliveryCharge), ordersList);
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("custominvoicereport")]
+        public async Task<ResponseModel<InvoiceReportModel>> CustomInvoiceReport(
+           int agentId,
+           int customerId)
+        {
+            double deliveryCharge = 0;
+            try
+            {
+                InvoiceReportModel model = new InvoiceReportModel();
+                model.MonthlyPrices = new List<MonthlyPrice>();
+                var customer = await _userService.GetUser(customerId);
+                var agent = await _userService.GetUser(agentId);
+                model.AgentId = agent.Id;
+                model.AgentName = agent.FirstName + " " + agent.LastName;
+                model.CustomerId = customer.Id;
+                model.CustomerName = customer.FirstName + " " + customer.LastName;
+
+
+                DateTime? fromDate = customer.JoinDate;
+                DateTime? toDate = DateTime.Now.Date;
+                var orders = await _sfpOrderService.GetOrders(customerId, agentId, 0, "Completed", fromDate, toDate);
+                // Month Calculation between two dates
+                DateTime fromMonthStartDate = fromDate == null ? DateTime.MinValue : new DateTime(fromDate.Value.Year, fromDate.Value.Month, 1);
+                DateTime toMonthStartDate = toDate == null ? DateTime.MinValue : new DateTime(toDate.Value.Year, toDate.Value.Month, 1);
+                if (orders != null && orders.Count() > 0)
+                {
+                    for (DateTime i = fromMonthStartDate; i <= toMonthStartDate; i = i.AddMonths(1))
+                    {
+                        var monthOrderDetails = orders.Where(x => (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Year) == i.Year
+                        && (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Month) == i.Month);
+                        if(monthOrderDetails!=null && monthOrderDetails.Count() > 0)
+                        {
+                            MonthlyPrice monthlyPrice = new MonthlyPrice();
+                            monthlyPrice.Year = i.Year;
+                            monthlyPrice.Month = i.Month;
+                            monthlyPrice.MonthName = i.Year + " - " + i.ToString("MMMM", CultureInfo.InvariantCulture);
+                            monthlyPrice.TotalAmount = monthOrderDetails.Sum(x => Convert.ToDouble(x.TotalPrice ?? "0"));
+                            DateTime deliveryChargeStartDate = new DateTime(i.Year, i.Month, 1);
+                            DateTime deliveryChargeToDate = deliveryChargeStartDate.AddMonths(1).AddDays(-1);
+                            if (i.Month == (fromDate == null ? 0 : fromDate.Value.Month))
+                            {
+                                deliveryChargeStartDate = (fromDate == null ? deliveryChargeStartDate : fromDate.Value.Date);
+                            }
+                            deliveryCharge = await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, deliveryChargeStartDate, deliveryChargeToDate);
+                            monthlyPrice.TotalAmount = monthlyPrice.TotalAmount + deliveryCharge;
+                            model.MonthlyPrices.Add(monthlyPrice);
+                        }
+                    }
+
+
+
+
+                    //var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
+                    //if (customerId > 0)
+                    //{
+                    //    orders = orders.Where(x => x.CustomerId == customerId);
+                    //}                    
+                    //if (orders != null && orders.Count() > 0)
+                    //{
+                    //    var groupedOrders = from c in orders
+                    //                        group c by new
+                    //                        {
+                    //                            c.MakeModelMasterId
+                    //                        } into gcs
+                    //                        select new SfpCustomizeQuantity()
+                    //                        {
+                    //                            MakeModelMasterId = gcs.Key.MakeModelMasterId,
+                    //                            Quantity = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.Quantity))),
+                    //                            TotalPrice = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.TotalPrice))),
+                    //                        };
+                    //    ordersList = groupedOrders.ToList();
+                    //    ordersList.ForEach(x => {
+                    //        var makeModelData = makeModelMasterData.First(y => y.Id == x.MakeModelMasterId);
+                    //        x.MakeName = makeModelData.MakeName;
+                    //        x.ModelName = makeModelData.ModelName;
+                    //        x.UomName = makeModelData.UomName;
+                    //        x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
+                    //        x.UnitPrice = makeModelData.Price;
+                    //    });
+                    //}
+
+                    //if (agentId > 0)
+                    //{
+                    //    if (customerId > 0)
+                    //    {
+                    //        deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customerId, fromDate, toDate);
+                    //    }
+                    //    else
+                    //    {
+                    //        var customers = await _sfpMappingService.GetAgentAssociatedCustomers(agentId);
+                    //        if (customers != null && customers.Count() > 0)
+                    //        {
+                    //            foreach (var customer in customers)
+                    //            {
+                    //                deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, fromDate, toDate);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                }
+                return ResponseModel<InvoiceReportModel>.ToApiResponse("Success", "Data Available", new List<InvoiceReportModel> { model });
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<InvoiceReportModel>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("monthlyinvoicereport")]
+        public async Task<ResponseModel<MonthlyOrderModel>> MonthlyInvoiceReport(
+           int agentId,
+           int customerId,
+           int year,
+           int month)
+        {
+            double deliveryCharge = 0;
+            try
+            {
+                MonthlyOrderModel model = new MonthlyOrderModel();
+                var customer = await _userService.GetUser(customerId);
+                var agent = await _userService.GetUser(agentId);
+                model.AgentId = agent.Id;
+                model.AgentName = agent.FirstName + " " + agent.LastName;
+                model.AgentMobileNumber = agent.Mobile;
+                model.AgentAddress = agent.Address;
+                model.AgentLandmark = agent.LandMark;
+                model.AgentState = agent.StateName;
+                model.AgentCity = agent.CityName;
+                model.AgentPincode = agent.PinCode;
+                model.CustomerId = customer.Id;
+                model.CustomerName = customer.FirstName + " " + customer.LastName;
+                DateTime? fromDate = new DateTime(year,month,1);
+                DateTime? toDate = fromDate.Value.AddMonths(1).AddDays(-1);
+                model.ValidFrom = fromDate.Value.ToString("dd-MMMM-yyyy");
+                model.ValidTo = toDate.Value.ToString("dd-MMMM-yyyy");
+                model.Products = new List<SfpCustomizeQuantity>();
+                var orders = await _sfpOrderService.GetOrders(customerId, agentId, 0, "Completed", fromDate, toDate);
+                if (orders != null && orders.Count() > 0)
+                {
+                    var monthOrderDetails = orders.Where(x => (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Year) == year
+                        && (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Month) == month);
+                    if (monthOrderDetails != null && monthOrderDetails.Count() > 0)
+                    {
+                        var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
+                        var groupedOrders = from c in monthOrderDetails
+                                            group c by new
+                                            {
+                                                c.MakeModelMasterId
+                                            } into gcs
+                                            select new SfpCustomizeQuantity()
+                                            {
+                                                MakeModelMasterId = gcs.Key.MakeModelMasterId,
+                                                Quantity = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.Quantity))),
+                                                TotalPrice = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.TotalPrice))),
+                                            };
+                        var ordersList = groupedOrders.ToList();
+                        ordersList.ForEach(x =>
+                        {
+                            var makeModelData = makeModelMasterData.First(y => y.Id == x.MakeModelMasterId);
+                            x.MakeName = makeModelData.MakeName;
+                            x.ModelName = makeModelData.ModelName;
+                            x.UomName = makeModelData.UomName;
+                            x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
+                            x.UnitPrice = makeModelData.Price;
+                        });
+                        model.Products = ordersList;
+                        model.TotalAmount = monthOrderDetails.Sum(x => Convert.ToDouble(x.TotalPrice ?? "0"));
+                        DateTime deliveryChargeStartDate = new DateTime(year, month, 1);
+                        DateTime deliveryChargeToDate = deliveryChargeStartDate.AddMonths(1).AddDays(-1);
+                        if (fromDate.Value.Month == (customer.JoinDate == null ? 0 : customer.JoinDate.Value.Month))
+                        {
+                            deliveryChargeStartDate = (customer.JoinDate == null ? deliveryChargeStartDate : customer.JoinDate.Value.Date);
+                        }
+                        deliveryCharge = await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, deliveryChargeStartDate, deliveryChargeToDate);
+                        model.DeliveryCharge = deliveryCharge;
+                        model.TotalAmount = model.TotalAmount + deliveryCharge;
+                    }
+
+
+
+
+                    //var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
+                    //if (customerId > 0)
+                    //{
+                    //    orders = orders.Where(x => x.CustomerId == customerId);
+                    //}                    
+                    //if (orders != null && orders.Count() > 0)
+                    //{
+                    //    var groupedOrders = from c in orders
+                    //                        group c by new
+                    //                        {
+                    //                            c.MakeModelMasterId
+                    //                        } into gcs
+                    //                        select new SfpCustomizeQuantity()
+                    //                        {
+                    //                            MakeModelMasterId = gcs.Key.MakeModelMasterId,
+                    //                            Quantity = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.Quantity))),
+                    //                            TotalPrice = Convert.ToString(gcs.Sum(x => Convert.ToDouble(x.TotalPrice))),
+                    //                        };
+                    //    ordersList = groupedOrders.ToList();
+                    //    ordersList.ForEach(x => {
+                    //        var makeModelData = makeModelMasterData.First(y => y.Id == x.MakeModelMasterId);
+                    //        x.MakeName = makeModelData.MakeName;
+                    //        x.ModelName = makeModelData.ModelName;
+                    //        x.UomName = makeModelData.UomName;
+                    //        x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
+                    //        x.UnitPrice = makeModelData.Price;
+                    //    });
+                    //}
+
+                    //if (agentId > 0)
+                    //{
+                    //    if (customerId > 0)
+                    //    {
+                    //        deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customerId, fromDate, toDate);
+                    //    }
+                    //    else
+                    //    {
+                    //        var customers = await _sfpMappingService.GetAgentAssociatedCustomers(agentId);
+                    //        if (customers != null && customers.Count() > 0)
+                    //        {
+                    //            foreach (var customer in customers)
+                    //            {
+                    //                deliveryCharge += await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, fromDate, toDate);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                }
+                return ResponseModel<MonthlyOrderModel>.ToApiResponse("Success", "Data Available", new List<MonthlyOrderModel> { model });
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<MonthlyOrderModel>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
             }
         }
     }
