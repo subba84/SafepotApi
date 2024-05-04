@@ -16,5 +16,6 @@ namespace Safepot.Contracts
          Task<double> GetDeliveryChargeforAgentandCustomer(int agentid, int customerid);
          Task SaveAgentCustDeliveryCharge(SfpAgentCustDlivryCharge sfpAgentCustDlivryCharge);
          Task UpdateAgentCustDeliveryCharge(SfpAgentCustDlivryCharge sfpAgentCustDlivryCharge);
+         Task<double> GetDeliveryChargeforPeriodbasedonAgentandCustomer(int agentid, int customerid, DateTime fromDate, DateTime toDate);
     }
 }

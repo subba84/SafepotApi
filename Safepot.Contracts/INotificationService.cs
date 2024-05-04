@@ -9,7 +9,7 @@ namespace Safepot.Contracts
 {
     public interface INotificationService
     {
-        public Task<IEnumerable<Notification>> GetNotifications(int agentId, int customerId, int deliveryBoyId);
+        public Task<IEnumerable<Notification>> GetNotifications(int userId, int userRoleId);
 
         public Task CreateNotification(string description,
             int? agentId,

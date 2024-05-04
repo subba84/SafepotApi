@@ -23,7 +23,8 @@ C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Co
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.AssemblyInfoInputs.cache
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.AssemblyInfo.cs
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.csproj.CoreCompileInputs.cache
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.csproj.CopyComplete
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.sourcelink.json
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot..2F7526FC.Up2Date
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\refint\Safepot.Contracts.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Contracts\obj\Debug\net6.0\Safepot.Contracts.pdb
