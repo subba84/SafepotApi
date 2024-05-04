@@ -27,7 +27,8 @@ C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Bus
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.AssemblyInfoInputs.cache
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.AssemblyInfo.cs
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.csproj.CoreCompileInputs.cache
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.csproj.CopyComplete
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.sourcelink.json
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot..60D627BC.Up2Date
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\refint\Safepot.Business.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Business\obj\Debug\net6.0\Safepot.Business.pdb

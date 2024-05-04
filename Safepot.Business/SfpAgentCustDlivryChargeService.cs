@@ -124,6 +124,48 @@ namespace Safepot.Business
             return new SfpAgentCustDlivryCharge();
         }
 
+        public async Task<double> GetDeliveryChargeforPeriodbasedonAgentandCustomer(int agentid, int customerid,DateTime fromDate,DateTime toDate)
+        {
+            try
+            {
+                double deliveryCharge = 0;
+                var masterdata = await _deliveryChargeRepository.GetAsync(x => x.AgentId == agentid && x.CustomerId == customerid);
+                if (masterdata != null && masterdata.Count() > 0)
+                {
+                    var deliveryChargeforMonth = Convert.ToDouble(masterdata.First().DeliveryCharge);
+                    var customerDetails = await _sfpUserService.GetUser(customerid);
+                    if (customerDetails.JoinDate != null && customerDetails.JoinDate.HasValue)
+                    {
+                        var today = toDate;
+                        var customerAbsentData = await _sfpCustomerAbsentService.GetCustomerAbsentDatabasedonCustomerandAgent(customerid, agentid);
+                        for (var day = fromDate.Date; day <= today; day = day.AddDays(1))
+                        {
+                            var customerAbsentDays = new List<DateTime>();
+                            int monthDays = DateTime.DaysInMonth(day.Year, day.Month);
+                            if (customerAbsentData != null && customerAbsentData.Count() > 0)
+                            {
+                                var absentDayliesbtweenAbsents = customerAbsentData.Where(x => day >= (x.AbsentFrom == null ? x.AbsentFrom : x.AbsentFrom.Value.Date) && day <= (x.AbsentTo == null ? x.AbsentTo : x.AbsentTo.Value.Date));
+                                if (absentDayliesbtweenAbsents == null || absentDayliesbtweenAbsents.Count() == 0)
+                                {
+                                    deliveryCharge += Math.Round((deliveryChargeforMonth / monthDays), 0);
+                                }
+                            }
+                            else
+                            {
+                                deliveryCharge += Math.Round((deliveryChargeforMonth / monthDays), 0);
+                            }
+                        }
+                    }
+                }
+
+                return deliveryCharge;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task SaveAgentCustDeliveryCharge(SfpAgentCustDlivryCharge sfpAgentCustDlivryCharge)
         {
             try

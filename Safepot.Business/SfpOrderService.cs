@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -293,6 +294,7 @@ namespace Safepot.Business
         {
             try
             {
+                var makemodelmasterdata = await _sfpMakeModelMasterService.GetMakeModels();
                 var customerAbsentData = await _sfpCustomerAbsentService.GetCustomerAbsentsData();
                 var schedules = await _sfpCustomizeQuantityService.GetAllTransactionsbasedonDate(DateTime.Today.Date);
                 if (schedules != null && schedules.Count() > 0)
@@ -304,6 +306,7 @@ namespace Safepot.Business
                         && (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date) <= (x.AbsentTo == null ? x.AbsentTo : x.AbsentTo.Value.Date));
                         if (thisCustomerAbsentData == null || thisCustomerAbsentData.Count() == 0)
                         {
+                            var makemodeldata = makemodelmasterdata.First(x => x.Id == item.MakeModelMasterId);
                             SfpOrder order = new SfpOrder();
                             order.CustomerId = item.CustomerId;
                             order.CustomerName = item.CustomerName;
@@ -319,7 +322,8 @@ namespace Safepot.Business
                             order.Status = "Pending";
                             order.OrderCreatedOn = DateTime.Now;
                             await CreateOrder(order);
-                            string description = "New Order have been created by " + item.CustomerName + " on " + item.TransactionDate;
+                            string description = "New Order have been created by " + item.CustomerName
+                                + " on " + item.TransactionDate + " for product - " + makemodeldata.ModelName + "(" + makemodeldata.ModelName + ")";
                             await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date),"Order Creation",true,true,true);
                         }
                     }
@@ -332,6 +336,7 @@ namespace Safepot.Business
                     foreach (var item in continuousOrders)
                     {
                         var today = DateTime.Now.Date;
+                        var makemodeldata = makemodelmasterdata.First(x => x.Id == item.MakeModelId);
                         var thisCustomerAbsentData = customerAbsentData.Where(x => x.CustomerId == item.CustomerId
                         && today >= (x.AbsentFrom == null ? x.AbsentFrom : x.AbsentFrom.Value.Date)
                         && today <= (x.AbsentTo == null ? x.AbsentTo : x.AbsentTo.Value.Date));
@@ -352,7 +357,8 @@ namespace Safepot.Business
                             order.Status = "Pending";
                             order.OrderCreatedOn = DateTime.Now;
                             await CreateOrder(order);
-                            string description = "New Order have been created by " + item.CustomerName + " on " + order.TransactionDate;
+                            string description = "New Order have been created by " + item.CustomerName
+                                + " on " + order.TransactionDate + " for product - " + makemodeldata.ModelName + "(" + makemodeldata.ModelName + ")";
                             await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (order.TransactionDate == null ? order.TransactionDate : order.TransactionDate.Value.Date),"Order Creation",true,true,true);
                         }
                     }
@@ -419,18 +425,24 @@ namespace Safepot.Business
             try
             {
                 List<int> agentIds = new List<int>();
+                List<int> customerIds = new List<int>();
                 var associatedAgents = await _agentCustDeliveryMapService.GetDeliveryAssociatedAgents(deliveryBoyId);
                 if(associatedAgents!=null && associatedAgents.Count() > 0)
                 {
                     agentIds = associatedAgents.Select(x => x.Id).Distinct().ToList();
                 }
-                if(agentIds.Count() > 0)
+                var associatedCustomers = await _agentCustDeliveryMapService.GetDeliveryAssociatedCustomers(deliveryBoyId);
+                if (associatedCustomers != null && associatedCustomers.Count() > 0)
                 {
+                    customerIds = associatedCustomers.Select(x => x.Id).Distinct().ToList();
+                }
+                if (agentIds.Count() > 0 && customerIds.Count() > 0)
+                {                    
                     if (syncDate == null)
                     {
                         var today = DateTime.Now.Date;
                         var tomorrow = today.AddDays(1);
-                        var transactions = await _sfpOrderRepository.GetAsync(x => agentIds.Contains(x.AgentId ?? 0) && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) >= today.Date && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) <= tomorrow.Date);
+                        var transactions = await _sfpOrderRepository.GetAsync(x => agentIds.Contains(x.AgentId ?? 0) && customerIds.Contains(x.CustomerId ?? 0) && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) >= today.Date && (x.TransactionDate == null ? x.TransactionDate : x.TransactionDate.Value.Date) <= tomorrow.Date);
                         if (transactions != null && transactions.Count() > 0)
                         {
                             return transactions.ToList();
@@ -439,7 +451,7 @@ namespace Safepot.Business
                     else
                     {
                         var today = (syncDate == null ? DateTime.Now : syncDate.Value);
-                        var transactions = await _sfpOrderRepository.GetAsync(x => agentIds.Contains(x.AgentId ?? 0) && (x.OrderModifiedOn == null ? x.OrderModifiedOn : x.OrderModifiedOn.Value) >= today);
+                        var transactions = await _sfpOrderRepository.GetAsync(x => agentIds.Contains(x.AgentId ?? 0) && customerIds.Contains(x.CustomerId ?? 0) && (x.OrderModifiedOn == null ? x.OrderModifiedOn : x.OrderModifiedOn.Value) >= today);
                         if (transactions != null && transactions.Count() > 0)
                         {
                             return transactions.ToList();
@@ -453,5 +465,7 @@ namespace Safepot.Business
                 throw ex;
             }
         }
+
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using Safepot.Contracts;
+﻿using Safepot.Business.Common;
+using Safepot.Contracts;
 using Safepot.Entity;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Safepot.Business
             _sfpAgentCustDeliveryMapService = sfpAgentCustDeliveryMapService;
         }
 
-        public async Task<IEnumerable<Notification>> GetNotifications(int agentId,int customerId,int deliveryBoyId)
+        public async Task<IEnumerable<Notification>> GetNotifications(int userId,int userRoleId)
         {
             try
             {
@@ -26,44 +27,17 @@ namespace Safepot.Business
                 var data = await _sfpNotificationRepository.GetAsync(x=>x.IsRead == false);
                 if(data!=null && data.Count() > 0)
                 {
-                    if(agentId > 0)
+                    if(userId > 0 && userRoleId == AppRoles.Agent)
                     {
-                        //data = data.Where(x => x.AgentId == agentId);
-                        var customers = await _sfpAgentCustDeliveryMapService.GetAgentAssociatedCustomers(agentId);
-                        if (customers != null && customers.Count() > 0)
-                        {
-                            List<int> customerids = customers.Select(x => x.Id).Distinct().ToList();
-                            data = data.Where(x => customerids.Contains(x.CustomerId ?? 0));
-                            //foreach (var customer in customers)
-                            //{
-                            //    var notificationData = data.Where(x => x.CustomerId == customer.Id);
-                            //    if (notificationData != null && notificationData.Count() > 0)
-                            //    {
-                            //        notifications.AddRange(notificationData.ToList());
-                            //    }
-                            //}
-                        }
+                        data = data.Where(x => x.AgentId == userId && x.IsForAgent == true);
                     }
-                    if(customerId > 0)
+                    if(userId > 0 && userRoleId == AppRoles.Customer)
                     {
-                        data = data.Where(x => x.CustomerId == customerId);
+                        data = data.Where(x => x.CustomerId == userId && x.IsForCustomer == true);
                     }
-                    if(deliveryBoyId > 0)
+                    if(userId > 0 && userRoleId == AppRoles.Delivery)
                     {
-                        var customers = await _sfpAgentCustDeliveryMapService.GetDeliveryAssociatedCustomers(deliveryBoyId);
-                        if(customers!=null && customers.Count() > 0)
-                        {
-                            List<int> customerids = customers.Select(x => x.Id).Distinct().ToList();
-                            data = data.Where(x => customerids.Contains(x.CustomerId ?? 0));
-                            //foreach (var customer in customers)
-                            //{
-                            //    var notificationData = data.Where(x => x.CustomerId == customer.Id);
-                            //    if(notificationData!=null && notificationData.Count() > 0)
-                            //    {
-                            //        notifications.AddRange(notificationData.ToList());
-                            //    }
-                            //}
-                        }
+                        data = data.Where(x => x.CustomerId == userId && x.IsForDeliveryBoy == true);
                     }
                 }
                 return ((data!=null && data.Count() > 0) ? data.ToList() : notifications);

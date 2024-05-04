@@ -118,6 +118,8 @@ namespace Safepot.Business
                                     sfpPaymentConfirmation.Amount = Convert.ToString(balancePaid);
                                 }
                                 var amountTobePaid = await GetBalancebasedonCustomerandAgent(customer.Id, agent.Id);
+                                // amount paid by customer already deducted in the above method, so we are adding it again here to balance the amount
+                                amountTobePaid = amountTobePaid + Convert.ToDouble(sfpPaymentConfirmation.Amount ?? "0");
                                 var deliveryCharge = await _sfpAgentCustDlivryChargeService.GetDeliveryChargeforAgentandCustomer(agent.Id, customer.Id);
                                 sfpPaymentConfirmation.BalanceAmount = Convert.ToString(Convert.ToDouble(amountTobePaid + deliveryCharge) - Convert.ToDouble(sfpPaymentConfirmation.Amount));
                                 if (status == "Pending")
@@ -163,39 +165,49 @@ namespace Safepot.Business
         {
             try
             {
-                //return await _paymentConfirmRepository.GetAsync(x => x.CustomerId == customerId);
                 List<SfpPaymentConfirmation> paymentConfirmations = new List<SfpPaymentConfirmation>();
-                //SfpPaymentConfirmation sfpPaymentConfirmation = new SfpPaymentConfirmation();
-                //sfpPaymentConfirmation.CustomerId = customerId;
-                ////sfpPaymentConfirmation.CustomerName = 
-                //var data = await _paymentConfirmRepository.GetAsync(x => x.CustomerId == customerId);
-                //if (data != null && data.Count() > 0)
-                //{
-                //    sfpPaymentConfirmation.CustomerName = data.First().CustomerName;
-                //    double balancePaid = data.Sum(x => Convert.ToDouble(x.Amount));
-                //    sfpPaymentConfirmation.Amount = Convert.ToString(balancePaid);
-                //}
-                //var orderData = await _customizeQuantityService.GetAllTransactionsbasedonCustomer(customerId);
-                //if (orderData != null && orderData.Count() > 0)
-                //{
-                //    sfpPaymentConfirmation.CustomerName = orderData.First().CustomerName;
-                //    var amountTobePaid = orderData.Sum(x => Convert.ToDouble(x.TotalPrice));
-                //    sfpPaymentConfirmation.BalanceAmount = Convert.ToString(Convert.ToDouble(amountTobePaid) - Convert.ToDouble(sfpPaymentConfirmation.Amount));
-                //}
-                //if (status == "Pending")
-                //{
-                //    if (sfpPaymentConfirmation.BalanceAmount != "0")
-                //    {
-                //        paymentConfirmations.Add(sfpPaymentConfirmation);
-                //    }
-                //}
-                //else
-                //{
-                //    if (sfpPaymentConfirmation.BalanceAmount == "0")
-                //    {
-                //        paymentConfirmations.Add(sfpPaymentConfirmation);
-                //    }
-                //}
+                if (customerId > 0)
+                {
+                    var customer = await _sfpUserService.GetUser(customerId);
+                    var agentData = await _mappingService.GetCustomerAssociatedAgents(customer.Id);
+                    if (agentData != null && agentData.Count() > 0)
+                    {
+                        foreach (var agent in agentData)
+                        {
+                            SfpPaymentConfirmation sfpPaymentConfirmation = new SfpPaymentConfirmation();
+                            sfpPaymentConfirmation.CustomerId = customer.Id;
+                            sfpPaymentConfirmation.CustomerName = customer.FirstName + " " + customer.LastName;
+                            sfpPaymentConfirmation.AgentId = agent.Id;
+                            sfpPaymentConfirmation.AgentName = agent.FirstName + " " + agent.LastName;
+                            var data = await _paymentConfirmRepository.GetAsync(x => x.CustomerId == customer.Id && x.AgentId == agent.Id);
+                            if (data != null && data.Count() > 0)
+                            {
+                                double balancePaid = data.Sum(x => Convert.ToDouble(x.Amount));
+                                sfpPaymentConfirmation.Amount = Convert.ToString(balancePaid);
+                            }
+                            var amountTobePaid = await GetBalancebasedonCustomerandAgent(customer.Id, agent.Id);
+                            // amount paid by customer already deducted in the above method, so we are adding it again here to balance the amount
+                            amountTobePaid = amountTobePaid + Convert.ToDouble(sfpPaymentConfirmation.Amount ?? "0");
+                            var deliveryCharge = await _sfpAgentCustDlivryChargeService.GetDeliveryChargeforAgentandCustomer(agent.Id, customer.Id);
+                            sfpPaymentConfirmation.BalanceAmount = Convert.ToString(Convert.ToDouble(amountTobePaid + deliveryCharge) - Convert.ToDouble(sfpPaymentConfirmation.Amount));
+                            if (status == "Pending")
+                            {
+                                if (sfpPaymentConfirmation.BalanceAmount != "0" && sfpPaymentConfirmation.BalanceAmount != null)
+                                {
+                                    sfpPaymentConfirmation.Amount = sfpPaymentConfirmation.BalanceAmount;
+                                    paymentConfirmations.Add(sfpPaymentConfirmation);
+                                }
+                            }
+                            else
+                            {
+                                if (sfpPaymentConfirmation.BalanceAmount == "0")
+                                {
+                                    paymentConfirmations.Add(sfpPaymentConfirmation);
+                                }
+                            }
+                        }
+                    }
+                }
                 return paymentConfirmations;
             }
             catch (Exception ex)
