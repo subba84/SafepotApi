@@ -21,6 +21,13 @@ builder.Services.AddSession(options =>
 builder.Services.AddDbContext<SafepotDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("SqlDataConnection"))
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
+
+//var connectionString = builder.Configuration.GetConnectionString("SqlDataConnection");
+//var serverVersion = ServerVersion.AutoDetect(connectionString);
+//builder.Services.AddDbContext<SafepotDbContext>(options =>
+//            options.UseMySql(connectionString, serverVersion: serverVersion)
+//            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
+
 builder.Services.AddTransient(typeof(ISfpDataRepository<>), typeof(SfpDataRepository<>));
 builder.Services.AddTransient<ISfpUserService, SfpUserService>();
 builder.Services.AddTransient<ILoginService, LoginService>();

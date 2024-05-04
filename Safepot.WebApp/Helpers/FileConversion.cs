@@ -32,7 +32,7 @@ namespace Safepot.WebApp.Helpers
 
                 iTextSharp.text.Font blackFont = FontFactory.GetFont("Arial", 7, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
                 iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 18, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
-                Font headerFont = new Font(FontFactory.GetFont("Arial", 18, Font.BOLD));
+                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(FontFactory.GetFont("Arial", 18, iTextSharp.text.Font.BOLD));
                 using (MemoryStream stream = new MemoryStream())
                 {
                     PdfReader reader = new PdfReader(bytes);
