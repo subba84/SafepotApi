@@ -13,11 +13,11 @@ C:\Working Projects\Safepot\Safepot.Entity\obj\Debug\net6.0\ref\Safepot.Entity.d
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\bin\Debug\net6.0\Safepot.Entity.deps.json
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\bin\Debug\net6.0\Safepot.Entity.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\bin\Debug\net6.0\Safepot.Entity.pdb
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.csproj.AssemblyReference.cache
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.GeneratedMSBuildEditorConfig.editorconfig
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.AssemblyInfoInputs.cache
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.AssemblyInfo.cs
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.csproj.CoreCompileInputs.cache
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.sourcelink.json
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\refint\Safepot.Entity.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Entity\obj\Debug\net6.0\Safepot.Entity.pdb
