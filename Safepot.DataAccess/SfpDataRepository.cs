@@ -9,11 +9,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using static Org.BouncyCastle.Math.EC.ECCurve;
+//using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Safepot.DataAccess
 {
-    public class SfpDataRepository<T> : DbFactoryBase, ISfpDataRepository<T> where T : class
+    public class SfpDataRepository<T> : SqlDbFactoryBase/*DbFactoryBase*/, ISfpDataRepository<T> where T : class
     {
         private readonly SafepotDbContext _context;
         private readonly DbSet<T> _dbSet;

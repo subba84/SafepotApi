@@ -27,7 +27,8 @@ C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.D
 C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.AssemblyInfoInputs.cache
 C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.AssemblyInfo.cs
 C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.csproj.CoreCompileInputs.cache
-C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.csproj.CopyComplete
+C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.sourcelink.json
+C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot..80B4212B.Up2Date
 C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\refint\Safepot.DataAccess.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.DataAccess\obj\Debug\net6.0\Safepot.DataAccess.pdb

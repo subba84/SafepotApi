@@ -2,11 +2,11 @@
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Paddings;
 using Org.BouncyCastle.Crypto.Parameters;
+using System.Security.Cryptography;
+using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Safepot.DataAccess
@@ -30,7 +30,7 @@ namespace Safepot.DataAccess
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
             {
                 var keyBytes = password.GetBytes(Keysize / 8);
-                var engine = new RijndaelEngine(256);
+                var engine = new Org.BouncyCastle.Crypto.Engines.RijndaelEngine(256);
                 var blockCipher = new CbcBlockCipher(engine);
                 var cipher = new PaddedBufferedBlockCipher(blockCipher, new Pkcs7Padding());
                 var keyParam = new KeyParameter(keyBytes);
