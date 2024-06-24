@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Safepot.Entity
 {
-    public class SfpSetting
+    public class SfpOrderSwitch
     {
         [Key]
         public int Id { get; set; }
         public int? AgentId { get; set; }
-        public string? AgentName { get; set; }
-        public bool? IsDamageReturnAllowed { get; set; }        
+        public int? CustomerId { get; set; }
+        public bool? IsOrderGenerationOff { get; set; }
+        public DateTime? OrderGenerateOnOffFrom { get; set; }
     }
 }
