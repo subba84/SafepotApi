@@ -13,5 +13,8 @@ namespace Safepot.Contracts
         Task<IEnumerable<SfpSubscriptionHistory>> GetAllSubscriptionHistory(int agentid);
         Task UpdateSubscriptionHistory(SfpSubscriptionHistory history);
         Task DeleteSubscriptionHistory(int id);
+        Task<List<SfpSubscriptionHistory>> GetAgentsexpiredinThreeMonths();
+        Task<List<SfpSubscriptionHistory>> GetAgentSubscriptions();
+
     }
 }

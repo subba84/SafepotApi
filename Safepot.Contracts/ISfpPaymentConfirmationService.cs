@@ -20,5 +20,6 @@ namespace Safepot.Contracts
         //public Task<SfpPaymentConfirmation> GetBalancebasedonCustomerandAgent(int customerId,int agentId);
         Task<double> GetBalancebasedonCustomerandAgent(int customerId, int agentId);
         public Task<IEnumerable<SfpPaymentConfirmation>> GetPaymentHistorybasedonAgentandCustomer(int agentId, int customerId);
+        public Task<IEnumerable<SfpUser>> GetMinimumBalanceCustomersbasedonAgent(int agentId);
     }
 }

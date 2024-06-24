@@ -9,7 +9,7 @@ namespace Safepot.Contracts
 {
     public interface ISfpCustomerQuantityService
     {
-        public Task<IEnumerable<SfpCustomerQuantity>> GetExistingCustomerQtybasedonDate(int? customerId, DateTime? fromDate, DateTime? toDate, int? makeModelMasterId);
+        public Task<IEnumerable<SfpCustomerQuantity>> GetExistingCustomerQtybasedonDate(int agentId, int? customerId, DateTime? fromDate, DateTime? toDate, int? makeModelMasterId);
         public Task<IEnumerable<SfpCustomerQuantity>> GetQuantitiesforCustomer();
         public Task<IEnumerable<SfpCustomerQuantity>> GetProductsbasedonCustomer(int customerId,int agentId,string status);
         public Task<SfpCustomerQuantity> GetQuantitiesforCustomer(int customerid);

@@ -24,5 +24,6 @@ namespace Safepot.Contracts
         public Task<IEnumerable<SfpUser>> GetFreeCustomersbasedonAgentandDelivery(int agentId, int deliveryId);
         public Task<IEnumerable<SfpUser>> GetFreeAgentsbasedoCustomer(int customerId);
         public Task<IEnumerable<SfpUser>> GetAssociatedCustomersbasedonAgentandDelivery(int agentId, int deliveryId);
+        public Task<IEnumerable<SfpUser>> GetAssociatedDeliveryBoysbasedonAgentandCustomer(int agentId, int customerId);
     }
 }
