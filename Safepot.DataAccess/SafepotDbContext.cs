@@ -41,6 +41,10 @@ namespace Safepot.DataAccess
             modelBuilder.Entity<SfpSetting>().HasKey(k => new { k.Id });
             modelBuilder.Entity<SfpCompany>().HasKey(k => new { k.Id });
             modelBuilder.Entity<SfpInvoice>().HasKey(k => new { k.Id });
+            modelBuilder.Entity<SfpCustomerInvoice>().HasKey(k => new { k.Id });
+            modelBuilder.Entity<SfpOrderSwitch>().HasKey(k => new { k.Id });
+            modelBuilder.Entity<SfpOtp>().HasKey(k => new { k.Id });
+            modelBuilder.Entity<SfpPaymentUpload>().HasKey(k => new { k.Id });
         }
     }
 }

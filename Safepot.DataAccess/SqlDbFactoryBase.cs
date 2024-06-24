@@ -20,8 +20,8 @@ namespace Safepot.DataAccess
 
         internal string DbConnectionString => _config.GetConnectionString("SqlDataConnection") ?? "";
 
-        internal SqlConnection DbConnection => new SqlConnection(DbConnectionString);
-        //internal MySql.Data.MySqlClient.MySqlConnection DbConnection => new MySql.Data.MySqlClient.MySqlConnection(DbConnectionString);
+        //internal SqlConnection DbConnection => new SqlConnection(DbConnectionString);
+        internal MySql.Data.MySqlClient.MySqlConnection DbConnection => new MySql.Data.MySqlClient.MySqlConnection(DbConnectionString);
 
         public virtual async Task<int> DbExecuteAsync(string sql, object[] parameters)
         {
@@ -30,7 +30,7 @@ namespace Safepot.DataAccess
                 using (var connection = DbConnection)
                 {
                     await connection.OpenAsync();
-                    using (var cmd = new SqlCommand(sql, connection))
+                    using (var cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.CommandTimeout = 0;
                         for (int i = 0; i < parameters.Length; i++)
@@ -54,7 +54,7 @@ namespace Safepot.DataAccess
                 using (var connection = DbConnection)
                 {
                     await connection.OpenAsync();
-                    using (var cmd = new SqlCommand(sql, connection))
+                    using (var cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.CommandTimeout = 0;
                         foreach (var key in parameters.Keys)
@@ -78,7 +78,7 @@ namespace Safepot.DataAccess
                 using (var connection = DbConnection)
                 {
                     await connection.OpenAsync();
-                    using (var cmd = new SqlCommand(sql, connection))
+                    using (var cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.CommandTimeout = 0;
                         return await cmd.ExecuteNonQueryAsync();
@@ -98,7 +98,7 @@ namespace Safepot.DataAccess
                 using (var connection = DbConnection)
                 {
                     await connection.OpenAsync();
-                    using (var cmd = new SqlCommand("Sp_ClearData", connection))
+                    using (var cmd = new MySqlCommand("Sp_ClearData", connection))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;

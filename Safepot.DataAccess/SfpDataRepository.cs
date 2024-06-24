@@ -249,10 +249,32 @@ namespace Safepot.DataAccess
                         if(prop.PropertyType == typeof(string))
                         {
                             var propVal = prop.GetValue(item, null);
-                            if(propVal != null && Convert.ToString(propVal) != "" && Convert.ToString(propVal) != "string")
-                              prop.SetValue(item, EncryptionHelper.Encrypt(propVal.ToString() ?? "", _encryptionkey), null);
+                            var attr = prop.GetCustomAttributes(true);
+                            if(attr != null && attr.Length > 0)
+                            {
+                                if(attr.First().ToString() == "Safepot.Entity.SkipEncrypt")
+                                {
+                                    if (propVal != null && Convert.ToString(propVal) != "" && Convert.ToString(propVal) != "string")
+                                        prop.SetValue(item, propVal.ToString() ?? "", null);
+                                    else
+                                        prop.SetValue(item, "", null);
+                                }
+                                else
+                                {
+                                    if (propVal != null && Convert.ToString(propVal) != "" && Convert.ToString(propVal) != "string")
+                                        prop.SetValue(item, EncryptionHelper.Encrypt(propVal.ToString() ?? "", _encryptionkey), null);
+                                    else
+                                        prop.SetValue(item, "", null);
+                                }
+                            }
                             else
-                                prop.SetValue(item, "", null);
+                            {
+                                if (propVal != null && Convert.ToString(propVal) != "" && Convert.ToString(propVal) != "string")
+                                    prop.SetValue(item, EncryptionHelper.Encrypt(propVal.ToString() ?? "", _encryptionkey), null);
+                                else
+                                    prop.SetValue(item, "", null);
+                            }
+                            
                         }
                     }
                 }
@@ -275,8 +297,25 @@ namespace Safepot.DataAccess
                         if (prop.PropertyType == typeof(string))
                         {
                             var propVal = prop.GetValue(item, null);
-                            if (propVal != null && Convert.ToString(propVal) != "")
-                                prop.SetValue(item, EncryptionHelper.Decrypt(propVal.ToString() ?? "", _encryptionkey), null);
+                            var attr = prop.GetCustomAttributes(true);
+                            if (attr != null && attr.Length > 0)
+                            {
+                                if (attr.First().ToString() == "Safepot.Entity.SkipEncrypt")
+                                {
+                                    if (propVal != null && Convert.ToString(propVal) != "")
+                                        prop.SetValue(item, propVal.ToString() ?? "", null);
+                                }
+                                else
+                                {
+                                    if (propVal != null && Convert.ToString(propVal) != "")
+                                        prop.SetValue(item, EncryptionHelper.Decrypt(propVal.ToString() ?? "", _encryptionkey), null);
+                                }
+                            }
+                            else
+                            {
+                                if (propVal != null && Convert.ToString(propVal) != "")
+                                    prop.SetValue(item, EncryptionHelper.Decrypt(propVal.ToString() ?? "", _encryptionkey), null);
+                            }                            
                         }
                     }
                 }
