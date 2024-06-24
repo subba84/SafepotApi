@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using NPOI.POIFS.Crypt.Dsig;
@@ -9,16 +10,24 @@ using Safepot.Web.Api.Helpers;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AgentCustDeliveryMapController : ControllerBase
     {
         private readonly ISfpAgentCustDeliveryMapService _sfpAgentCustDeliveryMapService;
         private readonly ILogger<AgentCustDeliveryMapController> _logger;
-        public AgentCustDeliveryMapController(ISfpAgentCustDeliveryMapService sfpAgentCustDeliveryMapService, ILogger<AgentCustDeliveryMapController> logger)
+        private readonly INotificationService _notificationService;
+        private readonly ISfpUserService _userService;
+        public AgentCustDeliveryMapController(ISfpAgentCustDeliveryMapService sfpAgentCustDeliveryMapService,
+            ILogger<AgentCustDeliveryMapController> logger,
+            INotificationService notificationService,
+            ISfpUserService userService)
         {
             _sfpAgentCustDeliveryMapService = sfpAgentCustDeliveryMapService;
             _logger = logger;
+            _notificationService = notificationService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -165,7 +174,26 @@ namespace Safepot.Web.Api.Controllers
         {
             try
             {
+                if (sfpAgentCustDeliveryMap.DeliveryId != 0)
+                {
+                    List<int?> usersList = new List<int?> { sfpAgentCustDeliveryMap.AgentId, sfpAgentCustDeliveryMap.CustomerId, sfpAgentCustDeliveryMap.DeliveryId };
+                    var userDetails = await _userService.GetUsers(usersList);
+                    if (userDetails != null && userDetails.Count() > 0)
+                    {
+                        var deliveryBoy = userDetails.First(x => x.Id == sfpAgentCustDeliveryMap.DeliveryId);
+                        var customer = userDetails.First(x => x.Id == sfpAgentCustDeliveryMap.CustomerId);
+                        var agent = userDetails.First(x => x.Id == sfpAgentCustDeliveryMap.AgentId);
+                        string customerDescription = "Delivery Boy - " + deliveryBoy.FirstName + " " + deliveryBoy.LastName + " have been assigned to you";
+                        string deliveryDescription = "you have been assigned to Customer - " + customer.FirstName + " " + customer.LastName;
+                        string agentDescription = "Delivery Boy - " + deliveryBoy.FirstName + " " + deliveryBoy.LastName + " have been assigned to Customer - " + customer.FirstName + " " + customer.LastName;
+
+                        await _notificationService.CreateNotification(deliveryDescription, sfpAgentCustDeliveryMap.AgentId, sfpAgentCustDeliveryMap.CustomerId, sfpAgentCustDeliveryMap.DeliveryId, null, "Assigning User", false, false, true);
+                        await _notificationService.CreateNotification(customerDescription, sfpAgentCustDeliveryMap.AgentId, sfpAgentCustDeliveryMap.CustomerId, sfpAgentCustDeliveryMap.DeliveryId, null, "Assigning User", false, true, false);
+                        await _notificationService.CreateNotification(agentDescription, sfpAgentCustDeliveryMap.AgentId, sfpAgentCustDeliveryMap.CustomerId, sfpAgentCustDeliveryMap.DeliveryId, null, "Assigning User", true, false, false);
+                    }
+                }
                 await _sfpAgentCustDeliveryMapService.SaveMapping(sfpAgentCustDeliveryMap);
+                
                 return ResponseModel<SfpAgentCustDeliveryMap>.ToApiResponse("Success", "Mapping Save Successful", new List<SfpAgentCustDeliveryMap>() { new SfpAgentCustDeliveryMap { Id = sfpAgentCustDeliveryMap.Id } });
             }
             catch (Exception ex)

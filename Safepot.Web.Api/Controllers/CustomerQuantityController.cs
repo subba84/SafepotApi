@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.POIFS.Crypt.Dsig;
 using NPOI.SS.Formula.Functions;
@@ -9,6 +10,7 @@ using Safepot.Web.Api.Helpers;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerQuantityController : ControllerBase
@@ -19,12 +21,14 @@ namespace Safepot.Web.Api.Controllers
         private readonly ISfpMakeModelMasterService _sfpMakeModelMasterService;
         private readonly ISfpUserService _sfpUserService;
         private readonly ISfpOrderService _sfpOrderService;
+        private readonly ISfpOrderSwitchService _sfpOrderSwitchService;
         public CustomerQuantityController(ISfpCustomerQuantityService sfpCustomerQuantityService,
             ILogger<CustomerQuantityController> logger,
             ISfpMakeModelMasterService sfpMakeModelMasterService,
             ISfpCustomizedQuantityService sfpCustomizedQuantityService,
             ISfpUserService sfpUserService,
-            ISfpOrderService sfpOrderService)
+            ISfpOrderService sfpOrderService,
+            ISfpOrderSwitchService sfpOrderSwitchService)
         {
             _sfpCustomerQuantityService = sfpCustomerQuantityService;
             _logger = logger;
@@ -32,6 +36,7 @@ namespace Safepot.Web.Api.Controllers
             _sfpCustomizedQuantityService = sfpCustomizedQuantityService;
             _sfpUserService = sfpUserService;
             _sfpOrderService = sfpOrderService;
+            _sfpOrderSwitchService = sfpOrderSwitchService;
         }
 
         [HttpGet]
@@ -152,8 +157,12 @@ namespace Safepot.Web.Api.Controllers
                 var today = DateTime.Now.Date;
                 if (isOrderSchedulerneedtoRun && (sfpCustomerQuantity.FromDate == null ? sfpCustomerQuantity.FromDate : sfpCustomerQuantity.FromDate.Value.Date) == today)
                 {
-                    // Run the order scheduler to create the orders for today..
-                    await _sfpOrderService.CreateOrdersbasedonSchedule();
+                    bool isOrderGenerationOff = await _sfpOrderSwitchService.IsOrderGenerationOff(sfpCustomerQuantity.AgentId ?? 0, sfpCustomerQuantity.CustomerId ?? 0);
+                    if(isOrderGenerationOff == false)
+                    {
+                        // Run the order scheduler to create the orders for today..
+                        await _sfpOrderService.CreateOrdersbasedonSchedule();
+                    }
                 }
 
                 return ResponseModel<SfpCustomerQuantity>.ToApiResponse("Success", "Schedule saved successfully", new List<SfpCustomerQuantity>() { new SfpCustomerQuantity { Id= sfpCustomerQuantity .Id} });

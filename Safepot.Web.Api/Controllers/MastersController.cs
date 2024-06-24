@@ -9,7 +9,7 @@ using Safepot.Web.Api.Helpers;
 
 namespace Safepot.Web.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MastersController : ControllerBase

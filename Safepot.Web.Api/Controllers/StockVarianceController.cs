@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Safepot.Business;
 using Safepot.Contracts;
@@ -8,6 +9,7 @@ using System.Linq;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StockVarianceController : ControllerBase

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.POIFS.Crypt.Dsig;
 using Safepot.Business;
@@ -8,6 +9,7 @@ using Safepot.Web.Api.Helpers;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StockEntryController : ControllerBase

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.POIFS.Crypt.Dsig;
 using Safepot.Business;
@@ -8,18 +9,23 @@ using Safepot.Web.Api.Helpers;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentConfirmationController : ControllerBase
     {
         private readonly ISfpPaymentConfirmationService _sfpPaymentConfirmationService;
         private readonly ISfpAgentCustDlivryChargeService _sfpAgentCustDlivryChargeService;
+        private readonly ISfpOrderSwitchService _sfpOrderSwitchService;
         private readonly ILogger<PaymentConfirmationController> _logger;
-        public PaymentConfirmationController(ISfpPaymentConfirmationService sfpPaymentConfirmationService, ILogger<PaymentConfirmationController> logger, ISfpAgentCustDlivryChargeService sfpAgentCustDlivryChargeService)
+        public PaymentConfirmationController(ISfpPaymentConfirmationService sfpPaymentConfirmationService, 
+            ILogger<PaymentConfirmationController> logger,
+            ISfpAgentCustDlivryChargeService sfpAgentCustDlivryChargeService, ISfpOrderSwitchService sfpOrderSwitchService)
         {
             _sfpPaymentConfirmationService = sfpPaymentConfirmationService;
             _sfpAgentCustDlivryChargeService = sfpAgentCustDlivryChargeService;
             _logger = logger;
+            _sfpOrderSwitchService = sfpOrderSwitchService;
         }
 
         [HttpGet]
@@ -82,6 +88,51 @@ namespace Safepot.Web.Api.Controllers
             catch (Exception ex)
             {
                 return ResponseModel<SfpPaymentConfirmation>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("getminimumbalancecustomers")]
+        public async Task<ResponseModel<CustomerData>> GetMinimumBalanceCustomers(int agentid)
+        {
+            try
+            {
+                var data = await _sfpPaymentConfirmationService.GetMinimumBalanceCustomersbasedonAgent(agentid);
+                List<CustomerData> customers = new List<CustomerData>();
+                if(data!=null && data.Count() > 0)
+                {
+                    foreach(var customer in data)
+                    {
+                        if (!string.IsNullOrEmpty(customer.ApprovalStatus))
+                        {
+                            if(Convert.ToDouble(customer.ApprovalStatus) <= 100)
+                            {
+                                CustomerData customerData = new CustomerData();
+                                var orderSwitchDetails = await _sfpOrderSwitchService.GetOrderSwitchDetails(agentid, customer.Id);
+                                if (orderSwitchDetails!=null && orderSwitchDetails.Id > 0)
+                                {
+                                    customerData.OrderStatus = orderSwitchDetails.IsOrderGenerationOff == true ? "Deactive" : "Active";
+                                    customerData.OrderOffDate = orderSwitchDetails.OrderGenerateOnOffFrom;
+                                }
+                                else
+                                {
+                                    customerData.OrderStatus = "Active";
+                                    customerData.OrderOffDate = null;
+                                }                                
+                                customerData.Id = customer.Id;
+                                customerData.CustomerName = customer.FirstName + " " + customer.LastName;
+                                customerData.MobileNumber = customer.Mobile;
+                                customerData.Balance = customer.ApprovalStatus;
+                                customers.Add(customerData);
+                            }
+                        }
+                    }
+                }
+                return ResponseModel<CustomerData>.ToApiResponse("Success", "List Available", customers);
+            }
+            catch (Exception ex)
+            {
+                return ResponseModel<CustomerData>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
             }
         }
 

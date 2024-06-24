@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mysqlx.Crud;
 using Safepot.Business;
 using Safepot.Contracts;
 using Safepot.Entity;
@@ -7,6 +9,7 @@ using Safepot.Web.Api.Helpers;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AddReduceQuantityController : ControllerBase
@@ -113,26 +116,40 @@ namespace Safepot.Web.Api.Controllers
                                 sfpOrder.Quantity = sfpCustomizeQuantity.Quantity;
                                 sfpOrder.UnitPrice = sfpCustomizeQuantity.UnitPrice;
                                 item.OrderCreatedOn = DateTime.Now;
+                                string orderDescription =  "New Order have been created by " + sfpOrder.CustomerName
+                                + " on " + (sfpOrder.TransactionDate == null ? "" : sfpOrder.TransactionDate.Value.Date.ToString("dd-MM-yyyy")) + " for product - " + makeModelData.ModelName + "(" + makeModelData.MakeName + ")";
                                 await _sfpOrderService.CreateOrder(sfpOrder);
+                                if(sfpOrder.AgentId > 0 && sfpOrder.CustomerId > 0)
+                                {
+                                    var deliveryBoys = await _sfpAgentCustDeliveryMapService.GetAssociatedDeliveryBoysbasedonAgentandCustomer(sfpOrder.AgentId ?? 0, sfpOrder.CustomerId ?? 0);
+                                    if(deliveryBoys != null && deliveryBoys.Count() > 0)
+                                    {
+                                        foreach(var delivery in deliveryBoys)
+                                        {
+                                            await _notificationService.CreateNotification(orderDescription, sfpOrder.AgentId, sfpOrder.CustomerId, delivery.Id, (sfpOrder.TransactionDate == null ? sfpOrder.TransactionDate : sfpOrder.TransactionDate.Value.Date), "Order Creation", false, false, true);
+                                        }
+                                    }
+                                }
+                                await _notificationService.CreateNotification(orderDescription, sfpOrder.AgentId, sfpOrder.CustomerId, null, (sfpOrder.TransactionDate == null ? sfpOrder.TransactionDate : sfpOrder.TransactionDate.Value.Date), "Order Creation", true, true, false);
                             }
                         }
                     }
                 }
 
-                string description = string.Empty;
-                DateTime? today = DateTime.Now;
-                if (sfpCustomizeQuantity.Id > 0)
-                {
-                    description = "New Order have been added/modified by " + sfpCustomizeQuantity.CustomerName + " on " + today;
-                    await _sfpCustomizedQuantityService.UpdateCustomizedQuantity(sfpCustomizeQuantity);
-                }
-                else
-                {
-                    description = "Order have been added/modified by " + sfpCustomizeQuantity.CustomerName + " on " + today;
-                    await _sfpCustomizedQuantityService.SaveCustomizedQuantity(sfpCustomizeQuantity);
-                }
+                //string description = string.Empty;
+                //DateTime? today = DateTime.Now;
+                //if (sfpCustomizeQuantity.Id > 0)
+                //{
+                //    description = "New Order have been added/modified by " + sfpCustomizeQuantity.CustomerName + " on " + today;
+                //    await _sfpCustomizedQuantityService.UpdateCustomizedQuantity(sfpCustomizeQuantity);
+                //}
+                //else
+                //{
+                //    description = "Order have been added/modified by " + sfpCustomizeQuantity.CustomerName + " on " + today;
+                //    await _sfpCustomizedQuantityService.SaveCustomizedQuantity(sfpCustomizeQuantity);
+                //}
                
-                await _notificationService.CreateNotification(description, sfpCustomizeQuantity.AgentId, sfpCustomizeQuantity.CustomerId,null, (sfpCustomizeQuantity.TransactionDate == null ? sfpCustomizeQuantity.TransactionDate : sfpCustomizeQuantity.TransactionDate.Value.Date),"Order Creation",true,true,true);
+                
                 return ResponseModel<SfpCustomizeQuantity>.ToApiResponse("Success", "Customer Quantity Save Successful", new List<SfpCustomizeQuantity>() { new SfpCustomizeQuantity() { Id = sfpCustomizeQuantity.Id } });
             }
             catch (Exception ex)

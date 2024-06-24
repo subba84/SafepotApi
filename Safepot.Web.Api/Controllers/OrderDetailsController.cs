@@ -1,39 +1,55 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
+using Mysqlx.Crud;
 using NPOI.SS.Formula.Functions;
 using Safepot.Business;
 using Safepot.Contracts;
 using Safepot.Entity;
 using Safepot.Web.Api.Helpers;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Safepot.Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderDetailsController : ControllerBase
     {
-        //private readonly ISfpCustomizedQuantityService _sfpCustomizedQuantityService;
+        private readonly ISfpCustomerQuantityService _sfpCustomerQuantityService;
         private readonly ISfpOrderService _sfpOrderService;
         private readonly ISfpMakeModelMasterService _sfpMakeModelMasterService;
         private readonly ISfpAgentCustDlivryChargeService _sfpDeliveryChargeService;
         private readonly ISfpAgentCustDeliveryMapService _sfpMappingService;
         private readonly ISfpUserService _userService;
+        private readonly ISfpCustomerInvoiceService _customerInvoiceService;
+        private readonly ISfpPaymentConfirmationService _paymentService;
         private readonly ILogger<OrderDetailsController> _logger;
+        private readonly INotificationService _notificationService;
         public OrderDetailsController(ISfpOrderService sfpOrderService,
             ISfpUserService userService,
             ISfpMakeModelMasterService sfpMakeModelMasterService,
             ISfpAgentCustDlivryChargeService sfpDeliveryChargeService,
             ISfpAgentCustDeliveryMapService sfpMappingService,
-            ILogger<OrderDetailsController> logger)
+            ISfpCustomerInvoiceService customerInvoiceService,
+            ISfpPaymentConfirmationService paymentService,
+            ISfpCustomerQuantityService sfpCustomerQuantityService,
+            ILogger<OrderDetailsController> logger,
+            INotificationService notificationService)
         {
             _sfpOrderService = sfpOrderService;
-            _userService=userService;
+            _userService = userService;
             _sfpMakeModelMasterService = sfpMakeModelMasterService;
             _sfpDeliveryChargeService = sfpDeliveryChargeService;
             _sfpMappingService = sfpMappingService;
+            _customerInvoiceService = customerInvoiceService;
+            _paymentService = paymentService;
+            _sfpCustomerQuantityService = sfpCustomerQuantityService;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         [HttpGet]
@@ -305,6 +321,41 @@ namespace Safepot.Web.Api.Controllers
                             item.OrderRejectedOn = DateTime.Now;
                         }
                         item.OrderModifiedOn = DateTime.Now;
+                        // Update Status in Schedule(Customer Quantity)
+                        if(item.Status == "Completed")
+                        {
+                            var scheduleDetails = await _sfpCustomerQuantityService.GetExistingCustomerQtybasedonDate(item.AgentId ?? 0,item.CustomerId,item.TransactionDate,item.TransactionDate,item.MakeModelMasterId);
+                            if(scheduleDetails!=null && scheduleDetails.Count() > 0)
+                            {
+                                var schedule = scheduleDetails.First();
+                                if(schedule.Status == "Approved" && schedule.DurationFlag != "Continuous" && (schedule.ToDate == null ? schedule.ToDate : schedule.ToDate.Value.Date) == (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date) )
+                                {
+                                    schedule.Status = "Completed";
+                                    await _sfpCustomerQuantityService.UpdateCustomerQuantity(schedule);
+                                }
+                            }
+                        }
+
+                        var makeModelData = await _sfpMakeModelMasterService.GetMakeModel(item.MakeModelMasterId ?? 0);
+                        var deliveryBoy = new SfpUser();
+                        if(deliveryBoyId > 0)
+                        {
+                            deliveryBoy = await _userService.GetUser(deliveryBoyId);
+                        }
+                        string description = "Customer - " + item.CustomerName +  "'s Order have been " + (item.Status == "Delivered" ? "accepted" : item.Status.ToLower()) + " by " + (deliveryBoy.Id > 0 ? deliveryBoy.FirstName + " " + deliveryBoy.LastName : "delivery boy ") 
+                                + " for product - " + makeModelData.ModelName + "(" + makeModelData.MakeName + ")";
+                        if (item.AgentId > 0 && item.CustomerId > 0)
+                        {
+                            var deliveryBoys = await _sfpMappingService.GetAssociatedDeliveryBoysbasedonAgentandCustomer(item.AgentId ?? 0, item.CustomerId ?? 0);
+                            if (deliveryBoys != null && deliveryBoys.Count() > 0)
+                            {
+                                foreach (var delivery in deliveryBoys)
+                                {
+                                    await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, delivery.Id, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date), "Order Update", false, false, true);
+                                }
+                            }
+                        }
+                        await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date), "Order Update", true, true, false);
                         await _sfpOrderService.UpdateOrder(item);
                     }
                 }
@@ -493,6 +544,26 @@ namespace Safepot.Web.Api.Controllers
                                         ord.OrderRejectedBy = order.DeliveryBoyId;
                                         ord.OrderRejectedOn = DateTime.Now;
                                     }
+                                    var makeModelData = await _sfpMakeModelMasterService.GetMakeModel(ord.MakeModelMasterId ?? 0);
+                                    var deliveryBoy = new SfpUser();
+                                    if ((order.DeliveryBoyId ?? 0) > 0)
+                                    {
+                                        deliveryBoy = await _userService.GetUser(order.DeliveryBoyId ?? 0);
+                                    }
+                                    string description = "Order have been " + (order.Status ?? "") .ToLower() + " by " + (deliveryBoy.Id > 0 ? deliveryBoy.FirstName + " " + deliveryBoy.LastName : " delivery boy ")
+                                            + " for product - " + makeModelData.ModelName + "(" + makeModelData.MakeName + ")";
+                                    if (ord.AgentId > 0 && ord.CustomerId > 0)
+                                    {
+                                        var deliveryBoys = await _sfpMappingService.GetAssociatedDeliveryBoysbasedonAgentandCustomer(ord.AgentId ?? 0, ord.CustomerId ?? 0);
+                                        if (deliveryBoys != null && deliveryBoys.Count() > 0)
+                                        {
+                                            foreach (var delivery in deliveryBoys)
+                                            {
+                                                await _notificationService.CreateNotification(description, ord.AgentId, ord.CustomerId, delivery.Id, (ord.TransactionDate == null ? ord.TransactionDate : ord.TransactionDate.Value.Date), "Order Update", false, false, true);
+                                            }
+                                        }
+                                    }
+                                    await _notificationService.CreateNotification(description, ord.AgentId, ord.CustomerId, null, (ord.TransactionDate == null ? ord.TransactionDate : ord.TransactionDate.Value.Date), "Order Update", true, true, false);
                                     await _sfpOrderService.UpdateOrder(ord);
                                 }
                             }
@@ -666,21 +737,22 @@ namespace Safepot.Web.Api.Controllers
 
         [HttpGet]
         [Route("custominvoicereport")]
-        public async Task<ResponseModel<InvoiceReportModel>> CustomInvoiceReport(
+        public async Task<ResponseModel<MonthlyPrice>> CustomInvoiceReport(
            int agentId,
            int customerId)
         {
             double deliveryCharge = 0;
             try
             {
-                InvoiceReportModel model = new InvoiceReportModel();
-                model.MonthlyPrices = new List<MonthlyPrice>();
+                List<MonthlyPrice> monthlyPrices = new List<MonthlyPrice>();
+                //InvoiceReportModel model = new InvoiceReportModel();
+                //model.MonthlyPrices = new List<MonthlyPrice>();
                 var customer = await _userService.GetUser(customerId);
-                var agent = await _userService.GetUser(agentId);
-                model.AgentId = agent.Id;
-                model.AgentName = agent.FirstName + " " + agent.LastName;
-                model.CustomerId = customer.Id;
-                model.CustomerName = customer.FirstName + " " + customer.LastName;
+                //var agent = await _userService.GetUser(agentId);
+                //model.AgentId = agent.Id;
+                //model.AgentName = agent.FirstName + " " + agent.LastName;
+                //model.CustomerId = customer.Id;
+                //model.CustomerName = customer.FirstName + " " + customer.LastName;
 
 
                 DateTime? fromDate = customer.JoinDate;
@@ -698,8 +770,6 @@ namespace Safepot.Web.Api.Controllers
                         if(monthOrderDetails!=null && monthOrderDetails.Count() > 0)
                         {
                             MonthlyPrice monthlyPrice = new MonthlyPrice();
-                            monthlyPrice.Year = i.Year;
-                            monthlyPrice.Month = i.Month;
                             monthlyPrice.MonthName = i.Year + " - " + i.ToString("MMMM", CultureInfo.InvariantCulture);
                             monthlyPrice.TotalAmount = monthOrderDetails.Sum(x => Convert.ToDouble(x.TotalPrice ?? "0"));
                             DateTime deliveryChargeStartDate = new DateTime(i.Year, i.Month, 1);
@@ -710,7 +780,8 @@ namespace Safepot.Web.Api.Controllers
                             }
                             deliveryCharge = await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, deliveryChargeStartDate, deliveryChargeToDate);
                             monthlyPrice.TotalAmount = monthlyPrice.TotalAmount + deliveryCharge;
-                            model.MonthlyPrices.Add(monthlyPrice);
+                            monthlyPrice.InvoiceNumber = await _customerInvoiceService.GetCustomerInvoiceId(i.Year, i.Month, customerId);
+                            monthlyPrices.Add(monthlyPrice);
                         }
                     }
 
@@ -765,11 +836,11 @@ namespace Safepot.Web.Api.Controllers
                     //    }
                     //}
                 }
-                return ResponseModel<InvoiceReportModel>.ToApiResponse("Success", "Data Available", new List<InvoiceReportModel> { model });
+                return ResponseModel<MonthlyPrice>.ToApiResponse("Success", "Data Available", monthlyPrices);
             }
             catch (Exception ex)
             {
-                return ResponseModel<InvoiceReportModel>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
+                return ResponseModel<MonthlyPrice>.ToApiResponse("Failure", "Error Occured - " + ex.Message, null);
             }
         }
 
@@ -778,12 +849,12 @@ namespace Safepot.Web.Api.Controllers
         public async Task<ResponseModel<MonthlyOrderModel>> MonthlyInvoiceReport(
            int agentId,
            int customerId,
-           int year,
-           int month)
+           int invoiceId)
         {
             double deliveryCharge = 0;
             try
             {
+                SfpCustomerInvoice sfpCustomerInvoice = await _customerInvoiceService.GetCustomerInvoice(invoiceId);
                 MonthlyOrderModel model = new MonthlyOrderModel();
                 var customer = await _userService.GetUser(customerId);
                 var agent = await _userService.GetUser(agentId);
@@ -797,16 +868,18 @@ namespace Safepot.Web.Api.Controllers
                 model.AgentPincode = agent.PinCode;
                 model.CustomerId = customer.Id;
                 model.CustomerName = customer.FirstName + " " + customer.LastName;
-                DateTime? fromDate = new DateTime(year,month,1);
+                model.InvoiceNumber = invoiceId;
+                model.ShopBeside = "0";
+                DateTime? fromDate = new DateTime(sfpCustomerInvoice.InvoiceYear, sfpCustomerInvoice.InvoiceMonth, 1);
                 DateTime? toDate = fromDate.Value.AddMonths(1).AddDays(-1);
-                model.ValidFrom = fromDate.Value.ToString("dd-MMMM-yyyy");
-                model.ValidTo = toDate.Value.ToString("dd-MMMM-yyyy");
-                model.Products = new List<SfpCustomizeQuantity>();
+                model.ValidFrom = fromDate.Value.ToString("dd.MM.yyyy");
+                model.ValidTo = toDate.Value.ToString("dd.MM.yyyy");
+                model.Products = new List<Product>();
                 var orders = await _sfpOrderService.GetOrders(customerId, agentId, 0, "Completed", fromDate, toDate);
                 if (orders != null && orders.Count() > 0)
                 {
-                    var monthOrderDetails = orders.Where(x => (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Year) == year
-                        && (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Month) == month);
+                    var monthOrderDetails = orders.Where(x => (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Year) == sfpCustomerInvoice.InvoiceYear
+                        && (x.TransactionDate == null ? 0 : x.TransactionDate.Value.Month) == sfpCustomerInvoice.InvoiceMonth);
                     if (monthOrderDetails != null && monthOrderDetails.Count() > 0)
                     {
                         var makeModelMasterData = await _sfpMakeModelMasterService.GetMakeModels();
@@ -831,19 +904,49 @@ namespace Safepot.Web.Api.Controllers
                             x.UnitQuantity = Convert.ToString(makeModelData.Quantity);
                             x.UnitPrice = makeModelData.Price;
                         });
-                        model.Products = ordersList;
-                        model.TotalAmount = monthOrderDetails.Sum(x => Convert.ToDouble(x.TotalPrice ?? "0"));
-                        DateTime deliveryChargeStartDate = new DateTime(year, month, 1);
-                        DateTime deliveryChargeToDate = deliveryChargeStartDate.AddMonths(1).AddDays(-1);
-                        if (fromDate.Value.Month == (customer.JoinDate == null ? 0 : customer.JoinDate.Value.Month))
+                        if(ordersList!=null && ordersList.Count() > 0)
                         {
-                            deliveryChargeStartDate = (customer.JoinDate == null ? deliveryChargeStartDate : customer.JoinDate.Value.Date);
+                            foreach(var order in ordersList)
+                            {
+                                Product product = new Product();
+                                product.Title = order.ModelName;
+                                product.Quantity = order.Quantity;
+                                product.Amount = order.TotalPrice;
+                                model.Products.Add(product);
+                            }
                         }
-                        deliveryCharge = await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, deliveryChargeStartDate, deliveryChargeToDate);
-                        model.DeliveryCharge = deliveryCharge;
-                        model.TotalAmount = model.TotalAmount + deliveryCharge;
                     }
+                    
+                    DateTime deliveryChargeStartDate = new DateTime(sfpCustomerInvoice.InvoiceYear, sfpCustomerInvoice.InvoiceMonth, 1);
+                    DateTime deliveryChargeToDate = deliveryChargeStartDate.AddMonths(1).AddDays(-1);
+                    if (fromDate.Value.Month == (customer.JoinDate == null ? 0 : customer.JoinDate.Value.Month))
+                    {
+                        deliveryChargeStartDate = (customer.JoinDate == null ? deliveryChargeStartDate : customer.JoinDate.Value.Date);
+                    }
+                    deliveryCharge = await _sfpDeliveryChargeService.GetDeliveryChargeforPeriodbasedonAgentandCustomer(agentId, customer.Id, deliveryChargeStartDate, deliveryChargeToDate);
 
+                    // Delivery Charge
+                    Product deliveryChargeproduct = new Product();
+                    deliveryChargeproduct.Title = "Delivery Charge";
+                    deliveryChargeproduct.Quantity = "0";
+                    deliveryChargeproduct.Amount = deliveryCharge.ToString();
+                    model.Products.Add(deliveryChargeproduct);
+
+                    // Delivery Charge
+                    //double advance = 0;
+                    //var paymentHistory = await _paymentService.GetPaymentHistorybasedonAgentandCustomer(agentId, customerId);
+                    //if(paymentHistory!=null && paymentHistory.Count() > 0)
+                    //{
+                    //    foreach(var history in paymentHistory)
+                    //    {
+                    //        advance += Convert.ToDouble(history.Amount ?? "0");
+                    //    }
+                    //}
+                    //Product advanceProduct = new Product();
+                    //advanceProduct.Title = "Advance";
+                    //advanceProduct.Quantity = "0";
+                    //advanceProduct.Amount = advance.ToString();
+                    //model.Products.Add(advanceProduct);
 
 
 

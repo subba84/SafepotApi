@@ -4,10 +4,10 @@ namespace Safepot.Web.Api.Helpers
 {
     public class InvoiceReportModel
     {
-        public int AgentId { get; set; }
-        public string? AgentName { get; set; }
-        public int CustomerId { get; set; }
-        public string? CustomerName { get; set; }
+        //public int AgentId { get; set; }
+        //public string? AgentName { get; set; }
+        //public int CustomerId { get; set; }
+        //public string? CustomerName { get; set; }
         public List<MonthlyPrice>? MonthlyPrices { get; set; }
     }
 
@@ -15,8 +15,7 @@ namespace Safepot.Web.Api.Helpers
     {
         public string? MonthName { get; set; }
         public double TotalAmount { get; set; }
-        public int Month { get; set; }
-        public int Year { get; set; }
+        public int InvoiceNumber { get; set; }
     }
 
     public class MonthlyOrderModel
@@ -33,10 +32,17 @@ namespace Safepot.Web.Api.Helpers
         public string? CustomerName { get; set; }
         public string? ValidFrom { get; set; }
         public string? ValidTo { get; set; }
-        public double? TotalAmount { get; set; }
-        public double? DeliveryCharge { get; set; }
-        public List<SfpCustomizeQuantity>? Products { get; set; }
+        //public double? TotalAmount { get; set; }
+        //public double? DeliveryCharge { get; set; }
+        public string? ShopBeside { get; set; }
+        public int InvoiceNumber { get; set; }
+        public List<Product>? Products { get; set; }
     }
 
-    
+    public class Product
+    {
+        public string? Title { get; set; }
+        public string? Quantity { get; set; }
+        public string? Amount { get; set; }
+    }
 }
