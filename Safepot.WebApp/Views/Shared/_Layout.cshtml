@@ -295,7 +295,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="index.html">
+                <a class="nav-link collapsed" href="/Dashboard/Index">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -303,86 +303,67 @@
             @{
                 var userRole = Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetInt32("_RoleId"));
             }
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-person"></i><span>Agents</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    @if (userRole == Safepot.Business.Common.AppRoles.Operator)
-                    {
-                        <li>
-                            <a href="/Agent/List">
-                                <i class="bi bi-circle"></i><span>Search Agents</span>
-                            </a>
-                        </li>
-                    }
-                    @if (userRole == Safepot.Business.Common.AppRoles.Approver)
-                    {
-                        <li>
-                            <a href="@Url.Action("List","AgentApproval")">
-                                <i class="bi bi-circle"></i><span>Approvals</span>
-                            </a>
-                        </li>
-                    }
 
-                    @if (userRole == Safepot.Business.Common.AppRoles.Accounts)
-                    {
-                        <li>
-                            <a href="@Url.Action("InvoiceList","Invoice")">
-                                <i class="bi bi-circle"></i><span>Invoices</span>
-                            </a>
-                        </li>
-                    }
-
-                </ul>
-            </li><!-- End Components Nav -->
-
-           @* <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-cust" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-person"></i><span>Customers</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-cust" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/Customer/List">
-                            <i class="bi bi-circle"></i><span>Search Customers</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>*@
-            <!-- End Components Nav -->
-
-            @*<li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-user" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-user" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/User/List">
-                            <i class="bi bi-circle"></i><span>Search Users</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>*@
-            <!-- End Components Nav -->
-            @if (userRole == Safepot.Business.Common.AppRoles.Operator)
+            @if (userRole == Safepot.Business.Common.AppRoles.Admin)
             {
                 <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#components-masters" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-database"></i><span>Masters</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <a class="nav-link collapsed" href="/MakeModel/List">
+                        <i class="bi bi-grid"></i><span>Make Model Master</span>
                     </a>
-                    <ul id="components-masters" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/MakeModel/List">
-                                <i class="bi bi-circle"></i><span>Make Model</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
-                <!-- End Components Nav -->
+                <!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/User/List">
+                        <i class="bi bi-grid"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <!-- End Dashboard Nav -->
+            }
+
+            @if (userRole == Safepot.Business.Common.AppRoles.Accounts)
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("ViewPaymentUploads","UploadPayment")">
+                        <i class="bi bi-grid"></i><span>View Payment Uploads</span>
+                    </a>
+                </li>
+
+                <!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("InvoiceList","Invoice")">
+                        <i class="bi bi-grid"></i>
+                        <span>Invoices</span>
+                    </a>
+                </li>
+
+                <!-- End Dashboard Nav -->
             }
             
+           
+            @if (userRole == Safepot.Business.Common.AppRoles.Sales)
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/Home/QRCode">
+                        <i class="bi bi-grid"></i><span>Payment QR Code</span>
+                    </a>
+                </li>
 
+                <!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/UploadPayment/PaymentUploads">
+                        <i class="bi bi-grid"></i>
+                        <span>Upload Payment Details</span>
+                    </a>
+                </li>
+
+                <!-- End Dashboard Nav -->
+            }
         </ul>
 
     </aside><!-- End Sidebar-->

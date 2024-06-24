@@ -13,7 +13,6 @@ C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\Safepot.Web.Api.runtimeconfig.json
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\Safepot.Web.Api.pdb
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\AutoMapper.dll
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\Azure.Core.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\Azure.Identity.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\BouncyCastle.Cryptography.dll
@@ -87,8 +86,18 @@ C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\System.Text.Json.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\ZstdSharp.dll
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\de\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\es\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\fr\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\it\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\ja\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\ko\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\ru\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
@@ -101,7 +110,7 @@ C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win-x64\native\krbcc64.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
-C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\GIT Projects\Safepot\SafepotApi\Safepot.Web.Api\obj\Release\net6.0\PubTmp\Out\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

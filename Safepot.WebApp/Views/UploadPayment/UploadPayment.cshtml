@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Safepot.Entity.SfpUser>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Upload Payment Details</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Upload Payment Details</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <form method="post" asp-action="SavePaymentDetails" asp-controller="UploadPayment" enctype="multipart/form-data">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>Mobile Number</label>
+                                    <div>
+                                        <input type="text" id="txtMobileNumber" class="form-control" name="MobileNumber" />
+                                        <input type="hidden" name="Id" id="hdnId"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Agent Name</label>
+                                    <div>
+                                        <input type="text" id="txtAgentName" class="form-control" name="" readonly/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Company</label>
+                                    <div>
+                                        <input type="text" id="txtCompany" class="form-control" name="" readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>State</label>
+                                    <div>
+                                        <input type="text" id="txtState" class="form-control" name="" readonly/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>City</label>
+                                    <div>
+                                        <input type="text" id="txtCity" class="form-control" name="" readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>Upload Payment Details</label>
+                                    <div>
+                                        <input type="file" accept=".png,.jpeg" id="flUpload" class="form-control" name="PaymentFile" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                    <input type="button" class="btn btn-danger" value="Cancel" />
+                                </div>
+                                <div class="col-lg-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<script type="text/javascript">
+    $("#txtMobileNumber").autocomplete({
+        appendTo: "#divUserNameControl",
+        source: function (request, response) {
+            $.ajax({
+                url: "@Url.Action("GetAgentDetails", "UploadPayment")?mobileNumber=" + $("#txtMobileNumber").val(),
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    //$("#hdnUserId").val('');
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.mobile,
+                            val: item.id,
+                            fullName : item.firstName + ' ' + item.lastName,
+                            companyName : item.companyName,
+                            state : item.stateName,
+                            city : item.cityName
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $("#txtMobileNumber").val(ui.item.label);
+            $("#txtAgentName").val(ui.item.fullName);
+            $("#txtCompany").val(ui.item.companyName);
+            $("#txtState").val(ui.item.state);
+            $("#txtCity").val(ui.item.city);
+            $("#hdnId").val(ui.item.val);
+        },
+        minLength: 3
+    });
+</script>
+
+

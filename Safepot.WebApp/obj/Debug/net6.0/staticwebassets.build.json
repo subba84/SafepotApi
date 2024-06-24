@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "b/wgsY4O9UjjY1ZhARpM+ij3R7SyV0VhfHjUiZnu4WY=",
+  "Hash": "/XFhgT8Re5PaZ87zgPJ+6q3b3LImpD8yHYKU/2A2P5A=",
   "Source": "Safepot.WebApp",
   "BasePath": "_content/Safepot.WebApp",
   "Mode": "Default",
@@ -433,6 +433,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\profile-img.jpg"
+    },
+    {
+      "Identity": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\assets\\img\\scan.png",
+      "SourceId": "Safepot.WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\",
+      "BasePath": "_content/Safepot.WebApp",
+      "RelativePath": "assets/img/scan.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\scan.png"
     },
     {
       "Identity": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\assets\\img\\slides-1.jpg",
@@ -8073,6 +8092,25 @@
       "OriginalItemSpec": "wwwroot\\assets\\vendor\\tinymce\\tinymce.min.js"
     },
     {
+      "Identity": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\Attachments\\Invoice_0c437d46-d018-49f5-a91b-085e4220f4c9.pdf",
+      "SourceId": "Safepot.WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\",
+      "BasePath": "_content/Safepot.WebApp",
+      "RelativePath": "Attachments/Invoice_0c437d46-d018-49f5-a91b-085e4220f4c9.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Attachments\\Invoice_0c437d46-d018-49f5-a91b-085e4220f4c9.pdf"
+    },
+    {
       "Identity": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\css\\site.css",
       "SourceId": "Safepot.WebApp",
       "SourceType": "Discovered",
@@ -9249,6 +9287,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\Uploads\\02f74e4f-f80f-449a-a13b-c41509a368c6\\sankar_payment.jpg",
+      "SourceId": "Safepot.WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\",
+      "BasePath": "_content/Safepot.WebApp",
+      "RelativePath": "Uploads/02f74e4f-f80f-449a-a13b-c41509a368c6/sankar_payment.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\02f74e4f-f80f-449a-a13b-c41509a368c6\\sankar_payment.jpg"
+    },
+    {
+      "Identity": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\Uploads\\b5aa58c3-40da-497d-a382-41e04efa55ef\\Lion.png",
+      "SourceId": "Safepot.WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\",
+      "BasePath": "_content/Safepot.WebApp",
+      "RelativePath": "Uploads/b5aa58c3-40da-497d-a382-41e04efa55ef/Lion.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\b5aa58c3-40da-497d-a382-41e04efa55ef\\Lion.png"
     }
   ]
 }

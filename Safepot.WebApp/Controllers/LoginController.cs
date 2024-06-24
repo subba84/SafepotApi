@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Safepot.Business.Common;
 using Safepot.Contracts;
 using Safepot.DataAccess;
 
@@ -34,7 +35,7 @@ namespace Safepot.WebApp.Controllers
             try
             {
                 var user = await _loginService.CheckUser(username, password);
-                if(user.Id > 0)
+                if(user.Id > 0 && (user.RoleId == AppRoles.Admin || user.RoleId == AppRoles.Accounts || user.RoleId == AppRoles.Sales))
                 {
                     HttpContext.Session.SetString(SessionName, user.FirstName + " " + user.LastName);
                     HttpContext.Session.SetInt32(SessionId, user.Id);

@@ -92,13 +92,20 @@
                                         {
                                             <option value="1">Admin</option>
                                             <option value="2" selected>Accounts</option>
+                                            <option value="8">Sales</option>
+                                        }
+                                        else if (Model.RoleId == Safepot.Business.Common.AppRoles.Sales)
+                                        {
+                                            <option value="1">Admin</option>
+                                            <option value="2">Accounts</option>
+                                            <option value="8" selected>Sales</option>
                                         }
                                         else
                                         {
                                             <option value="1" selected>Admin</option>
                                             <option value="2">Accounts</option>
+                                            <option value="8">Sales</option>
                                         }
-                                        
                                     </select>
                                     <div class="invalid-feedback">Please select role.</div>
                                 </div>

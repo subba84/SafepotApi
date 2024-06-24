@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Safepot.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+537382f5d48273f417b565bc6b91cb69b11f99d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+508b632aa68123202555b61925a3f4cac4956a2e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Safepot.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Safepot.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

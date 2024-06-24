@@ -1,0 +1,160 @@
+﻿@model Safepot.Entity.SfpPaymentUpload
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Payment Details</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Dashboard")">Home</a></li>
+                <li class="breadcrumb-item active">Payment Details</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <form method="post" asp-action="SaveInvoice" asp-controller="Invoice" enctype="multipart/form-data">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>Agent Name</label>
+                                    <div>
+                                        <input type="text" id="txtAgentName" class="form-control" value="@Model.AgentName" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Company</label>
+                                    <div>
+                                        <input type="text" id="txtCompany" class="form-control" value="@Model.CompanyName" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Mobile Number</label>
+                                    <div>
+                                        <input type="text" id="txtMobileNumber" class="form-control" value="@Model.MobileNumber" name="MobileNumber" readonly/>
+                                        <input type="hidden" name="AgentId" id="" value="@Model.AgentId"/>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>Payment Details</label>
+                                    <div>
+                                        @{
+                                            string imgUrl = ".." + Model.RelativePath;
+                                        }
+                                        <img src="@imgUrl" height="500px" width="350px" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="col-12">
+                                        <label for="fromDate" class="form-label">From Date<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="date" name="FromDate" value="" class="form-control" id="fromDate" required>
+                                            <div class="invalid-feedback">Please select from date.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="toDate" class="form-label">To Date<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="date" name="ToDate" value="" class="form-control" id="toDate" required>
+                                            <div class="invalid-feedback">Please select to date.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="geoLocation" class="form-label">Amount<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="number" name="Amount" value="" class="form-control" id="amount" maxlength="8">
+                                            <div class="invalid-feedback">Please enter Amount.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="joinDate" class="form-label">GST<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="number" name="GST" value="" readonly class="form-control" id="gst" required>
+                                            <div class="invalid-feedback">Please enter GST.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="totalAmount" class="form-label">Total Amount<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="number" name="TotalAmount" readonly value="" class="form-control" id="totalAmount" maxlength="6" required>
+                                            <div class="invalid-feedback">Please enter Total Amount.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="renewalDate" class="form-label">Invoice Type<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-control" name="InvoiceType">
+                                                <option value="B2C">B2C</option>
+                                                <option value="B2B">B2B</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select invoice type.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="transactionid" class="form-label">Transaction Id<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" name="TransactionId" value="" class="form-control" id="transactionid" maxlength="256" required>
+                                            <div class="invalid-feedback">Please enter transaction id.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="paidVia" class="form-label">Paid Via<span class="text-red">*</span></label>
+                                        <div class="input-group has-validation">
+                                            @{
+                                                string[] paymenttypes = { "Google Pay", "Phone Pay", "Paytm", "Others" };
+                                            }
+                                            <select class="form-control" name="PaidVia">
+                                                @for (int i = 0; i < paymenttypes.Length; i++)
+                                                {
+                                                    <option value="@paymenttypes[i]">@paymenttypes[i]</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                    <input type="button" class="btn btn-danger" value="Cancel" />
+                                </div>
+                                <div class="col-lg-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<script src="~/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).on("keyup", "#amount", function () {
+        var thisVal = $(this).val();
+        if (thisVal != null && thisVal != undefined && thisVal != NaN) {
+            var gst = parseFloat(thisVal) * 18 / 100;
+            var total = parseFloat(thisVal) + parseFloat(gst);
+            $("#gst").val(gst);
+            $("#totalAmount").val(parseFloat(total));
+        }
+    });
+</script>
+
+
+
+

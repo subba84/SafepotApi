@@ -1,4 +1,7 @@
-﻿@{
+﻿@model Safepot.WebApp.Models.DashboardModel
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -17,8 +20,87 @@
     <section class="section dashboard">
         <div class="row">
 
-            <div>Work In Progress</div>
+            @{
+                var userRole = Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetInt32("_RoleId"));
+            }
 
+            @if (userRole == Safepot.Business.Common.AppRoles.Admin)
+            {
+                <div class="col-lg-5">
+                    @if (Model.AgentsSubscriptions != null && Model.AgentsSubscriptions.Count() > 0)
+                    {
+                        int i = 1;
+                        <h3 style="font-style:italic"><b>Agents Subscriptions</b></h3>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Agent Name</th>
+                                    <th>Company</th>
+                                    <th>Mobile #</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.AgentsSubscriptions)
+                                {
+                                    string[] namesparts = (item.AgentName ?? "").Split('|');
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@namesparts[0]</td>
+                                        <td>@namesparts[1]</td>
+                                        <td>@namesparts[2]</td>
+                                        <td>@item.PlanStartDate</td>
+                                        <td>@item.PlanEndDate</td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+
+
+                <div class="col-lg-2"></div>
+
+                <div class="col-lg-5">
+                    @if (Model.AgentsExpiredinThreeMonths != null && Model.AgentsExpiredinThreeMonths.Count() > 0)
+                    {
+                        int i = 1;
+                        <h3 style="font-style:italic"><b>Agents expired in 90 Days</b></h3>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Agent Name</th>
+                                    <th>Company</th>
+                                    <th>Mobile #</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.AgentsExpiredinThreeMonths)
+                                {
+                                    string[] namesparts = (item.AgentName ?? "").Split('|');
+                                    <tr style="color:red;">
+                                        <td>@i</td>
+                                        <td>@namesparts[0]</td>
+                                        <td>@namesparts[1]</td>
+                                        <td>@namesparts[2]</td>
+                                        <td>@item.PlanStartDate</td>
+                                        <td>@item.PlanEndDate</td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            }
+
+           
         </div>
     </section>
 

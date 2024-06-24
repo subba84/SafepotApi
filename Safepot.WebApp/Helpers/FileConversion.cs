@@ -98,23 +98,29 @@ namespace Safepot.WebApp.Helpers
 
 
 
-        public string SaveReport(string flag, string viewContent, string reportTitle,string rootpath)
+        public string SaveReport(string flag, string viewContent, string reportTitle,string rootpath,bool isForDownload)
         {
-            string filePath = string.Empty;
+            string filePath = string.Empty;string relativePath = string.Empty;
             try
             {
                 byte[] bytes;
+                if (!System.IO.Directory.Exists(rootpath + "/Attachments/"))
+                {
+                    System.IO.Directory.CreateDirectory(rootpath + "/Attachments/");
+                }
                 if (flag == "PDF")
                 {
                     bytes = ConverttoPDF(viewContent, reportTitle);
                     Guid obj = Guid.NewGuid();
                     filePath = Path.Combine(rootpath + "/Attachments/", "Invoice_" + obj.ToString() + ".pdf");
+                    relativePath = Path.Combine("/Attachments/", "Invoice_" + obj.ToString() + ".pdf");
                 }
                 else
                 {
                     bytes = Encoding.ASCII.GetBytes(viewContent);
                     Guid obj = Guid.NewGuid();
                     filePath = Path.Combine(rootpath + "/Attachments/", "Invoice_" + obj.ToString() + ".csv");
+                    relativePath = Path.Combine("/Attachments/", "Invoice_" + obj.ToString() + ".csv");
                 }
                 System.IO.File.WriteAllBytes(filePath, bytes);
             }
@@ -122,7 +128,7 @@ namespace Safepot.WebApp.Helpers
             {
                 throw ex;
             }
-            return filePath;
+            return isForDownload ? filePath : relativePath;
         }
     }
 }

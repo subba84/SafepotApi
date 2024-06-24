@@ -17,16 +17,17 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddHttpClient();
 
-builder.Services.AddDbContext<SafepotDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("SqlDataConnection"))
-            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
-
-//var connectionString = builder.Configuration.GetConnectionString("SqlDataConnection");
-//var serverVersion = ServerVersion.AutoDetect(connectionString);
 //builder.Services.AddDbContext<SafepotDbContext>(options =>
-//            options.UseMySql(connectionString, serverVersion: serverVersion)
+//            options.UseSqlServer(builder.Configuration.GetConnectionString("SqlDataConnection"))
 //            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
+
+var connectionString = builder.Configuration.GetConnectionString("SqlDataConnection");
+var serverVersion = ServerVersion.AutoDetect(connectionString);
+builder.Services.AddDbContext<SafepotDbContext>(options =>
+            options.UseMySql(connectionString, serverVersion: serverVersion)
+            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking), ServiceLifetime.Scoped);
 
 builder.Services.AddTransient(typeof(ISfpDataRepository<>), typeof(SfpDataRepository<>));
 builder.Services.AddTransient<ISfpUserService, SfpUserService>();
@@ -40,6 +41,7 @@ builder.Services.AddTransient<ISfpMakeModelMasterService, SfpMakeModelMasterServ
 builder.Services.AddTransient<ISfpCompanyService, SfpCompanyService>();
 builder.Services.AddTransient<IUserRoleMapService, UserRoleMapService>();
 builder.Services.AddTransient<ISfpInvoiceService, SfpInvoiceService>();
+builder.Services.AddTransient<ISfpPaymentUploadService, SfpPaymentUploadService>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

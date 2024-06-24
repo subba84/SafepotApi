@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\Safepot.WebApp.bundle.scp.css"
     },
     {
+      "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\Attachments\\Invoice_0c437d46-d018-49f5-a91b-085e4220f4c9.pdf",
+      "PackagePath": "staticwebassets\\Attachments\\Invoice_0c437d46-d018-49f5-a91b-085e4220f4c9.pdf"
+    },
+    {
+      "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\Uploads\\02f74e4f-f80f-449a-a13b-c41509a368c6\\sankar_payment.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\02f74e4f-f80f-449a-a13b-c41509a368c6\\sankar_payment.jpg"
+    },
+    {
+      "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\Uploads\\b5aa58c3-40da-497d-a382-41e04efa55ef\\Lion.png",
+      "PackagePath": "staticwebassets\\Uploads\\b5aa58c3-40da-497d-a382-41e04efa55ef\\Lion.png"
+    },
+    {
       "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\assets\\css\\style.css",
       "PackagePath": "staticwebassets\\assets\\css\\style.css"
     },
@@ -83,6 +95,10 @@
     {
       "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\assets\\img\\profile-img.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\profile-img.jpg"
+    },
+    {
+      "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\assets\\img\\scan.png",
+      "PackagePath": "staticwebassets\\assets\\img\\scan.png"
     },
     {
       "Id": "C:\\GIT Projects\\Safepot\\SafepotApi\\Safepot.WebApp\\wwwroot\\assets\\img\\slides-1.jpg",

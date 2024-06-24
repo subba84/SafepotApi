@@ -30,7 +30,7 @@ namespace Safepot.WebApp.Controllers
                 var users = await _userService.GetAllUsers();
                 if(users!=null && users.Count() > 0)
                 {
-                    users = users.Where(x => x.RoleId == AppRoles.Admin || x.RoleId == AppRoles.Accounts);
+                    users = users.Where(x => x.RoleId == AppRoles.Admin || x.RoleId == AppRoles.Accounts || x.RoleId == AppRoles.Sales);
                     if (users != null && users.Count() == 0)
                         users = new List<SfpUser>();
                 }
