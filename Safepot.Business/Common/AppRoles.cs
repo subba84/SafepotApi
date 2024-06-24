@@ -15,5 +15,6 @@ namespace Safepot.Business.Common
         public static int Delivery = 5;
         public static int Operator = 6;
         public static int Approver = 7;
+        public static int Sales = 8;
     }
 }
