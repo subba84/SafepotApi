@@ -37,10 +37,10 @@ namespace Safepot.Business
                     }
                     if(userId > 0 && userRoleId == AppRoles.Delivery)
                     {
-                        data = data.Where(x => x.CustomerId == userId && x.IsForDeliveryBoy == true);
+                        data = data.Where(x => x.DeliveryBoyId == userId && x.IsForDeliveryBoy == true);
                     }
                 }
-                return ((data!=null && data.Count() > 0) ? data.ToList() : notifications);
+                return ((data!=null && data.Count() > 0) ? data.OrderByDescending(x=>x.Id).ToList() : notifications);
             }
             catch(Exception ex)
             {

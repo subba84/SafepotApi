@@ -424,7 +424,7 @@ namespace Safepot.Business
                     return await _sfpMappingApprovalRepository.CreateAsync(sfpMappingApproval);
                 }
                 else
-                {
+                {   
                     return await _sfpMappingRepository.CreateAsync(sfpAgentCustDeliveryMap);
                 }
                 //return await _sfpMappingRepository.CreateAsync(sfpAgentCustDeliveryMap);
@@ -482,6 +482,26 @@ namespace Safepot.Business
                 }
                 var users = await _sfpUserRepository.GetAsync(x => customerids.Contains(x.Id));
                 return users;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<SfpUser>> GetAssociatedDeliveryBoysbasedonAgentandCustomer(int agentId, int customerId)
+        {
+            try
+            {
+                List<int> deliveryBoyIds = new List<int>();
+                var data = await _sfpMappingRepository.GetAsync(x=>x.AgentId == agentId && x.CustomerId == customerId);
+                if (data != null && data.Count() > 0)
+                {
+                    var deliveryBoysData = data.Where(x => x.DeliveryId != null).Select(x => x.DeliveryId).Distinct().ToList();
+                    var users = await _sfpUserRepository.GetAsync(x => deliveryBoysData.Contains(x.Id));
+                    return users;
+                }
+                return new List<SfpUser>();
             }
             catch (Exception ex)
             {

@@ -20,7 +20,8 @@ namespace Safepot.Business
         {
             try
             {
-                return await _invoiceRepository.CreateAsync(invoice);
+                await _invoiceRepository.CreateAsync(invoice);
+                return invoice.Id;
             }
             catch(Exception ex)
             {

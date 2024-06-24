@@ -149,11 +149,11 @@ namespace Safepot.Business
             }
         }
 
-        public async Task<IEnumerable<SfpCustomerQuantity>> GetExistingCustomerQtybasedonDate(int? customerId, DateTime? fromDate,DateTime? toDate, int? makeModelMasterId)
+        public async Task<IEnumerable<SfpCustomerQuantity>> GetExistingCustomerQtybasedonDate(int agentId, int? customerId, DateTime? fromDate,DateTime? toDate, int? makeModelMasterId)
         {
             try
             {
-                var data = await _customerQuantityRepository.GetAsync(x => x.CustomerId == customerId && x.MakeModelId == makeModelMasterId && (x.FromDate == null ? x.FromDate : x.FromDate.Value.Date) >= (fromDate == null ? fromDate : fromDate.Value.Date) && (x.ToDate == null ? x.ToDate : x.ToDate.Value.Date) <= (toDate == null ? toDate : toDate.Value.Date));               
+                var data = await _customerQuantityRepository.GetAsync(x => x.AgentId == agentId && x.CustomerId == customerId && x.MakeModelId == makeModelMasterId && (x.FromDate == null ? x.FromDate : x.FromDate.Value.Date) >= (fromDate == null ? fromDate : fromDate.Value.Date) && (x.ToDate == null ? x.ToDate : x.ToDate.Value.Date) <= (toDate == null ? toDate : toDate.Value.Date));               
                 return data;
             }
             catch (Exception ex)

@@ -240,8 +240,8 @@ namespace Safepot.Business
                     agentdescription = sfpMappingApproval.CustomerName + " have been assigned to you as a customer on " + DateTime.Now.ToString("dd-MM-yyyy hh:mm");
                     
                     //Notification creation
-                    await _notificationService.CreateNotification(customerdescription, sfpMappingApproval.AgentId, sfpMappingApproval.CustomerId, null, null,"AgentCustomerMap",false,true,false);
-                    await _notificationService.CreateNotification(agentdescription, sfpMappingApproval.AgentId, sfpMappingApproval.CustomerId, null, null, "AgentCustomerMap", true, false, false);
+                    await _notificationService.CreateNotification(customerdescription, sfpMappingApproval.AgentId, sfpMappingApproval.CustomerId, null, null,"Assigning User",false,true,false);
+                    await _notificationService.CreateNotification(agentdescription, sfpMappingApproval.AgentId, sfpMappingApproval.CustomerId, null, null, "Assigning User", true, false, false);
 
                     // Add User
                     await _agentCustMappingRepository.CreateAsync(agentCustDeliveryMap);

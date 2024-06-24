@@ -241,7 +241,8 @@ namespace Safepot.Business
                 }
 
                 deliveryCharge = 0;// await _sfpAgentCustDlivryChargeService.GetDeliveryChargeforAgentandCustomer(agentId, customerId);
-                balanceAmount = balanceAmount - returnQuantityAmount - amountPaidbyCustomer;
+                //balanceAmount = balanceAmount - returnQuantityAmount - amountPaidbyCustomer;
+                balanceAmount = amountPaidbyCustomer - balanceAmount - returnQuantityAmount;
                 balanceAmount += Math.Round(deliveryCharge,0);
                 return balanceAmount;
             }
@@ -295,6 +296,43 @@ namespace Safepot.Business
             try
             {
                 await _paymentConfirmRepository.DeleteAsync(sfpPaymentConfirmation);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<SfpUser>> GetMinimumBalanceCustomersbasedonAgent(int agentId)
+        {
+            try
+            {
+                List<SfpUser> customers = new List<SfpUser>();
+                var agentMappedCustomers = await _mappingService.GetAgentAssociatedCustomers(agentId);
+                if(agentMappedCustomers != null && agentMappedCustomers.Count() > 0)
+                {
+                    customers = agentMappedCustomers.ToList();
+                    foreach (var customer in customers)
+                    {
+                        customer.ApprovalStatus = string.Empty;
+                        double balanceAmount = 0; double returnQuantityAmount = 0; double amountPaidbyCustomer = 0;
+                        var orderData = await _sfpOrderService.GetPendingBalanceforCustomer(customer.Id, agentId);
+                        var returnQuantity = await _sfpReturnQuantityService.GetReturnRequestsDatabasedonCustomer(customer.Id, agentId);
+                        if (orderData != null && orderData.Count() > 0)
+                        {
+                            balanceAmount = orderData.Sum(x => Convert.ToDouble(x.TotalPrice));
+                        }
+                        var customertransations = await _paymentConfirmRepository.GetAsync(x => x.CustomerId == customer.Id && x.AgentId == agentId);
+                        if (customertransations != null && customertransations.Count() > 0)
+                        {
+                            amountPaidbyCustomer = customertransations.Sum(x => (x.Amount == null ? 0 : Convert.ToDouble(x.Amount)));
+                        }
+                        balanceAmount = amountPaidbyCustomer - balanceAmount - returnQuantityAmount;
+                        // Using approval status column for carrying balance to controller
+                        customer.ApprovalStatus = Convert.ToString(balanceAmount);
+                    }
+                }
+                return customers;
             }
             catch (Exception ex)
             {

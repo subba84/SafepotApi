@@ -19,6 +19,7 @@ namespace Safepot.Business
         private readonly ISfpCustomerAbsentService _sfpCustomerAbsentService;
         private readonly ISfpAgentCustDeliveryMapService _agentCustDeliveryMapService;
         private readonly INotificationService _notificationService;
+        private readonly ISfpOrderSwitchService _sfpOrderSwitchService;
 
         public SfpOrderService(ISfpDataRepository<SfpOrder> sfpOrderRepository,
             ISfpAgentCustDeliveryMapService agentCustDeliveryMapService,
@@ -26,7 +27,8 @@ namespace Safepot.Business
             ISfpCustomerAbsentService sfpCustomerAbsentService,
             ISfpCustomerQuantityService sfpCustomerQuantityService,
             ISfpCustomizedQuantityService sfpCustomizeQuantityService,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            ISfpOrderSwitchService sfpOrderSwitchService)
         {
             _sfpOrderRepository = sfpOrderRepository;
             _agentCustDeliveryMapService = agentCustDeliveryMapService;
@@ -35,6 +37,7 @@ namespace Safepot.Business
             _sfpCustomerQuantityService = sfpCustomerQuantityService;
             _sfpCustomizeQuantityService = sfpCustomizeQuantityService;
             _notificationService = notificationService;
+            _sfpOrderSwitchService = sfpOrderSwitchService;
         }
 
         public async Task CreateOrder(SfpOrder sfpOrder)
@@ -244,6 +247,10 @@ namespace Safepot.Business
                             List<int> customerids = customers.Select(x => x.Id).Distinct().ToList();
                             transactions = transactions.Where(x => customerids.Contains(x.CustomerId ?? 0));
                         }
+                        else
+                        {
+                            transactions = new List<SfpOrder>();
+                        }
                     }
                     if (agentId > 0)
                     {
@@ -252,6 +259,10 @@ namespace Safepot.Business
                         {
                             List<int> customerids = customers.Select(x => x.Id).Distinct().ToList();
                             transactions = transactions.Where(x => customerids.Contains(x.CustomerId ?? 0));
+                        }
+                        else
+                        {
+                            transactions = transactions.Where(x => x.AgentId == agentId);
                         }
                     }
                     if (transactions != null && transactions.Count() > 0)
@@ -293,7 +304,7 @@ namespace Safepot.Business
         public async Task CreateOrdersbasedonSchedule()
         {
             try
-            {
+            { 
                 var makemodelmasterdata = await _sfpMakeModelMasterService.GetMakeModels();
                 var customerAbsentData = await _sfpCustomerAbsentService.GetCustomerAbsentsData();
                 var schedules = await _sfpCustomizeQuantityService.GetAllTransactionsbasedonDate(DateTime.Today.Date);
@@ -301,31 +312,46 @@ namespace Safepot.Business
                 {
                     foreach (var item in schedules)
                     {
-                        var thisCustomerAbsentData = customerAbsentData.Where(x => x.CustomerId == item.CustomerId
+                        var orderGenSwitchDetails = await _sfpOrderSwitchService.IsOrderGenerationOff(item.AgentId ?? 0, item.CustomerId ?? 0);
+                        if(orderGenSwitchDetails == false)
+                        {
+                            var thisCustomerAbsentData = customerAbsentData.Where(x => x.CustomerId == item.CustomerId
                         && (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date) >= (x.AbsentFrom == null ? x.AbsentFrom : x.AbsentFrom.Value.Date)
                         && (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date) <= (x.AbsentTo == null ? x.AbsentTo : x.AbsentTo.Value.Date));
-                        if (thisCustomerAbsentData == null || thisCustomerAbsentData.Count() == 0)
-                        {
-                            var makemodeldata = makemodelmasterdata.First(x => x.Id == item.MakeModelMasterId);
-                            SfpOrder order = new SfpOrder();
-                            order.CustomerId = item.CustomerId;
-                            order.CustomerName = item.CustomerName;
-                            order.AgentId = item.AgentId;
-                            order.AgentName = item.AgentName;
-                            order.DeliveryBoyId = item.DeliveryBoyId;
-                            order.DeliveryBoyName = item.DeliveryBoyName;
-                            order.TransactionDate = item.TransactionDate;
-                            order.MakeModelMasterId = item.MakeModelMasterId;
-                            order.Quantity = item.Quantity;
-                            order.UnitPrice = item.UnitPrice;
-                            order.TotalPrice = item.TotalPrice;
-                            order.Status = "Pending";
-                            order.OrderCreatedOn = DateTime.Now;
-                            await CreateOrder(order);
-                            string description = "New Order have been created by " + item.CustomerName
-                                + " on " + item.TransactionDate + " for product - " + makemodeldata.ModelName + "(" + makemodeldata.ModelName + ")";
-                            await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date),"Order Creation",true,true,true);
-                        }
+                            if (thisCustomerAbsentData == null || thisCustomerAbsentData.Count() == 0)
+                            {
+                                var makemodeldata = makemodelmasterdata.First(x => x.Id == item.MakeModelMasterId);
+                                SfpOrder order = new SfpOrder();
+                                order.CustomerId = item.CustomerId;
+                                order.CustomerName = item.CustomerName;
+                                order.AgentId = item.AgentId;
+                                order.AgentName = item.AgentName;
+                                order.DeliveryBoyId = item.DeliveryBoyId;
+                                order.DeliveryBoyName = item.DeliveryBoyName;
+                                order.TransactionDate = item.TransactionDate;
+                                order.MakeModelMasterId = item.MakeModelMasterId;
+                                order.Quantity = item.Quantity;
+                                order.UnitPrice = item.UnitPrice;
+                                order.TotalPrice = item.TotalPrice;
+                                order.Status = "Pending";
+                                order.OrderCreatedOn = DateTime.Now;
+                                await CreateOrder(order);
+                                string description = "New Order have been created by " + item.CustomerName
+                                    + " for product - " + makemodeldata.ModelName + "(" + makemodeldata.MakeName + ")";
+                                if (order.AgentId > 0 && order.CustomerId > 0)
+                                {
+                                    var deliveryBoys = await _agentCustDeliveryMapService.GetAssociatedDeliveryBoysbasedonAgentandCustomer(order.AgentId ?? 0, order.CustomerId ?? 0);
+                                    if (deliveryBoys != null && deliveryBoys.Count() > 0)
+                                    {
+                                        foreach (var delivery in deliveryBoys)
+                                        {
+                                            await _notificationService.CreateNotification(description, order.AgentId, order.CustomerId, delivery.Id, (order.TransactionDate == null ? order.TransactionDate : order.TransactionDate.Value.Date), "Order Creation", false, false, true);
+                                        }
+                                    }
+                                }
+                                await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date), "Order Creation", true, true, false);
+                            }
+                        }                        
                     }
                 }
 
@@ -335,32 +361,47 @@ namespace Safepot.Business
                 {
                     foreach (var item in continuousOrders)
                     {
-                        var today = DateTime.Now.Date;
-                        var makemodeldata = makemodelmasterdata.First(x => x.Id == item.MakeModelId);
-                        var thisCustomerAbsentData = customerAbsentData.Where(x => x.CustomerId == item.CustomerId
-                        && today >= (x.AbsentFrom == null ? x.AbsentFrom : x.AbsentFrom.Value.Date)
-                        && today <= (x.AbsentTo == null ? x.AbsentTo : x.AbsentTo.Value.Date));
-                        if (thisCustomerAbsentData == null || thisCustomerAbsentData.Count() == 0)
+                        var orderGenSwitchDetails = await _sfpOrderSwitchService.IsOrderGenerationOff(item.AgentId ?? 0, item.CustomerId ?? 0);
+                        if (orderGenSwitchDetails == false)
                         {
-                            SfpOrder order = new SfpOrder();
-                            order.CustomerId = item.CustomerId;
-                            order.CustomerName = item.CustomerName;
-                            order.AgentId = item.AgentId;
-                            order.AgentName = item.AgentName;
-                            order.DeliveryBoyId = 0;
-                            order.DeliveryBoyName = String.Empty;
-                            order.TransactionDate = today;
-                            order.MakeModelMasterId = item.MakeModelId;
-                            order.Quantity = item.Quantity;
-                            order.UnitPrice = item.UnitPrice;
-                            order.TotalPrice = item.TotalPrice;
-                            order.Status = "Pending";
-                            order.OrderCreatedOn = DateTime.Now;
-                            await CreateOrder(order);
-                            string description = "New Order have been created by " + item.CustomerName
-                                + " on " + order.TransactionDate + " for product - " + makemodeldata.ModelName + "(" + makemodeldata.ModelName + ")";
-                            await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (order.TransactionDate == null ? order.TransactionDate : order.TransactionDate.Value.Date),"Order Creation",true,true,true);
-                        }
+                            var today = DateTime.Now.Date;
+                            var makemodeldata = makemodelmasterdata.First(x => x.Id == item.MakeModelId);
+                            var thisCustomerAbsentData = customerAbsentData.Where(x => x.CustomerId == item.CustomerId
+                            && today >= (x.AbsentFrom == null ? x.AbsentFrom : x.AbsentFrom.Value.Date)
+                            && today <= (x.AbsentTo == null ? x.AbsentTo : x.AbsentTo.Value.Date));
+                            if (thisCustomerAbsentData == null || thisCustomerAbsentData.Count() == 0)
+                            {
+                                SfpOrder order = new SfpOrder();
+                                order.CustomerId = item.CustomerId;
+                                order.CustomerName = item.CustomerName;
+                                order.AgentId = item.AgentId;
+                                order.AgentName = item.AgentName;
+                                order.DeliveryBoyId = 0;
+                                order.DeliveryBoyName = String.Empty;
+                                order.TransactionDate = today;
+                                order.MakeModelMasterId = item.MakeModelId;
+                                order.Quantity = item.Quantity;
+                                order.UnitPrice = item.UnitPrice;
+                                order.TotalPrice = item.TotalPrice;
+                                order.Status = "Pending";
+                                order.OrderCreatedOn = DateTime.Now;
+                                await CreateOrder(order);
+                                string description = "New Order have been created by " + item.CustomerName
+                                     + " for product - " + makemodeldata.ModelName + "(" + makemodeldata.MakeName + ")";
+                                if (order.AgentId > 0 && order.CustomerId > 0)
+                                {
+                                    var deliveryBoys = await _agentCustDeliveryMapService.GetAssociatedDeliveryBoysbasedonAgentandCustomer(order.AgentId ?? 0, order.CustomerId ?? 0);
+                                    if (deliveryBoys != null && deliveryBoys.Count() > 0)
+                                    {
+                                        foreach (var delivery in deliveryBoys)
+                                        {
+                                            await _notificationService.CreateNotification(description, order.AgentId, order.CustomerId, delivery.Id, (order.TransactionDate == null ? order.TransactionDate : order.TransactionDate.Value.Date), "Order Creation", false, false, true);
+                                        }
+                                    }
+                                }
+                                await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (order.TransactionDate == null ? order.TransactionDate : order.TransactionDate.Value.Date), "Order Creation", true, true, false);
+                            }
+                        }                       
                     }
                 }
             }
@@ -385,9 +426,20 @@ namespace Safepot.Business
                         item.Status = "Rejected";
                         item.OrderRejectedOn = DateTime.Now;
                         item.OrderRejectedComments = "Rejected by System";
-                        string description = "Customer - " + item.CustomerName + " Order which was placed on " + (item.TransactionDate == null ? "" : item.TransactionDate.Value.ToString("dd-MM-yyyy")) + " have been rejected by system on " + DateTime.Now.ToString("dd-MM-yyyy") +" due to date change.";
-                        await UpdateOrder(item);                        
-                        await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date), "Order Rejection", true, true, true);
+                        string description = "Customer - " + item.CustomerName + " Order which was placed on " + (item.TransactionDate == null ? "" : item.TransactionDate.Value.ToString("dd-MM-yyyy")) + " have been rejected by system due to time completion.";
+                        await UpdateOrder(item);
+                        if (item.AgentId > 0 && item.CustomerId > 0)
+                        {
+                            var deliveryBoys = await _agentCustDeliveryMapService.GetAssociatedDeliveryBoysbasedonAgentandCustomer(item.AgentId ?? 0, item.CustomerId ?? 0);
+                            if (deliveryBoys != null && deliveryBoys.Count() > 0)
+                            {
+                                foreach (var delivery in deliveryBoys)
+                                {
+                                    await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, delivery.Id, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date), "Order Rejection", false, false, true);
+                                }
+                            }
+                        }
+                        await _notificationService.CreateNotification(description, item.AgentId, item.CustomerId, null, (item.TransactionDate == null ? item.TransactionDate : item.TransactionDate.Value.Date), "Order Rejection", true, true, false);
                     }
                 }
 
